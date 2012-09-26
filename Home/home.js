@@ -4,7 +4,6 @@ Ext.require([
     //'Ext.tab.Panel'
     '*'
 ]);
-//This is a test!!!!!!!!!!!
 Ext.onReady(function() {
 
 	Ext.create('Ext.Viewport', {
