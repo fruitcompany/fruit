@@ -4,7 +4,7 @@ Ext.require([
     //'Ext.tab.Panel'
     '*'
 ]);
-
+//This is a test!!!!!!!!!!!
 Ext.onReady(function() {
 
 	Ext.create('Ext.Viewport', {
@@ -13,6 +13,11 @@ Ext.onReady(function() {
 		items: [{
 				id:'horz1',
 				region:'north',
+				//baseCls:'x-plain',
+				//split:true,
+				//width:150,
+				//minWidth: 100,
+				//maxWidth: 250,
 				layout: {
 					type:'hbox',
 					padding: 10
@@ -20,34 +25,34 @@ Ext.onReady(function() {
 				margins: '5 0 5 5',
 				items: [{
 					id: 'icon',
-					html: '<img src="images/fruit_cup_logo_white_text.jpg" width="200" height="175">',
+					html: '<img src="images/fruit_cup_logo_white_text.jpg" width="304" height="228">',
 					region: 'west',
 					layout: 'fit',
-					border: 0,
-					margins: '5 0 5 5'
+					border: 0
 				}, {
 					id: 'title1',
-					html: '<img src="images/GPAS.jpg" width="600" height="300">',
-					region: 'center',
+					html: '<h1 class="x-panel-header">Page Title</h1>',
+					region: 'east',
 					layout: 'fit',
-					border: 0,
-					margins: '5 0 5 120'
+					border: 0
 				}]
 			}, {
 				id:'horz2',
 				region:'center',
+				//baseCls:'x-plain',
+				//split:false,
+				//width:150,
+				//minWidth: 100,
+				//maxWidth: 250,
 				layout: {
 					type:'hbox',
-					pack: 'center',
 					padding: 10
 				},
 				margins: '5 0 5 5',
 				items: [{
 					id: 'login',
-					xtype: 'panel',
 					layout: {
 						type:'vbox',
-						pack: 'start',
 						padding: 10
 					},
 					region: 'west',
@@ -59,8 +64,8 @@ Ext.onReady(function() {
 					}, {
 						id: 'password',
 						xtype: 'textfield',
-						inputType: 'password',
-						fieldLabel: 'Password'
+						fieldLabel: 'Password',
+						allowBlank: false
 					},{
 						id: 'login_button',
 						xtype: 'button',
@@ -68,63 +73,13 @@ Ext.onReady(function() {
 						handler: function() {
 							alert('You clicked the button!');
 							console.log('Logging In...');
-							var uName = Ext.getCmp('username');
-							var pName = Ext.getCmp('password');
-							console.log(uName.getValue() + ", " + pName.getValue());
 						}
 					}],
 					border: 0
 				}, {
-					id: 'divider',
-					html: '<img src="images/divider.jpg" width="10" height="300">',
-					region: 'center',
-					layout: 'fit',
-					border: 0,
-					margins: '5 25 5 25'
-				}, {
-					id: 'createAccount',			
-					layout: {
-						type:'vbox',
-						pack: 'center',
-						padding: 10
-					},
+					id: 'title',
 					region: 'east',
-					items: [{
-						id: 'createUsername',
-						xtype: 'textfield',
-						fieldLabel: 'Username',
-						allowBlank: false
-					}, {
-						id: 'createPassword',
-						xtype: 'textfield',
-						inputType: 'password',
-						fieldLabel: 'Password'
-					}, {
-						id: 'createEmail',
-						xtype: 'textfield',
-						inputType: 'email',
-						fieldLabel: 'Email'
-					}, {
-						id: 'createStudentID',
-						xtype: 'textfield',
-						inputType: 'number',
-						fieldLabel: 'Student ID'
-					},{
-						id: 'create_button',
-						xtype: 'button',
-						text: 'Create User',
-						handler: function() {
-							alert('You clicked the button!');
-							console.log('Creating User...');
-							var uName = Ext.getCmp('createUsername');
-							var pName = Ext.getCmp('createPassword');
-							var eName = Ext.getCmp('createEmail');
-							var sName = Ext.getCmp('createStudentID');
-							var str = escape(uName.getValue()) + "&" + escape(pName.getValue()) + "&" + escape(eName.getValue()) + "&" + escape(sName.getValue());
-							window.location="../MainPage/index.html?" + str;
-						}
-					}],
-					border: 0
+					layout: 'fit'
 				}]
 			}],
 		renderTo: Ext.getBody()
