@@ -15,23 +15,23 @@ Ext.onReady(function() {
 				region:'north',
 				layout: {
 					type:'hbox',
-					padding: 10
+					padding: 5
 				},
 				margins: '5 0 5 5',
 				items: [{
 					id: 'icon',
-					html: '<img src="images/fruit_cup_logo_white_text.jpg" width="200" height="175">',
+					html: '<img src="images/fruit_cup_logo_white_text.jpg" width="200" height="165">',
 					region: 'west',
 					layout: 'fit',
 					border: 0,
 					margins: '5 0 5 5'
 				}, {
 					id: 'title1',
-					html: '<img src="images/GPAS.jpg" width="600" height="300">',
+					html: '<img src="images/4.gif" width="210" height="100">',
 					region: 'center',
 					layout: 'fit',
 					border: 0,
-					margins: '5 0 5 120'
+					margins: '0 0 70 360'
 				}]
 			}, {
 				id:'horz2',
@@ -100,27 +100,46 @@ Ext.onReady(function() {
 						inputType: 'password',
 						fieldLabel: 'Password'
 					}, {
+						id: 'createRetypePassword',
+						xtype: 'textfield',
+						inputType: 'password',
+						fieldLabel: 'Retype Password'
+					},	{
+						id: 'createRetypePassword',
+						xtype: 'textfield',
+						inputType: 'password',
+						fieldLabel: 'Retype Password'
+					}, {
 						id: 'createEmail',
 						xtype: 'textfield',
 						inputType: 'email',
 						fieldLabel: 'Email'
 					}, {
+						id: 'createRetypeEmail',
+						xtype: 'textfield',
+						inputType: 'email',
+						fieldLabel: 'Retype Email'
+					}, {
 						id: 'createStudentID',
 						xtype: 'textfield',
 						inputType: 'number',
 						fieldLabel: 'Student ID'
-					},{
+					}, {
 						id: 'create_button',
 						xtype: 'button',
-						text: 'Create User',
+						text: 'Create Account',
 						handler: function() {
 							alert('You clicked the button!');
 							console.log('Creating User...');
-							var uName = Ext.getCmp('createUsername');
-							var pName = Ext.getCmp('createPassword');
-							var eName = Ext.getCmp('createEmail');
-							var sName = Ext.getCmp('createStudentID');
-							var str = escape(uName.getValue()) + "&" + escape(pName.getValue()) + "&" + escape(eName.getValue()) + "&" + escape(sName.getValue());
+							var uName  = Ext.getCmp('createUsername');
+							var pName  = Ext.getCmp('createPassword');
+							var rpName = Ext.getCmp('createRetypePassword');
+							var eName  = Ext.getCmp('createEmail');
+							var reName = Ext.getCmp('createRetypeEmail');
+							var sName  = Ext.getCmp('createStudentID');
+							var str    = escape(uName.getValue()) + "&" + escape(pName.getValue()) + "&" + 
+							             escape(rpName.getValue()) + "&" + escape(eName.getValue()) + "&" + 
+											 escape(reName.getValue()) + "&" + escape(sName.getValue()); 
 							window.location="../MainPage/index.html?" + str;
 						}
 					}],
@@ -133,13 +152,7 @@ Ext.onReady(function() {
 
 	//viewport.renderTo(document.body);
 });
-	   
-	   
-	   
-	   
-	   
-	   
-	   
+	   	   
 	   
 	   // {
 			// region:'center',
