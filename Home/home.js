@@ -8,30 +8,41 @@ Ext.require([
 Ext.onReady(function() {
 
 	Ext.create('Ext.Viewport', {
-		layout: 'border',
-		
+		layout: {
+			type: 'border',
+			padding: 5
+		},		
 		items: [{
 				id:'horz1',
 				region:'north',
 				layout: {
 					type:'hbox',
-					padding: 5
+// 					padding: 5
 				},
-				margins: '5 0 5 5',
+// 				margins: '5 0 5 5',
 				items: [{
 					id: 'icon',
-					html: '<img src="images/fruit_cup_logo_white_text.jpg" width="200" height="165">',
+					html: '<img src="images/fruit_cup_logo_white_text.jpg" width="100">',
 					region: 'west',
-					layout: 'fit',
+// 					layout: 'fit',
 					border: 0,
-					margins: '5 0 5 5'
-				}, {
+// 					margins: '5 0 5 5'
+				},{
+                	xtype:'tbspacer',
+                	flex:1
+                },{
 					id: 'title1',
 					html: '<img src="images/4.gif" width="210" height="100">',
 					region: 'center',
-					layout: 'fit',
+// 					layout: 'fit',
 					border: 0,
-					margins: '0 0 70 360'
+// 					margins: '0 0 70 360'
+				},{
+                	xtype:'tbspacer',
+                	flex:1
+                },{
+					html: '<a href="help.htm">Help</a>',
+					region: 'east'
 				}]
 			}, {
 				id:'horz2',
