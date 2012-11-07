@@ -41,7 +41,7 @@ Ext.onReady(function() {
                 	xtype:'tbspacer',
                 	flex:1
                 },{
-					html: '<a href="help.htm">Help</a>',
+					html: '<a href="HELP.htm">Help</a>',
 					region: 'east'
 				}]
 			}, {
