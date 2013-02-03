@@ -37,6 +37,7 @@ Ext.onReady(function(){
         renderTo: 'multiselect',
         autoScroll: true,
         
+        
               
         items:[{
             xtype: 'multiselect',
@@ -47,7 +48,7 @@ Ext.onReady(function(){
 			dropGroup: 'path',
             name: 'multiselect',
             id: 'multiselect-field',
-            store: ds,
+            store: [[130,'Comp 282'],[129,'Math 150B'],[128,'Math 150A']],
 //             value: ['3', '4', '6'],
             ddReorder: true
         },{
