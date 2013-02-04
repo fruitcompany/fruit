@@ -3,15 +3,12 @@ Ext.Loader.setConfig({enabled: true});
 Ext.Loader.setPath('Ext.ux', 'ux');
 Ext.require([
     'Ext.form.Panel',
+    'Ext.container.Viewport',
     'Ext.ux.form.MultiSelect',
 ]);
 
 Ext.onReady(function(){
     
-    // Ext.create('Ext.container.Viewport', {
-// 		layout: 'border',
-// 		items: [msForm]
-// 	});
     
     var ds =  [[124,'Comp 110'],[125,'Comp 110L'],[126,'Comp 182'],[127,'Comp 182L'],
         	   [131,'Comp 282L'],[130,'Comp 282'],[129,'Math 150B'],[128,'Math 150A'],
@@ -28,7 +25,7 @@ Ext.onReady(function(){
     /*
      * Ext.ux.form.MultiSelect Example Code
      */
-    var msForm = Ext.widget('container', {
+    var msForm = Ext.widget('panel', {
 //         title: 'MultiSelect Test',
 		semesters: 11,
 //         width: 200,
@@ -36,11 +33,12 @@ Ext.onReady(function(){
 // 		flex: 1,
         layout: 'hbox',
 //         bodyPadding: 10,
-        renderTo: 'multiselect',
+//         renderTo: 'multiselect',
+		region: 'north',
         autoScroll: true,
         
         listeners:{
-        	afterrender:function(me){
+        	beforerender: function(me){
         		console.log("rendered");
         		var i = 0, semArray = [];
 			
@@ -99,11 +97,17 @@ Ext.onReady(function(){
 // //             value: ['3', '4', '6'],
 //             ddReorder: true
 //         }],
-        
-        
         /*	Functions	*/
-		
+	
     });
+    
+    var vp = Ext.create('Ext.container.Viewport', {
+// 		layout: 'border',
+		items: [msForm],
+		renderTo: 'multiselect',
+	});
+    
+    
     
 });
 
