@@ -76,75 +76,138 @@ Ext.onReady(function(){
 //         renderTo: 'multiselect',
 		region: 'north',
         autoScroll: true,
+        initItems: [],
         
-        listeners:{
-        	beforerender: function(me){
-        		console.log("rendered");
-        		var i = 0, semArray = [];
-			
-				while(i<me.semesters){
-// 					semArray.push({
-					me.add({
-						xtype: 'multiselect',
-						width: 125,
-						displayField: 'field1',
-						dragGroup: 'path',
-						dropGroup: 'path',
-						name: 'multiselect-'+i,
-						id: 'multiselect-field-'+i,
-						listTitle: 'Semester '+(i+1),
-						store: [ds.pop(),ds.pop(),ds.pop(),ds.pop()], //blank store to begin
-	// 					listeners: {
-	// 						boundList: {
-	// 							itemdblclick: me.onItemDblClick,
-	// 							scope: me
-	// 						}
-	// 					}
-					});
-					me.add({
-						xtype: 'panel',
-						layout: 'fit',
-						items: [{
-							xtype	: 'button',
-							text	: 'Add Semester',
-							handler : function(butt){
-								me.semesters++,
-								me.insert(me.semesters-1,{
-									xtype: 'multiselect',
-									width: 125,
-									displayField: 'field1',
-									dragGroup: 'path',
-									dropGroup: 'path',
-									name: 'multiselect-'+me.semesters-1,
-									id: 'multiselect-field-'+me.semesters-1,
-									listTitle: 'Semester '+(me.semesters),
-									store: [], //blank store to begin
-				// 					listeners: {
-				// 						boundList: {
-				// 							itemdblclick: me.onItemDblClick,
-				// 							scope: me
-				// 						}
-				// 					}
-								});
-							}
-						},{
-							xtype	: 'button',
-							text	: 'Test stuff',
-							handler : function(butt){
-								console.log(me);
-							}
-						}]	
-					});
+        initComponent: function(){
+        	console.log(this,"should be path panel");
+        	var i = 0, semArray = [], me = this;
+		
+			while(i<me.semesters){
+				semArray.push({
+					xtype: 'multiselect',
+					width: 125,
+					displayField: 'c_name',
+					dragGroup: 'path',
+					dropGroup: 'path',
+					name: 'multiselect-'+i,
+					id: 'multiselect-field-'+i,
+					listTitle: 'Semester '+(i+1),
+					store: [ds.pop(),ds.pop(),ds.pop(),ds.pop()], //blank store to begin
 					
-					i++;
-				}
-				
-				
-				console.log(semArray);
-// 				return semArray;
-				
-        	}
+// 					listeners: {
+// 						boundList: {
+// 							itemdblclick: me.onItemDblClick,
+// 							scope: me
+// 						}
+// 					}
+				});
+				i++;
+			}
+			me.items = semArray.concat([{
+				xtype: 'panel',
+				layout: 'fit',
+				items: [{
+					xtype	: 'button',
+					text	: 'Add Semester',
+					handler : function(butt){
+						me.semesters++,
+						me.insert(me.semesters-1,{
+							xtype: 'multiselect',
+							width: 125,
+							displayField: 'field1',
+							dragGroup: 'path',
+							dropGroup: 'path',
+							name: 'multiselect-'+me.semesters-1,
+							id: 'multiselect-field-'+me.semesters-1,
+							listTitle: 'Semester '+(me.semesters),
+							store: [], //blank store to begin
+		// 					listeners: {
+		// 						boundList: {
+		// 							itemdblclick: me.onItemDblClick,
+		// 							scope: me
+		// 						}
+		// 					}
+						});
+					}
+				},{
+					xtype	: 'button',
+					text	: 'Test stuff',
+					handler : function(butt){
+						console.log(me);
+					}
+				}]	
+			}]);
         },
+        
+        
+        // listeners:{
+//         	beforerender: function(me){
+//         		console.log("rendered");
+//         		var i = 0, semArray = [];
+// 			
+// 				while(i<me.semesters){
+// // 					semArray.push({
+// 					me.add({
+// 						xtype: 'multiselect',
+// 						width: 125,
+// 						displayField: 'c_name',
+// 						dragGroup: 'path',
+// 						dropGroup: 'path',
+// 						name: 'multiselect-'+i,
+// 						id: 'multiselect-field-'+i,
+// 						listTitle: 'Semester '+(i+1),
+// 						store: [ds.pop(),ds.pop(),ds.pop(),ds.pop()], //blank store to begin
+// 	// 					listeners: {
+// 	// 						boundList: {
+// 	// 							itemdblclick: me.onItemDblClick,
+// 	// 							scope: me
+// 	// 						}
+// 	// 					}
+// 					});
+// 					me.add({
+// 						xtype: 'panel',
+// 						layout: 'fit',
+// 						items: [{
+// 							xtype	: 'button',
+// 							text	: 'Add Semester',
+// 							handler : function(butt){
+// 								me.semesters++,
+// 								me.insert(me.semesters-1,{
+// 									xtype: 'multiselect',
+// 									width: 125,
+// 									displayField: 'field1',
+// 									dragGroup: 'path',
+// 									dropGroup: 'path',
+// 									name: 'multiselect-'+me.semesters-1,
+// 									id: 'multiselect-field-'+me.semesters-1,
+// 									listTitle: 'Semester '+(me.semesters),
+// 									store: [], //blank store to begin
+// 				// 					listeners: {
+// 				// 						boundList: {
+// 				// 							itemdblclick: me.onItemDblClick,
+// 				// 							scope: me
+// 				// 						}
+// 				// 					}
+// 								});
+// 							}
+// 						},{
+// 							xtype	: 'button',
+// 							text	: 'Test stuff',
+// 							handler : function(butt){
+// 								console.log(me);
+// 							}
+// 						}]	
+// 					});
+// 					
+// 					i++;
+// 				}
+// 				
+// 				
+// 				console.log(semArray);
+// // 				return semArray;
+// 				
+//         	}
+//         },
               
 //         items:[{
 //             xtype: 'multiselect',
