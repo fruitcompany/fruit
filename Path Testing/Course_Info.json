@@ -1,0 +1,485 @@
+{
+	"courses":
+		[
+	{
+		"Class name": "COMP 110",
+		"Department": "Computer Science",
+		"Course Title": "Introduction to Algorithm and Programming",
+		"Description": "Introduction to algorithms, their representation, design, structuring, analysis and optimization. Implementation of algorithms as structured programs in a high level language.",
+		"Unit": "3",
+		"Type": "LEC"
+	},
+	{
+		"Class name": "COMP 110L",
+		"Department": "Computer Science",
+		"Course Title": "Introduction to Algorithm and Programming Lab",
+		"Description": "The test is divided into three sections. The first section asks you to write an essay. The next two sections assess your ability to comprehend and interpret reading material and your understanding of sentence construction and paragraph development.",
+		"Unit": "1",
+		"Type": "LAB"
+	},
+	{
+		"Class name": "MATH 150A",
+		"Department": "Mathematics",
+		"Course Title": "Calculus I",
+		"Description": "Limits, derivatives, applications of differentiation. Definite and indefinite integrals, the Fundamental Theorem of Calculus.",
+		"Unit": "5",
+		"Type": "LEC"
+	},
+	{
+		"Class name": "MATH 150AL",
+		"Department": "Mathematics",
+		"Course Title": "Calculus I Lab",
+		"Description": "Required for all conditionally prepared students enrolled in MATH 150A. This is a NC/CR enrichment laboratory for students, i.e., this class itself has no credit, but students must have to pass for a credit in MATH 150A.",
+		"Unit": "1",
+		"Type": "LAB"
+	},
+	{
+		"Class name": "COMP 122",
+		"Department": "Computer Science",
+		"Course Title": "Computer Architecture and Assembly Language",
+		"Description": "Introduction to computer architecture, assembly language programming, system software and computer applications. Number systems and data representation. Internal organization of a computer. Primitive instructions and operations. Assembly language.",
+		"Unit": "1",
+		"Type": "LEC"
+	},
+	{
+		"Class name": "COMP 122L",
+		"Department": "Computer Science",
+		"Course Title": "Computer Architecture and Assembly Language Lab",
+		"Description": "Three hours lab work per week.",
+		"Unit": "1",
+		"Type": "LAB"
+	},
+	{
+		"Class name": "COMP 182",
+		"Department": "Computer Science",
+		"Course Title": "Data Structure and Program Design",
+		"Description": "Introduction to data structures and the algorithms that use them. Review of composite data types such as arrays, records, strings, and sets. Role of the abstract data type in program design. Definition, implementation, and application of data structures such as stacks, queues, linked lists, trees, and graphs. Recursion. Use of time complexity expressions in evaluating algorithms. Comparative study of sorting and searching algorithms.",
+		"Unit": "3",
+		"Type": "LEC"
+	},
+	{
+		"Class name": "COMP 182L",
+		"Department": "Computer Science",
+		"Course Title": "Data Structure and Program Design Lab",
+		"Description": "Three hours lab work per week.",
+		"Unit": "1",
+		"Type": "LAB"
+	},
+	{
+		"Class name": "",
+		"Department": "",
+		"Course Title": "The rest three are GE courses which will be added later.",
+		"Description": "",
+		"Unit": "",
+		"Type": ""
+	},
+	{
+		"Class name": "",
+		"Department": "Major core:",
+		"Course Title": "",
+		"Description": "No CSUN Grade lower than a \"\"C-\"\" will be accepted for courses in the major. CS Pre-Major students may not enroll in the following major courses without the consent of the instructor. ",
+		"Unit": "",
+		"Type": ""
+	},
+	{
+		"Class name": "Class name",
+		"Department": "Department",
+		"Course Title": "Course Title",
+		"Description": "Description",
+		"Unit": "Unit",
+		"Type": "Type"
+	},
+	{
+		"Class name": "COMP 222",
+		"Department": "Computer Science",
+		"Course Title": "Computer Organization",
+		"Description": "Extension of basic addressing concepts to more advanced addressability such as base register and self-relative addressing. Comparative computer architecture focusing on such organizations as multiple register processors and stack machines. Basics of virtual memory input-output. Introduction to the concept of microprogrammable systems. Low level language translation process associated with assemblers. System functions such as relocatable loading and memory management. Application of data structure and hashing techniques to the above. Other related topics.",
+		"Unit": "3",
+		"Type": "LEC"
+	},
+	{
+		"Class name": "MATH 150B",
+		"Department": "Mathematics",
+		"Course Title": "Calculus II",
+		"Description": "Techniques of integration, numerical integration, improper integrals, applications of the integral. Taylor polynomials, sequences and series, power series.",
+		"Unit": "5",
+		"Type": "LEC"
+	},
+	{
+		"Class name": "MATH 150BL",
+		"Department": "Mathematics",
+		"Course Title": "Calculus II Lab",
+		"Description": "Required for all conditionally prepared students enrolled in MATH 150B. This is a NC/CR enrichment laboratory for students, i.e., it itself has no credit, but students must have to pass for a credit in MATH 150B.",
+		"Unit": "1",
+		"Type": "LAB"
+	},
+	{
+		"Class name": "MATH 262",
+		"Department": "Mathematics",
+		"Course Title": "Introduction to Linear Algebra",
+		"Description": "Systems of linear equations, matrices, determinants, eigenvalues, vector spaces, linear transformations, introduction to inner products on Rn, spectral theorem for symmetric matrices.",
+		"Unit": "3",
+		"Type": "LEC"
+	},
+	{
+		"Class name": "COMP 256",
+		"Department": "Computer Science",
+		"Course Title": "Discrete Structure",
+		"Description": "Study of discrete mathematical structures and proof techniques as used in computer science. Discrete structures such as functions, relations, sets, graphs, and trees. Proof techniques such as proof by induction, proof by contradiction, and proof by cases. Counting techniques.",
+		"Unit": "3",
+		"Type": "LEC"
+	},
+	{
+		"Class name": "COMP 256L",
+		"Department": "Computer Science",
+		"Course Title": "Discrete Structure Lab",
+		"Description": "Three hours lab work per week.",
+		"Unit": "1",
+		"Type": "LAB"
+	},
+	{
+		"Class name": "",
+		"Department": "",
+		"Course Title": "Students may take MATH 326 instead of COMP 256/L",
+		"Description": "",
+		"Unit": "",
+		"Type": ""
+	},
+	{
+		"Class name": "MATH 326",
+		"Department": "Mathematics",
+		"Course Title": "Discrete Mathematics",
+		"Description": "Propositional calculus, predicate calculus, set algebra, relations, functions, mappings, fields, number systems.",
+		"Unit": "3",
+		"Type": "LEC"
+	},
+	{
+		"Class name": "COMP 282",
+		"Department": "Computer Science",
+		"Course Title": "Advanced Data Structures",
+		"Description": "Introduction to advanced data structures (particularly persistent structures) using object-oriented design. Main memory structures: hash tables, trees. Architectural foundations for files. Large-scale sorting. Hash-based persistent structures. Indexed files. Introduction to databases.",
+		"Unit": "3",
+		"Type": "LEC"
+	},
+	{
+		"Class name": "COMP 322",
+		"Department": "Computer Science",
+		"Course Title": "Introduction to Operating System and System Architecture",
+		"Description": "Examination of the principal types of systems including batch, multi-programming, and time-sharing. Discusses networked system. Considers the salient problems associated with implementing systems including interrupt of event driven systems, multi-tasking, storage and data base management, and input-output. Emphasizes some of the simple algorithms used to solve common problems encountered such as deadlocks, queue service, and multiple access to data.",
+		"Unit": "3",
+		"Type": "LEC"
+	},
+	{
+		"Class name": "COMP 322L",
+		"Department": "Computer Science",
+		"Course Title": "Introduction to Operating System and System Architecture Lab",
+		"Description": "Projects are implemented to reinforce the lectures. Three hours lab work per week.",
+		"Unit": "1",
+		"Type": "LAB"
+	},
+	{
+		"Class name": "MATH 341",
+		"Department": "Mathematics",
+		"Course Title": "Applied Statistics I",
+		"Description": "Introduction to the practice of statistics, emphasizing the role of probability. Includes basic probability, discrete and continuous probability distributions, expectation and variance, sample surveys and experiments, displaying and summarizing data, sampling distributions, central limit theorem, inference for proportions, chi-square test, least squares regression. ",
+		"Unit": "3",
+		"Type": "LEC"
+	},
+	{
+		"Class name": "COMP 333",
+		"Department": "Computer Science",
+		"Course Title": "Concepts of Programming Languages",
+		"Description": "Discussion of issues in the design, implementation, and use of high-level programming languages through a historical framework. Including how languages reflect different design philosophies and use requirements and the technical issues in the design of main abstraction constructs of programming languages. Other approaches to imperative or object oriented programming: functional programming, logical programming, and parallel programming.",
+		"Unit": "3",
+		"Type": "LEC"
+	},
+	{
+		"Class name": "COMP 310",
+		"Department": "Computer Science",
+		"Course Title": "Automata, Languages, and Computation",
+		"Description": "Study of the relation of languages (i.e. sets of strings) and machines for processing these languages, with emphasis on classes of languages and corresponding classes of machines. Phrase structure languages and grammar. Types of grammar and classes of languages. Regular languages and finite state automata. Context-free languages and pushdown automata. Unrestricted languages and Turing Machines. Computability models of Turing, Church, Markov, and McCarthy. Applications to programming languages, compiler design, and program design and testing.",
+		"Unit": "3",
+		"Type": "LEC"
+	},
+	{
+		"Class name": "MATH 482",
+		"Department": "Mathematics",
+		"Course Title": "Combined Algorithm",
+		"Description": "some computer programming experience. Computer oriented study of seminumerical and non-numerical algorithms. Sorting, tree searching, generation of combinatorial structures, algorithm proof techniques, best algorithms, programming complexity.",
+		"Unit": "3",
+		"Type": "LEC"
+	},
+	{
+		"Class name": "COMP 380",
+		"Department": "Computer Science",
+		"Course Title": "Introduction to Software Engineering",
+		"Description": "Concepts and techniques for systems engineering, requirements analysis, design, implementation and testing of large scale computer systems. Principles of software engineering for production of reliable, maintainable and portable software products. Emphasis on object-oriented analysis and design techniques. Topics include unit, integration and systems testing, configuration management, software quality assurance practices, and an introduction to Computer Aided Software Engineering (CASE). ",
+		"Unit": "2",
+		"Type": "LEC"
+	},
+	{
+		"Class name": "COMP 380L",
+		"Department": "Computer Science",
+		"Course Title": "Introduction to Software Engineering Lab",
+		"Description": "Projects are implemented to reinforce the lectures. Three hours lab work per week.",
+		"Unit": "1",
+		"Type": "LAB"
+	},
+	{
+		"Class name": "COMP 450",
+		"Department": "Computer Science",
+		"Course Title": "Societal Issues in Computing",
+		"Description": "Survey course on the role of the digital computer in modern society. The dangers of the misuse of computers (as in the invasion of privacy), as well as the proper and intelligent use of the machines, are discussed.",
+		"Unit": "3",
+		"Type": "LEC"
+	},
+	{
+		"Class name": "COMP 490",
+		"Department": "Computer Science",
+		"Course Title": "Senior Design Project",
+		"Description": "Project-oriented course to allow students to apply their knowledge of software engineering to the design and implementation of a system to solve a real world problem. Students select and specify a suitable problem, investigate design alternatives and select an appropriate one, implement a solution, and verify and validate the result, all as part of a team effort. The role of digital computers in modern society are investigated including the dangers of computer misuse, as well as the proper and intelligent use of computers. Ethical concerns of software professionals are studied. ",
+		"Unit": "3",
+		"Type": "LEC"
+	},
+	{
+		"Class name": "COMP 490L",
+		"Department": "Computer Science",
+		"Course Title": "Senior Design Project Lab",
+		"Description": "Three hours lab work per week. Real-world project implementation in the academic enrironment.",
+		"Unit": "1",
+		"Type": "LAB"
+	},
+	{
+		"Class name": "COMP 491L",
+		"Department": "Computer Science",
+		"Course Title": "Senior Project Lab",
+		"Description": "Project-oriented laboratory to allow students complete the design, implementation, and testing of the team based software engineering project started in COMP 490L. ",
+		"Unit": "1",
+		"Type": "LAB"
+	},
+	{
+		"Class name": "",
+		"Department": "Senior Elective Courses:",
+		"Course Title": "Select at least 5 from the following Courses:",
+		"Description": "",
+		"Unit": "",
+		"Type": ""
+	},
+	{
+		"Class name": "Class name",
+		"Department": "Department",
+		"Course Title": "Course Title",
+		"Description": "Description",
+		"Unit": "Unit",
+		"Type": "Type"
+	},
+	{
+		"Class name": "COMP 410",
+		"Department": "Computer Science",
+		"Course Title": "Logic Programming",
+		"Description": "Programming techniques in the logic programming language PROLOG. Prenex conjunctive normal form and grammatical algorithms. Tableaux, sequenzen, resolution, and other semi-decision procedures. Closures of relations, fixed point theory, control mechanisms, relationship to functional programming.",
+		"Unit": "3",
+		"Type": "LEC"
+	},
+	{
+		"Class name": "COMP 424",
+		"Department": "Computer Science",
+		"Course Title": "Computer System Security",
+		"Description": "Analysis of the need for computer system security, and the security techniques in operating systems, data bases, and computer networks. Supporting techniques such as auditing, risk analysis, and cost-benefit tradeoffs are discussed.",
+		"Unit": "3",
+		"Type": "LEC"
+	},
+	{
+		"Class name": "COMP 426",
+		"Department": "Computer Science",
+		"Course Title": "Fault-Tolerant Software and Computing",
+		"Description": "An examination of dependability requirements in computing, and the basic principles of system-level reliability and fault-tolerance. Software-based implementation of fault-tolerance in distributed systems. Fault-tolerant software and data bases: reliability modeling, fault-tolerance techniques (e.g., recovery blocks, N-version programming), and design approaches.",
+		"Unit": "3",
+		"Type": "LEC"
+	},
+	{
+		"Class name": "COMP 429",
+		"Department": "Computer Science",
+		"Course Title": "Computer Network Software",
+		"Description": "Basic software design and analysis considerations in networking computers into coherent, cooperating systems capable of processing computational tasks in a distributed manner. Network topology, routing procedures, message multiplexing and process scheduling techniques.",
+		"Unit": "3",
+		"Type": "LEC"
+	},
+	{
+		"Class name": "COMP 440",
+		"Department": "Computer Science",
+		"Course Title": "Database Design",
+		"Description": "Database structure including: structure definition, data models, semantics of relations, operation on data models. Database schemas: element definition, use and manipulation of the schema. Elements of implementation. Algebra of relations on a database. Hierarchical data bases. Discussion of information retrieval, reliability, protection and integrity of databases.",
+		"Unit": "3",
+		"Type": "LEC"
+	},
+	{
+		"Class name": "COMP 465",
+		"Department": "Computer Science",
+		"Course Title": "Computer Graphics System and Design",
+		"Description": "Fundamental concepts of computer graphics. Graphics devices; graphics languages; interactive systems. Applications to art, science, engineering and business. Trade-offs between hardware devices and software support. ",
+		"Unit": "2",
+		"Type": "LEC"
+	},
+	{
+		"Class name": "COMP 465L",
+		"Department": "Computer Science",
+		"Course Title": "Computer Graphics System and Design and Lab",
+		"Description": "Projects are implemented to reinforce the lectures. Three hours lab work per week.",
+		"Unit": "1",
+		"Type": "LAB"
+	},
+	{
+		"Class name": "COMP 467",
+		"Department": "Computer Science",
+		"Course Title": "Multimedia System Design",
+		"Description": "Study of fundamentals of multimedia storage, processing, communication, presentation, and display by digital means with emphasis on audio, still images and video media. Includes sampling theory, compression techniques and synchronization. Discussion of hypermedia and methodology issues. Multimedia programming; software tools for authoring multimedia applications and interfaces.",
+		"Unit": "3",
+		"Type": "LEC"
+	},
+	{
+		"Class name": "COMP 469",
+		"Department": "Computer Science",
+		"Course Title": "Introduction to Artificial Intelligence",
+		"Description": "Exploration of the use of computers to perform computations normally associated with intelligence. These include game playing, theorem proving, problem solving, question answering and visual perception. Topics include languages, system architectures and heuristic strategies for advanced, high level computations. Covers computational models for knowledge representation, natural language and vision.",
+		"Unit": "3",
+		"Type": "LEC"
+	},
+	{
+		"Class name": "COMP 484",
+		"Department": "Computer Science",
+		"Course Title": "Web Engineering I",
+		"Description": "Internet infrastructure and the underlying networking technologies. Study of system and software architectures for web applications, e-business, and e-commerce systems. Principles of website design. Advances in web-engineering technologies. Principles of web-based based transaction processing. XML and the associated technologies. Web service technology. Security and privacy issues. Study of the emerging Internet technologies. ",
+		"Unit": "2",
+		"Type": "LEC"
+	},
+	{
+		"Class name": "COMP 484L",
+		"Department": "Computer Science",
+		"Course Title": "Web Engineering I and Lab",
+		"Description": "Projects are implemented to reinforce the lectures. Three hours lab work per week.",
+		"Unit": "1",
+		"Type": "LAB"
+	},
+	{
+		"Class name": "COMP 485",
+		"Department": "Computer Science",
+		"Course Title": "Human-Computer Interaction",
+		"Description": "The information exchange between humans and computer systems will be examined. Aspects of input/output devices, software engineering, and human factors will be discussed with respect to human-computer interactions. Topics include: text and graphic display; user modeling; program design, debugging, complexity and comprehension; and current research studies and methodologies.",
+		"Unit": "3",
+		"Type": "LEC"
+	},
+	{
+		"Class name": "COMP 541",
+		"Department": "Computer Science",
+		"Course Title": "Data Mining",
+		"Description": "A study of the concepts, principles, techniques, and applications of data mining. Topics include data preprocessing, the ChiMerge algorithm, data warehousing, OLAP technology, the Apriori algorithm for mining frequent patterns, classification methods (such as decision tree induction, Bayesian classification, neural networks, support vector machines, genetic algorithms), clustering methods (such as k-means algorithm, hierarchical clustering methods, self-organizing feature map), and data mining applications (such as Web, finance, telecommunication, biology, medicine, science, and engineering). Privacy protection and information security in data mining are also discussed.",
+		"Unit": "3",
+		"Type": "SEM"
+	},
+	{
+		"Class name": "COMP 560",
+		"Department": "Computer Science",
+		"Course Title": "Expert Systems",
+		"Description": "Extensive introduction to the concepts and techniques of expert systems. Rationale for such systems including evaluation of prospective domains. Existing systems, those under development and likely future areas will be explored. Basic architecture is demonstrated using both example and rule-based systems. Commercial tools for building expert systems are surveyed and evaluated. Of special concern will be knowledge acquisition methods. Guidelines for planning and managing development projects will be given.",
+		"Unit": "3",
+		"Type": "SEM"
+	},
+	{
+		"Class name": "COMP 565",
+		"Department": "Computer Science",
+		"Course Title": "Advanced Computer Graphics",
+		"Description": "This course will cover the theory, design, implementation, and application of advanced computer graphics environments. Accelerated 3D graphics APIs; the modeling and simulation of light, sound, physical objects, motion, and collisions; and user interaction in single and multi-user virtual environments will be studied. The application domain for this class is interactive 3D computer games, scientific visualization, and Virtual Reality.",
+		"Unit": "3",
+		"Type": "SEM"
+	},
+	{
+		"Class name": "COMP 581",
+		"Department": "Computer Science",
+		"Course Title": "Open-Source Software Engineering",
+		"Description": "Introduction to open source software engineering concepts, principles and applications. Topics include history of open source software, open source software engineering models, open source products and software quality, strategies and business models, government policies towards open source software, work organization of open source software development, software and intellectual property rights, organizations of the open source community, and case studies. Different open source software products for various applications are also discussed and used for group projects.",
+		"Unit": "3",
+		"Type": "SEM"
+	},
+	{
+		"Class name": "COMP 584",
+		"Department": "Computer Science",
+		"Course Title": "Advanced Web Engineering",
+		"Description": "A study of the concepts, principles, techniques, and methods of Web engineering. Topics include requirements engineering, modeling and architectures, design and technologies, testing, operation and maintenance, Web project management, application development process, usability and performance, and security of Web applications. Technologies, business models and strategies, and societal issues of Web 2.0 and Semantic Web are also discussed.",
+		"Unit": "3",
+		"Type": "SEM"
+	},
+	{
+		"Class name": "COMP 585",
+		"Department": "Computer Science",
+		"Course Title": "Graphical User Interface",
+		"Description": "The design, development and analysis of programs requiring graphical, direct manipulation, user interfaces (GUIs) will be examined. The majority of modern software includes a GUI. The development tools, environments, and style guides for common GUIs will be used in course assignments and discussed in lecture. The course involves the design and development of several GUI programs. The aesthetic and human computer interaction aspects and future trends in GUIs design and development will also be reviewed.",
+		"Unit": "3",
+		"Type": "SEM"
+	},
+	{
+		"Class name": "COMP 586",
+		"Department": "Computer Science",
+		"Course Title": "Object-Oriented Software Deaign",
+		"Description": "Review of object oriented concepts. Comparison with functional methods. Benefits and pitfalls of object orientation. Fundamentals of object-oriented modeling-associations, links, states. Survey of object-oriented development methods. In-depth study of a current object-oriented method. Object-oriented software requirements analysis and modeling. Object-oriented preliminary design. Designing concurrent and multiprocessor systems. Object-oriented detailed design. Object-oriented and object-based implementations. Object-oriented testing.",
+		"Unit": "3",
+		"Type": "SEM"
+	},
+	{
+		"Class name": "COMP 587",
+		"Department": "Computer Science",
+		"Course Title": "Software Verification and Validation",
+		"Description": "An in depth study of verification and validation strategies and techniques as they apply to the development of quality software. Topics include test planning and management, testing tools, technical reviews, formal methods and the economics of software testing. The relationship of testing to other quality assurance activities as well as the integration of verification and validation into the overall software development process are also discussed.",
+		"Unit": "3",
+		"Type": "SEM"
+	},
+	{
+		"Class name": "COMP 589",
+		"Department": "Computer Science",
+		"Course Title": "Software Matrices",
+		"Description": "The role of metrics and quantitative models in software development. Product metrics, process metrics, measurement models and techniques for empirical validation. Measurement and analysis: implementation of a metrics program. Measuring software size, complexity, and functionality at different stages of software development. Use of measures to predict effort and schedule required for software projects. Measures of software quality. Analyzing defect data to predict software reliability. Performance measures. Management applications for metrics. Tools that support metrics collection, analysis, summary, and presentation.",
+		"Unit": "3",
+		"Type": "SEM"
+	},
+	{
+		"Class name": "COMP 598EA",
+		"Department": "Computer Science",
+		"Course Title": "Embedded Applications",
+		"Description": "Embedded systems present cost effective, challenging and flexible computational platforms. Instruction in the unique aspects of embedded systems including architectures, instruction sets, development environments, concurrent programming, networking, applications of embedded platforms, data acquisition from sensors and interaction with surrounding environment.",
+		"Unit": "3",
+		"Type": "SEM"
+	},
+	{
+		"Class name": "COMP 598NSP",
+		"Department": "Computer Science",
+		"Course Title": "Advanced Network Security Projects",
+		"Description": "Topics regarding the implementation and administration of network and information infrastructure components will be presented. Issues covered include security administration, packet filtering, proxy services and virus protection. Fundamentals of administering information services such as SMTP, DNS, LDAP and HTTP will be investigated. Internet infrastructure administration and routing protocols such as RIP, BGP and link redundancy will also be explored.",
+		"Unit": "3",
+		"Type": "SEM"
+	},
+	{
+		"Class name": "MATH 481A",
+		"Department": "Mathematics",
+		"Course Title": "Numerical Analysis",
+		"Description": "Techniques of applied mathematics, solution of equations, interpolation, numerical integration, numerical solution of differential equations.",
+		"Unit": "3",
+		"Type": "LEC"
+	},
+	{
+		"Class name": "",
+		"Department": "",
+		"Course Title": "",
+		"Description": "",
+		"Unit": "",
+		"Type": ""
+	},
+	{
+		"Class name": "",
+		"Department": "",
+		"Course Title": "",
+		"Description": "",
+		"Unit": "",
+		"Type": ""
+	}
+]
+}
