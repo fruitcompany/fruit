@@ -2,12 +2,12 @@
 	"courses":
 		[
 	{
-		"Class name": "COMP 110",
-		"Department": "Computer Science",
-		"Course Title": "Introduction to Algorithm and Programming",
-		"Description": "Introduction to algorithms, their representation, design, structuring, analysis and optimization. Implementation of algorithms as structured programs in a high level language.",
-		"Unit": "3",
-		"Type": "LEC"
+		Class name: "COMP 110",
+		Department: "Computer Science",
+		Course Title: "Introduction to Algorithm and Programming",
+		Description: "Introduction to algorithms, their representation, design, structuring, analysis and optimization. Implementation of algorithms as structured programs in a high level language.",
+		Unit: 3,
+		Type: "LEC"
 	},
 	{
 		"Class name": "COMP 110L",
