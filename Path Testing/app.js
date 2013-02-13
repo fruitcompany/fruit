@@ -22,7 +22,7 @@ Ext.define('Course', {
 Ext.onReady(function(){
 
 	var CourseStore = Ext.create('Ext.data.Store', {
-// 		model: 'Course',
+		model: 'Course',
 		proxy: {
 			type: 'ajax',
 			url : 'Course_Info.json',
