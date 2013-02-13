@@ -26,10 +26,10 @@ Ext.onReady(function(){
 		proxy: {
 			type: 'ajax',
 			url : 'Course_Info.json',
-			// reader: {
-// 				type: 'json',
-// 				root: 'courses'
-// 			}
+			reader: {
+				type: 'json',
+				root: 'courses'
+			}
 		},
 		autoLoad: true
 	});
