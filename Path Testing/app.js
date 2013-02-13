@@ -10,7 +10,7 @@ Ext.require([
 Ext.define('Course', {
 	extend: 'Ext.data.Model',
 	fields: [
-		{name: 'c_name', 	type: 'string',	mapping:'Class Name'},
+		{name: 'c_name', 	type: 'string',	mapping:'Class name'},
 		{name: 'dept',  	type: 'string',	mapping:'Department'},
 		{name: 'c_title',   type: 'string',	mapping:'Course Title'},
 		{name: 'desc',  	type: 'string',	mapping:'Description'},
