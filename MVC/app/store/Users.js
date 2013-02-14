@@ -1,6 +1,6 @@
-Ext.define('AM.store.Users', {
+Ext.define('GPAS.store.Users', {
     extend: 'Ext.data.Store',
-    model: 'AM.model.User',
+    model: 'GPAS.model.User',
     autoLoad: true,
 
     proxy: {

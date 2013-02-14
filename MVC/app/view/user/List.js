@@ -1,4 +1,4 @@
-Ext.define('AM.view.user.List' ,{
+Ext.define('GPAS.view.user.List' ,{
     extend: 'Ext.grid.Panel',
     alias : 'widget.userlist',
 

@@ -1,11 +1,12 @@
 //the Users controller will make sure that the User model is included on the page and available to our app
-Ext.define('AM.controller.Users', {
+Ext.define('GPAS.controller.Paths', {
     extend: 'Ext.app.Controller',
     stores: ['Users'],
     models: ['User'],
     views: [
         'user.List',
-        'user.Edit'
+        'user.Edit',
+        'user.Path'
     ],
     
     init: function() {

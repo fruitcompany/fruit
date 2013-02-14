@@ -1,4 +1,4 @@
-Ext.define('AM.view.user.Edit', {
+Ext.define('GPAS.view.user.Edit', {
     extend: 'Ext.window.Window',
     alias : 'widget.useredit',
 
