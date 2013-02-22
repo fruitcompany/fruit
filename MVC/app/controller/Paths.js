@@ -75,15 +75,21 @@ Ext.define('GPAS.controller.Paths', {
     
     loginUser: function(create, info){
 	console.log('login...',create,info);
-	Ext.Ajax.defaultHeaders = { 'Content-Type': 'application/json; charset=utf-8' };
+	//Ext.Ajax.defaultHeaders = { 'Content-Type': 'application/json; charset=utf-8' };
 	Ext.Ajax.request({
 	    url: 'data/User.pl',
 	    data: {
 		create	: create,
 		info	: info
 	    },
-	    contentType: "application/json; charset=utf-8",
-	    dataType: "json",
+	    headers: { 'Content-Type' : 'application/json' },
+	    params:{ 'test' : 'testing' },
+	    jsonData: {
+		create	: create,
+		info	: info
+	    },
+	    //contentType: "application/json; charset=utf-8",
+	    //dataType: "json",
 	//    defaultHeaders: {
 	//	'Content-Type': 'application/json; charset=utf-8'
 	//    },
