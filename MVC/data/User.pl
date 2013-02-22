@@ -22,7 +22,7 @@ print $cgi->header(-type => "application/json", -charset => "utf-8");
 print $data;
 
 
-query = "SELECT * FROM Course_Info";
+$query = "SELECT * FROM Course_Info";
 @headers = ("Course_Name", "Department", "Course_Title", "Description", "Units", "Type");
 
 printTable($query,\@headers);
