@@ -26,7 +26,7 @@ print $data;
 $query = "SELECT * FROM Course_Info";
 @headers = ("Course_Name", "Department", "Course_Title", "Description", "Units", "Type");
 
-printTable($query,\@headers);
+#printTable($query,\@headers);
 
 
 sub printTable {

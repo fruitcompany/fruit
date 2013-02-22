@@ -81,6 +81,8 @@ Ext.define('GPAS.controller.Paths', {
 		create	: create,
 		info	: info
 	    },
+	    contentType: "application/json; charset=utf-8",
+	    dataType: "json",
 	    success: function(response){
 		var text = response.responseText;
 		// process server response here
