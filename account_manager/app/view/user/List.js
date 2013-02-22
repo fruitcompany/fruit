@@ -12,6 +12,8 @@ Ext.define('AM.view.user.List' ,{
             {header: 'Name',  dataIndex: 'name',  flex: 1},
             {header: 'Email', dataIndex: 'email', flex: 1}
         ];
+        
+        console.log(this.store);
 
         this.callParent(arguments);
     }

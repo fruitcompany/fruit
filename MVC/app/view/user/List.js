@@ -1,17 +1,17 @@
 Ext.define('GPAS.view.user.List' ,{
-    extend: 'Ext.grid.Panel',
+    extend: 'Ext.panel.Panel',
     alias : 'widget.userlist',
 
-	store: 'Users',
+	store: 'Classes',
 
     title : 'All Users',
 
     initComponent: function() {
         
-        this.columns = [
-            {header: 'Name',  dataIndex: 'name',  flex: 1},
-            {header: 'Email', dataIndex: 'email', flex: 1}
-        ];
+        // this.columns = [
+//             {header: 'Name',  dataIndex: 'name',  flex: 1},
+//             {header: 'Email', dataIndex: 'email', flex: 1}
+//         ];
 
         this.callParent(arguments);
     }

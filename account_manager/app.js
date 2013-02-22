@@ -15,7 +15,15 @@ Ext.application({
             	width: 'fit',
             	height: 100,
             	region: 'north',
-            	html: 'this is a test'
+            	html: 'this is a test',
+            	items:{
+            		xtype:'button',
+            		handler:function(){
+            			
+            			console.log(this);
+            		
+            		}
+            	}
             },{
             	xtype:'panel',
             	width: 100,
