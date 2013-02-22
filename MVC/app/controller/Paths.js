@@ -78,7 +78,7 @@ Ext.define('GPAS.controller.Paths', {
 	Ext.Ajax.defaultHeaders = { 'Content-Type': 'application/json; charset=utf-8' };
 	Ext.Ajax.request({
 	    url: 'data/User.pl',
-	    params: {
+	    data: {
 		create	: create,
 		info	: info
 	    },
