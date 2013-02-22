@@ -13,8 +13,8 @@ my $data = $cgi->param('info');
 $database = "gpas";
 $user     = "gpas";
 $pw       = "r3dh0tSvr*";
-#$host     = "localhost";
-$host     = "jd-research.ecs.csun.edu";
+$host     = "localhost";
+#$host     = "jd-research.ecs.csun.edu";
 $dsn      = "dbi:mysql:$database:$host";
 
 
