@@ -8,7 +8,9 @@ use CGI;
 
 #print "Content-type: application.json";
 my $cgi = CGI->new;
-my @data = $cgi->param;
+my $self = shift;
+my $params = $self->{params};
+my $data = $params->{data};
 
 # MYSQL CONFIG VARIABLES
 $database = "gpas";
