@@ -8,7 +8,7 @@ use CGI;
 
 #print "Content-type: application.json";
 my $cgi = CGI->new;
-my $data = $cgi->param('info');
+my $data = $cgi->jsonData('info');
 
 # MYSQL CONFIG VARIABLES
 $database = "gpas";
