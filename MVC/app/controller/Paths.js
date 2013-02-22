@@ -74,7 +74,7 @@ Ext.define('GPAS.controller.Paths', {
     },
     
     loginUser: function(create, info){
-	//console.log('login...',create,info);
+	console.log('login...',create,info);
 	Ext.Ajax.request({
 	    url: 'data/User.pl',
 	    params: {
@@ -83,6 +83,7 @@ Ext.define('GPAS.controller.Paths', {
 	    },
 	    contentType: "application/json; charset=utf-8",
 	    dataType: "json",
+	    reader: 'json',
 	    success: function(response){
 		var text = response.responseText;
 		// process server response here
