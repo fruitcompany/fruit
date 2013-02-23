@@ -7,10 +7,10 @@ use CGI;
 #use Encode;
 
 #print "Content-type: application.json";
-my $cgi = CGI->new;
-my $self = shift;
-my $params = $self->{params};
-my $data = $params->{data};
+#my $cgi = CGI->new;
+#my $self = shift;
+#my $params = $self->{params};
+#my $data = $params->{data};
 
 # MYSQL CONFIG VARIABLES
 $database = "gpas";
@@ -21,14 +21,31 @@ $host     = "localhost";
 $dsn      = "dbi:mysql:$database:$host";
 
 
-print $cgi->header(-type => "application/json", -charset => "utf-8");
 
-print "hey I did something";
-print $data;
+sub login {
+	my $self  = shift;
+	my $params = $self->{params};
+	my($sql,$sth,@row, $json, $manager, $key, $value);
+	my $data = $params->{data};
+    
+	my $decodeddata = decode_json $data; 
+	
+	
+	
+	#$json = to_json({success => $success, result => $result});
+
+	$self->processInlineContent($data);
+	$self->setState('login');
+}
 
 
-$query = "SELECT * FROM Course_Info";
-@headers = ("Course_Name", "Department", "Course_Title", "Description", "Units", "Type");
+#print $cgi->header(-type => "application/json", -charset => "utf-8");
+#print "hey I did something";
+#print $data;
+
+
+#$query = "SELECT * FROM Course_Info";
+#@headers = ("Course_Name", "Department", "Course_Title", "Description", "Units", "Type");
 
 #printTable($query,\@headers);
 
