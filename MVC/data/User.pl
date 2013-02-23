@@ -21,6 +21,9 @@ $host     = "localhost";
 #$host     = "jd-research.ecs.csun.edu";
 $dsn      = "dbi:mysql:$database:$host";
 
+print $cgi->header(-type => "application/json", -charset => "utf-8");
+#print "hey I did something";
+print $data;
 
 
 sub login {
@@ -38,11 +41,6 @@ sub login {
 	$self->processInlineContent($data);
 	$self->setState('login');
 }
-
-
-print $cgi->header(-type => "application/json", -charset => "utf-8");
-#print "hey I did something";
-print $data;
 
 
 #$query = "SELECT * FROM Course_Info";
