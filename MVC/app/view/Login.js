@@ -92,9 +92,19 @@ Ext.define('GPAS.view.Login' ,{
 	    border: 0,
 	    region: 'east',
 	    items: [{
-		id: 'createUsername',
+		id: 'createuName',
 		xtype: 'textfield',
 		fieldLabel: 'Username',
+		allowBlank: false
+	    }, {
+		id: 'createfName',
+		xtype: 'textfield',
+		fieldLabel: 'First Name',
+		allowBlank: false
+	    }, {
+		id: 'createlName',
+		xtype: 'textfield',
+		fieldLabel: 'Last Name',
 		allowBlank: false
 	    }, {
 		id: 'createPassword',
@@ -127,16 +137,19 @@ Ext.define('GPAS.view.Login' ,{
 		text: 'Create Account',
 		handler: function(button) {
 		    //console.log(button.up('panel').down('textfield'));
-		    var uName  = Ext.getCmp('createUsername').getValue();
+		    var uName  = Ext.getCmp('createuName').getValue();
+		    var fName  = Ext.getCmp('createfName').getValue();
+		    var lName  = Ext.getCmp('createlName').getValue();
 		    var pName  = Ext.getCmp('createPassword').getValue();
 		    var rpName = Ext.getCmp('createRetypePassword').getValue();
 		    var eName  = Ext.getCmp('createEmail').getValue();
 		    var reName = Ext.getCmp('createRetypeEmail').getValue();
 		    var sName  = Ext.getCmp('createStudentID').getValue();
-		    console.log('Creating User...',uName,pName,rpName,eName,reName,sName);
+		    console.log('Creating User...',fName,pName,rpName,eName,reName,sName);
 		    
 		    button.fireEvent('login', true, {
-			'uName' : uName,
+			'fName' : fName,
+			'lName' : lName,
 			'pName' : pName,
 			'rpName': rpName,
 			'eName'	: eName,
