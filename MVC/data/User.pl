@@ -22,7 +22,7 @@ $host     = "localhost";
 $dsn      = "dbi:mysql:$database:$host";
 
 print $cgi->header(-type => "application/json", -charset => "utf-8");
-#print "hey I did something";
+print "hey I did something";
 print $data;
 
 
@@ -85,5 +85,3 @@ sub runSql {
     $handler->execute or croak("error: " . $dbh->errstr);
     return $handler;
 }
-
-1
