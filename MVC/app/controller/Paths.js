@@ -79,13 +79,14 @@ Ext.define('GPAS.controller.Paths', {
 	Ext.Ajax.request({
 	    url: 'data/User.pl',
 	    method: 'Post',
-	    params:{
-		method: 'login',
+	    //params:{
+		//method: 'login',
 		data: Ext.encode({
 		    create	: create,
 		    info	: info
-		})
-	    },
+		}),
+	    //},
+	    dataType:'json',
 	//    data: {
 	//	create	: create,
 	//	info	: info

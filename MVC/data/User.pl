@@ -7,7 +7,8 @@ use CGI;
 #use Encode;
 
 #print "Content-type: application.json";
-#my $cgi = CGI->new;
+my $cgi = CGI->new;
+my $data = $cgi->all_parameters,
 #my $self = shift;
 #my $params = $self->{params};
 #my $data = $params->{data};
@@ -39,9 +40,9 @@ sub login {
 }
 
 
-#print $cgi->header(-type => "application/json", -charset => "utf-8");
+print $cgi->header(-type => "application/json", -charset => "utf-8");
 #print "hey I did something";
-#print $data;
+print $data;
 
 
 #$query = "SELECT * FROM Course_Info";
