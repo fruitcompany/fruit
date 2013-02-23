@@ -8,7 +8,7 @@ use CGI;
 
 #print "Content-type: application.json";
 my $cgi = CGI->new;
-my $data = $cgi->all_param('POSTDATA');
+#my $data = $cgi->all_parameters,
 #my $self = shift;
 #my $params = $self->{params};
 #my $data = $params->{data};
