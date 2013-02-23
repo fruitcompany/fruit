@@ -89,21 +89,50 @@ Ext.define('GPAS.controller.Paths', {
     loginUser: function(create, info){
 	console.log('login...',create,info);
 	var controller = this;
-	Ext.Ajax.request({
-	    url: 'data/Classes.json',
+	
+	
+	
+	if(!create){
+	    Ext.Ajax.request({
+		url: 'data/login.pl',
+		
+		params:{
+		    username : info.uName,
+		    password : info.pName
+		},
+		
+		success: function(response){
+		    var text = response.responseText,
+			log = controller.getLog();
+		    
+		    //log.destroy();
+		    //Ext.create('GPAS.view.PathManager');
+		    
+		    // process server response here
+		    console.log(text);
+		    
+		}
+	    });
 	    
-	    success: function(response){
-		var text = response.responseText,
-		    log = controller.getLog();
+	    
+	    
+	    
+	    /*Ext.Ajax.request({
+		url: 'data/Classes.json',
 		
-		log.destroy();
-		Ext.create('GPAS.view.PathManager');
-		
-		// process server response here
-		console.log(text);
-		
-	    }
-	});
+		success: function(response){
+		    var text = response.responseText,
+			log = controller.getLog();
+		    
+		    log.destroy();
+		    Ext.create('GPAS.view.PathManager');
+		    
+		    // process server response here
+		    console.log(text);
+		    
+		}
+	    });*/
+	}
 	//Ext.Ajax.request({
 	//    url: 'data/User.pl',
 	//    method: 'Post',
