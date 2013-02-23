@@ -8,7 +8,9 @@ Ext.define('GPAS.controller.Paths', {
         'user.Edit',
         'user.Path',
         'user.Semester',
-        'Login'
+        'Login',
+	'PathManager',
+	'NewPath'
     ],
     refs: [{
 		selector: 'viewport > panel[region=center]',
@@ -17,13 +19,22 @@ Ext.define('GPAS.controller.Paths', {
 		selector: 'viewport',
 		ref: 'vp'
 	},{
+		selector: 'login',
+		ref: 'log'
+	},{
 		selector: 'viewport > panel[region=center] > path',
 		ref: 'path'
 	}],
     
     init: function() {
         this.control({
-            'viewport > login > panel > panel > button': {
+	    'newpath > button': {
+                makenewpath: function(win, major, year){
+		    win.close();
+		    this.addNewPath(major,year);
+		}
+            },
+            'login > panel > panel > button': {
                 login: this.loginUser
             },
 	    'viewport > userlist': {
@@ -41,7 +52,9 @@ Ext.define('GPAS.controller.Paths', {
 		}
             },
             'viewport > panel > button[action=add_path]': {
-                click: this.addNewPath
+                click: function(){
+		    addWin = Ext.create('GPAS.view.NewPath').show();
+		}
             },
             'viewport > panel[region=center] > path > store': {
                 load: this.onPathStoreLoad,
@@ -75,37 +88,28 @@ Ext.define('GPAS.controller.Paths', {
     
     loginUser: function(create, info){
 	console.log('login...',create,info);
-	//Ext.Ajax.defaultHeaders = { 'Content-Type': 'application/json; charset=utf-8' };
+	var controller = this;
 	Ext.Ajax.request({
 	    url: 'data/User.pl',
 	    method: 'Post',
-	    //params:{
-		//method: 'login',
 		jsonData: Ext.encode({
 		    create	: create,
 		    info	: info
 		}),
-	    //},
 	    dataType:'json',
-	//    data: {
-	//	create	: create,
-	//	info	: info
-	//    },
+
 	    headers: { 'Content-Type' : 'application/json' },
-	
-	//    jsonData: {
-	//	create	: create,
-	//	info	: info
-	//    },
-	    //contentType: "application/json; charset=utf-8",
-	    //dataType: "json",
-	//    defaultHeaders: {
-	//	'Content-Type': 'application/json; charset=utf-8'
-	//    },
+
 	    success: function(response){
-		var text = response.responseText;
+		var text = response.responseText,
+		    log = controller.getLog();
+		
+		log.destroy();
+		Ext.create('GPAS.view.PathManager');
+		
 		// process server response here
 		console.log(text);
+		
 	    }
 	});
     },
@@ -114,11 +118,19 @@ Ext.define('GPAS.controller.Paths', {
         console.log('The panel was rendered');
     },
     
-    addNewPath: function() {
-    	pathPanel = this.getPathPanel();
-    	pathPanel.add(Ext.create('GPAS.view.user.Path', {
-    		
-    	}));
+    addNewPath: function(major, year) {
+	pathPanel = this.getPathPanel();
+	
+	pathPanel.setLoading(true);
+	Ext.defer(function(){
+	    
+	    pathPanel.on('add',function(){
+		pathPanel.setLoading(false);
+	    },{single:true});
+	    pathPanel.insert(pathPanel.items.length-1, Ext.create('GPAS.view.user.Path'));
+	},20);
+    	
+    	
     },
     addPanel: function() {
     	pathPanel = this.getPathPanel();

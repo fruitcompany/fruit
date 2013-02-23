@@ -23,7 +23,7 @@ $dsn      = "dbi:mysql:$database:$host";
 
 print $cgi->header(-type => "application/json", -charset => "utf-8");
 print "hey I did something";
-print $data;
+print $cgi->param('POSTDATA');
 
 
 sub login {

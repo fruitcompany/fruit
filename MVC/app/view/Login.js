@@ -144,9 +144,6 @@ Ext.define('GPAS.view.Login' ,{
 			'sName' : sName
 		    });
 		}
-	    },{
-		id: 'fakeTfield',
-		xtype: 'textfield'
 	    }],
 	}]
     }],
