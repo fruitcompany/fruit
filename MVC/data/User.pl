@@ -4,7 +4,7 @@ use DBI;
 use DBD::mysql;
 use CGI;
 #use JSON;
-#use Encode;
+use Encode;
 
 #print "Content-type: application.json";
 my $cgi = CGI->new;
@@ -22,8 +22,7 @@ $host     = "localhost";
 $dsn      = "dbi:mysql:$database:$host";
 
 print $cgi->header(-type => "application/json", -charset => "utf-8");
-print "hey I did something";
-print $cgi->param('POSTDATA');
+print decode $cgi->param('POSTDATA');
 
 
 sub login {
