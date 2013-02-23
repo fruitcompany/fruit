@@ -81,7 +81,7 @@ Ext.define('GPAS.controller.Paths', {
 	    method: 'Post',
 	    //params:{
 		//method: 'login',
-		data: Ext.encode({
+		jsonData: Ext.encode({
 		    create	: create,
 		    info	: info
 		}),
