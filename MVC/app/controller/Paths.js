@@ -90,7 +90,7 @@ Ext.define('GPAS.controller.Paths', {
 	//	create	: create,
 	//	info	: info
 	//    },
-	    //headers: { 'Content-Type' : 'application/json' },
+	    headers: { 'Content-Type' : 'application/json' },
 	
 	//    jsonData: {
 	//	create	: create,
