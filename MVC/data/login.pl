@@ -22,7 +22,7 @@ $host     = "localhost";
 $dsn      = "dbi:mysql:$database:$host";
 
 #print $cgi->header(-type => "application/json", -charset => "utf-8");
-print $cgi->param('username').", ".$cgi->param('password');
+print $cgi->param("username").", ".$cgi->param("password");
 
 sub runSql {
     my($sql)    = @_;
