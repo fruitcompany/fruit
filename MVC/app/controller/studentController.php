@@ -32,7 +32,7 @@ class studentController
 			$params = new stdClass();
 			$params->s_id = $row["Student_ID"];
 			$pathControl = new pathController();
-			
+
 	  		$listResult["Student_ID"] = $row["Student_ID"];
 			$listResult["First_Name"] = $row["First_Name"];
 			$listResult["Last_Name"] = $row["Last_Name"];
@@ -46,7 +46,7 @@ class studentController
  
     public function createAction($request) {
         $query = "insert into Student ( `Student_ID`, `First_Name`, `Last_Name`, `User_Name`, `Password`, `Email` )
-		                    values ( '$request->s_id', '$request->fname', '$request->lname', '$request->username', '$request->password', '$request->email' )";
+		                    values ( '$request->Student_ID', '$request->First_Name', '$request->Last_Name', '$request->User_Name', '$request->Password', '$request->Email' )";
 		$goodToGo = mysql_query($query);
 		$request->id = 1;
 		if($goodToGo)
@@ -57,10 +57,11 @@ class studentController
     }
 	
 	public function updateAction($request) {
-        if( isset( $request->s_id ) )
+        if( isset( $request->Student_ID ) )
 		{
-			$query = "UPDATE  Student SET First_Name = '$request->fname', Last_Name = '$request->lname', User_Name = '$request->username', Password = '$request->password', Email = '$request->email' WHERE Student_ID = $request->s_id";
+			$query = "UPDATE  Student SET First_Name = '$request->First_Name', Last_Name = '$request->Last_Name', User_Name = '$request->User_Name', Password = '$request->Password', Email = '$request->Email' WHERE Student_ID = $request->Student_ID";
 			$goodToGo = mysql_query($query);
+			$request->id = $request->Student_ID;
 			if($goodToGo)
 				return '{"success":true,"students":[' . json_encode($request) . ']}';
 			else
@@ -70,7 +71,7 @@ class studentController
     }
 	
 	public function deleteAction($request) {
-			$query = "DELETE FROM Student WHERE Student_ID = $request->s_id LIMIT 1";
+			$query = "DELETE FROM Student WHERE Student_ID = $request->Student_ID LIMIT 1";
 			$goodToGo = mysql_query($query);
 			if($goodToGo)
 				return '{"success":true,"students":[' . json_encode($request) . ']}';
