@@ -2,10 +2,12 @@
 
 use DBI;
 #use DBD::mysql;
+
+use 5.010;
 use CGI;
 
-
-my $cgi = CGI->new;
+use strict;
+use warnings;
 
 # MYSQL CONFIG VARIABLES
 #$database = "gpas";
@@ -14,15 +16,41 @@ my $cgi = CGI->new;
 #$host     = "localhost";
 ##$host     = "jd-research.ecs.csun.edu";
 #$dsn      = "dbi:mysql:$database:$host";
-print $cgi->header(-type => "text/plain", -charset => "utf-8");
-print "hello";
-for my $param ($q->param('POSTDATA')) {
+
+
+
+my $q = CGI->new();
+say $q->header(), $q->start_html();
+
+say "<h1>Parameters</h1>";
+
+for my $param ($q->param()) {
     my $safe_param = $q->escapeHTML($param);
-    print $param;
+
+    say "<p><strong>$safe_param</strong>: ";
+
     for my $value ($q->param($param)) {
-        print $value;
+        say $q->escapeHTML($value);
     }
+
+    say '</p>';
 }
+
+say $q->end_html();
+
+
+
+
+
+#print $cgi->header(-type => "text/plain", -charset => "utf-8");
+#print "hello";
+#for my $param ($q->param()) {
+#    my $safe_param = $q->escapeHTML($param);
+#    print $param;
+#    for my $value ($q->param($param)) {
+#        print $value;
+#    }
+#}
 
 
 
