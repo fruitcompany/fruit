@@ -5,10 +5,10 @@ Ext.define('GPAS.model.Class', {
     idProperty: 'id',
     proxy: {
         api : {
-            create  : 'rest.php?_m=class&_verb=create',
-            read    : 'rest.php?_m=class&_verb=read',
-            update  : 'rest.php?_m=class&_verb=update',
-            destroy : 'rest.php?_m=class&_verb=delete'    
+            create  : 'data/rest.php?_m=class&_verb=create',
+            read    : 'data/rest.php?_m=class&_verb=read',
+            update  : 'data/rest.php?_m=class&_verb=update',
+            destroy : 'data/rest.php?_m=class&_verb=delete'    
         },
         type : 'ajax',
         reader : 'json'

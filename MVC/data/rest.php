@@ -1,60 +1,27 @@
-<?php
-
-require_once 'logger/error_log.php'; //enables printing log messages to logger/error_log.txt
-require_once 'Request.php'; //uses client data sent to make query calls to class in charge.
-require_once 'QueryOperation.php'; //class in charge of query operations
-
-
-	$request_method = strtolower($_SERVER['REQUEST_METHOD']);  
-	error_log( "type " . $request_method );
-		
-	$query = new QueryOperation();
-	$result = new stdClass();
-	
-	function get_url_id()
-	{
-		$strip =  basename($_SERVER['REQUEST_URI']);
-		$strip = explode( "?", $strip );
-			
-		if( count($strip) > 0 )
-		{
-			return $strip[0];				
-		}
-		
-		return NULL;
-	}
-	
-	
+<?phprequire_once 'logger/error_log.php'; //enables printing log messages to logger/error_log.txt
+spl_autoload_register('apiAutoload');function apiAutoload($classname){    if (preg_match('/[a-zA-Z]+Controller$/', $classname)) {        include __DIR__ . '/controller/' . $classname . '.php';        return true;    } }
+	$request_method = strtolower($_GET['_verb']);  	$model_name = $_GET['_m'];	error_log( "model " . $model_name );
+	error_log( "type " . $request_method );	if(isset($_GET['id']))		error_log( "id " . $_GET['id'] );
+	// route the request to the right place	$controller_name = $model_name . 'Controller';if (class_exists($controller_name)) {	$controller = new $controller_name();	$action_name = strtolower($request_method) . 'Action';	
+	$result = new stdClass();
 	switch( $request_method )
 	{
-		
-		case 'get':
-			$result = $query->getResults(new stdClass());
-		break;
-		
-		
-		case 'put':
-			$put = file_get_contents("php://input", 'r' );
-			$params = json_decode( $put );
-			$result = $query->updateRecords($params);
+		case 'read':			if(isset($_GET['id']))			{				$params = new stdClass();				$params->id = $_GET['id'];				$result = $controller->$action_name($params);			}			else			{				$result = $controller->$action_name(new stdClass());			}
 			
-		break;
-		
-		case 'post':
+		break;
+		case 'create':
 			$put = file_get_contents("php://input", 'r' );
 			$params = json_decode( $put );
-			$result = $query->createRecord($params);
-		break;
-		
+			$result = $controller->$action_name($params);
+		break;
+		case 'update':
+			$put = file_get_contents("php://input", 'r' );
+			$params = json_decode( $put );
+			$result = $controller->$action_name($params);
+		break;
 		case 'delete':
-			$id = get_url_id();
-			$params = new stdClass();
-			$params->id = $id;
-			$result = $query->destroyRecord($params);
-		break;
-		
-	}
-	
-	echo json_encode( $result );
-	
+			$put = file_get_contents("php://input", 'r' );			$params = json_decode( $put );
+			$result = $controller->$action_name($params);
+		break;	}
+	echo json_encode( $result );}
 ?>

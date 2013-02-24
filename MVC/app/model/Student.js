@@ -14,10 +14,10 @@ Ext.define('GPAS.model.Student', {
     idProperty: 'id',
     proxy: {
         api : {
-            create  : 'rest.php?_m=student&_verb=create',
-            read    : 'rest.php?_m=student&_verb=read',
-            update  : 'rest.php?_m=student&_verb=update',
-            destroy : 'rest.php?_m=student&_verb=delete'    
+            create  : 'data/rest.php?_m=student&_verb=create',
+            read    : 'data/rest.php?_m=student&_verb=read',
+            update  : 'data/rest.php?_m=student&_verb=update',
+            destroy : 'data/rest.php?_m=student&_verb=delete'    
         },
         type : 'ajax',
         reader : 'json'
