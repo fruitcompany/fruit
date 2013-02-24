@@ -15,8 +15,8 @@ my $cgi = CGI->new;
 ##$host     = "jd-research.ecs.csun.edu";
 #$dsn      = "dbi:mysql:$database:$host";
 print $cgi->header(-type => "text/plain", -charset => "utf-8");
-
-for my $param ($q->param()) {
+print "hello";
+for my $param ($q->param('POSTDATA')) {
     my $safe_param = $q->escapeHTML($param);
     print $param;
     for my $value ($q->param($param)) {
