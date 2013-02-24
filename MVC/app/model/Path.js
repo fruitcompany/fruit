@@ -5,10 +5,10 @@ Ext.define('GPAS.model.Path', {
     idProperty: 'id',
     proxy: {
         api : {
-            create  : 'data/rest.php?_m=path&_verb=create',
-            read    : 'data/rest.php?_m=path&_verb=read',
-            update  : 'data/rest.php?_m=path&_verb=update',
-            destroy : 'data/rest.php?_m=path&_verb=delete'    
+            create  : 'app/rest.php?_m=path&_verb=create',
+            read    : 'app/rest.php?_m=path&_verb=read',
+            update  : 'app/rest.php?_m=path&_verb=update',
+            destroy : 'app/rest.php?_m=path&_verb=delete'    
         },
         type : 'ajax',
         reader : 'json'
