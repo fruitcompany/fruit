@@ -21,8 +21,19 @@ $host     = "localhost";
 #$host     = "jd-research.ecs.csun.edu";
 $dsn      = "dbi:mysql:$database:$host";
 
+
+for my $param ($q->param()) {
+    my $safe_param = $q->escapeHTML($param);
+    say $param;
+    for my $value ($q->param($param)) {
+        say $value;
+    }
+}
+
+
+
 #print $cgi->header(-type => "application/json", -charset => "utf-8");
-print $cgi->param("username").", ".$cgi->param("password");
+#print $cgi->param("username").", ".$cgi->param("password");
 
 sub runSql {
     my($sql)    = @_;
