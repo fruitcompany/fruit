@@ -17,21 +17,32 @@ my $host     = "localhost";
 #my $host     = "jd-research.ecs.csun.edu";
 my $dsn      = "dbi:mysql:$database:$host";
 
-
-
 my $q = CGI->new();
+
+my $uname = $q->param('username');
+my $pname = $q->param('password');
+
+my $query = "SELECT Student_ID FROM Student WHERE User_Name = '$uname' AND Password = '$pname'";
+my $h = runSql($query);
+
+my @row_ary  = $h->fetchrow_array;
+
+for my $row (@row_ary) {
+    say $row;
+}
+
 say $q->header();
 
-for my $param ($q->param()) {
-    #my $safe_param = $q->escapeHTML($param);
-
-    #say "<p><strong>$safe_param</strong>: ";
-    say $param;
-
-    for my $value ($q->param($param)) {
-        say $value;
-    }
-}
+#for my $param ($q->param()) {
+#    #my $safe_param = $q->escapeHTML($param);
+#
+#    #say "<p><strong>$safe_param</strong>: ";
+#    say $param;
+#
+#    for my $value ($q->param($param)) {
+#        say $value;
+#    }
+#}
 
 
 
@@ -50,12 +61,12 @@ for my $param ($q->param()) {
 #print $cgi->header(-type => "application/json", -charset => "utf-8");
 #print $cgi->param("username").", ".$cgi->param("password");
 
-#sub runSql {
-#    my($sql)    = @_;
-#    my $dbh     = DBI->connect($dsn, $user, $pw) or die print"Unable to connect: $DBI::errstr\n";
-#    my $handler = $dbh->prepare($sql) or croak("error: " . $dbh->errstr);
-# 
-#    warn($sql . "\n");
-#    $handler->execute or croak("error: " . $dbh->errstr);
-#    return $handler;
-#}
+sub runSql {
+    my($sql)    = @_;
+    my $dbh     = DBI->connect($dsn, $user, $pw) or die print"Unable to connect: $DBI::errstr\n";
+    my $handler = $dbh->prepare($sql) or croak("error: " . $dbh->errstr);
+ 
+    warn($sql . "\n");
+    $handler->execute or croak("error: " . $dbh->errstr);
+    return $handler;
+}
