@@ -1,15 +1,24 @@
 Ext.define('GPAS.model.Student', {
     extend: 'Ext.data.Model',
-    fields: ['id', 's_id', 'fname', 'lname', 'username', 'password', 'email'],
+        
+    fields : [
+        { name: 'id'},
+        { name:  'Student_ID',  type: 'number'},
+        { name:  'First_Name',  type: 'string'},
+        { name:  'Last_Name',   type: 'string'},
+        { name:  'User_Name',   type: 'string'},
+        { name:  'Password',    type: 'string'},
+        { name:  'Email',       type: 'string'}
+    ],
     
     validations: [
-        {type: 'presence', field: 'username'},
-        {type: 'presence', field: 's_id'},
-        {type: 'presence', field: 'fname'},
-        {type: 'presence', field: 'lname'},
-        {type: 'presence', field: 'email'},
-        {type: 'length', field: 'username', min: 2},
-        {type: 'format', field: 'email', matcher: /[a-z]@[a-z].com/}
+        {type: 'presence', field: 'User_Name'},
+        {type: 'presence', field: 'Student_ID'},
+        {type: 'presence', field: 'First_Name'},
+        {type: 'presence', field: 'Last_Name'},
+        {type: 'presence', field: 'Email'},
+        {type: 'length', field: 'User_Name', min: 2},
+        {type: 'format', field: 'Email', matcher: /[a-z]@[a-z].com/}
     ],
     idProperty: 'id',
     proxy: {
@@ -20,6 +29,10 @@ Ext.define('GPAS.model.Student', {
             destroy : 'app/rest.php?_m=student&_verb=delete'    
         },
         type : 'ajax',
-        reader : 'json'
-    }
+        reader : {
+            type: 'json',
+            root: 'students'
+        }
+    },
+    hasMany: 'GPAS.model.Path'
 });

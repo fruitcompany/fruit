@@ -13,5 +13,5 @@ Ext.define('GPAS.model.Path', {
         type : 'ajax',
         reader : 'json'
     },
-    hasMany : 'Classes'
+    hasMany : 'GPAS.model.Class'
 });
