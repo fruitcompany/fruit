@@ -95,7 +95,7 @@ Ext.define('GPAS.controller.Paths', {
 	if(!create){
 	    Ext.Ajax.request({
 		url: 'data/login.pl',
-		method: 'GET',
+		method: 'POST',
 		params: {
 		    username : info.uName,
 		    password : info.pName
