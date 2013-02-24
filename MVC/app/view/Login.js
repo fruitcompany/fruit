@@ -35,9 +35,10 @@ Ext.define('GPAS.view.Login' ,{
 	id:'horz2',
 	region:'center',
 	layout: {
-	    type:'hbox',
-	    pack: 'center',
-	    padding: 10
+	    type: 'hbox',
+	    padding:'5',
+	    pack:'center',
+	    align:'middle'
 	},
 	margins: '5 0 5 5',
 	items: [{

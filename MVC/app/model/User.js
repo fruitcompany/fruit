@@ -15,5 +15,7 @@ Ext.define('GPAS.model.User', {
     proxy: {
         type: 'rest',
         url : 'rest.php'
-    }
+    },
+    
+    hasMany: 'GPAS.model.Paths'
 });
