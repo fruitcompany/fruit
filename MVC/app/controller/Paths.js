@@ -69,23 +69,7 @@ Ext.define('GPAS.controller.Paths', {
         });
     },
     
-    updateUser: function(button) {
-	var win    = button.up('window'),
-		form   = win.down('form'),
-		record = form.getRecord(),
-		values = form.getValues();
-
-	console.log(record,values);
-	record.set(values);
-	win.close();
-	this.getUsersStore().sync();
-    },
     
-    editUser: function(grid, record) {
-        var view = Ext.widget('useredit');
-		console.log(record);
-        view.down('form').loadRecord(record);
-    },
     
     loginUser: function(create, info){
 	console.log('login...',create,info);
@@ -94,49 +78,52 @@ Ext.define('GPAS.controller.Paths', {
 	
 	if(!create){
 	    
-	    Ext.Ajax.request({
-		url: 'data/Classes.json',
-		reader:'json',
-		success: function(response){
-		    var text = response.responseText,
-			log = controller.getLog();
-		    
-		    log.destroy();
-		    var pm = Ext.create('GPAS.view.PathManager'),
-			path = Ext.create('GPAS.view.user.Path');
-		    
-		    pm.down('panel[region=center]').insert(0,path);
-		    path.store.loadData(Ext.JSON.decode(text));
-		    // process server response here
-		    console.log(response);
-		    
-		}
-	    });
-
+	    //Ext.ModelManager.getModel('GPAS.model.Student').load()
+	    
 	//    Ext.Ajax.request({
-	//	url: 'data/login.pl',
-	//	method: 'POST',
-	//	params: {
-	//	    username : info.uName,
-	//	    password : info.pName
-	//	},
-	//	
-	//	callback: function(options, success, response){
+	//	url: 'data/Classes.json',
+	//	reader:'json',
+	//	success: function(response){
 	//	    var text = response.responseText,
 	//		log = controller.getLog();
-	//	    if(success && text){
-	//		var user = new User();
-	//		user.load(Number(text));
-	//		//log.destroy();
-	//		//Ext.create('GPAS.view.PathManager');
-	//	    } else {
-	//		alert("Incorrected Username or Password");
-	//	    }
+	//	    
+	//	    log.destroy();
+	//	    var pm = Ext.create('GPAS.view.PathManager'),
+	//		path = Ext.create('GPAS.view.user.Path');
+	//	    
+	//	    pm.down('panel[region=center]').insert(0,path);
+	//	    path.store.loadData(Ext.JSON.decode(text));
 	//	    // process server response here
-	//	    console.log(text);
+	//	    console.log(response);
 	//	    
 	//	}
 	//    });
+
+	    Ext.Ajax.request({
+		url: 'data/login.pl',
+		method: 'POST',
+		params: {
+		    username : info.uName,
+		    password : info.pName
+		},
+		
+		callback: function(options, success, response){
+		    var text = response.responseText,
+			log = controller.getLog();
+		    if(success && text){
+			//var user = new User();
+			//user.load(Number(text));
+			console.log('success');
+			//log.destroy();
+			//Ext.create('GPAS.view.PathManager');
+		    } else {
+			alert("Incorrected Username or Password");
+		    }
+		    // process server response here
+		    console.log(text);
+		    
+		}
+	    });
 	    
 	    
 	}
