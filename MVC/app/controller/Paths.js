@@ -114,6 +114,14 @@ Ext.define('GPAS.controller.Paths', {
 			Ext.ModelManager.getModel('GPAS.model.Student').load(Number(text),{
 			    success: function(user){
 				console.log("loaded user", user);
+				user.paths().each(function(path) {
+				    console.log(path.get('id')); //"shipped
+
+				    //we can even iterate over each Order's OrderItems:
+				    path.classes().each(function(cl) {
+					console.log(cl.get('Course_Name'));
+				    });
+				});
 			    }
 			});
 			
