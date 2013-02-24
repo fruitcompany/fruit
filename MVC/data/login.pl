@@ -18,6 +18,7 @@ my $host     = "localhost";
 my $dsn      = "dbi:mysql:$database:$host";
 
 my $q = CGI->new();
+say $q->header();
 
 my $uname = $q->param('username');
 my $pname = $q->param('password');
@@ -31,7 +32,7 @@ for my $row (@row_ary) {
     say $row;
 }
 
-say $q->header();
+
 
 #for my $param ($q->param()) {
 #    #my $safe_param = $q->escapeHTML($param);
