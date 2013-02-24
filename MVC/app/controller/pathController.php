@@ -10,7 +10,7 @@ class pathController
 
 	function __destruct()
 	{
-		mysql_close();
+		
 	}
 	
     public function readAction($request) {

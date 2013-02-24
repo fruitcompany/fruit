@@ -11,7 +11,7 @@ class studentController
 
 	function __destruct()
 	{
-		mysql_close();
+		
 	}
 	
     public function readAction($request) {
@@ -39,10 +39,9 @@ class studentController
 			$listResult["User_Name"] = $row["User_Name"];
 			$listResult["Password"] = $row["Password"];
 			$listResult["Email"] = $row["Email"];
-			
 			$listResult["paths"] = $pathControl->readAction($params);
 	  	}			
-	  	return $listResult;
+	  	return '{"success":true,"students":[' . json_encode($listResult) . ']}';//array( 'success'=>true, 'data'=>$listResult );
     }
  
     public function createAction($request) {
@@ -51,10 +50,10 @@ class studentController
 		$goodToGo = mysql_query($query);
 		$request->id = 1;
 		if($goodToGo)
-			$response = array( 'success'=>true, 'data'=>$request );
+			return '{"success":true,"students":[' . json_encode($request) . ']}';
 		else
-			$response = array( 'success'=>false, 'data'=>$request );
-		return $response;	
+			return '{"success":false,"students":[' . json_encode($request) . ']}';
+		return '{"success":false}';	
     }
 	
 	public function updateAction($request) {
@@ -63,14 +62,10 @@ class studentController
 			$query = "UPDATE  Student SET First_Name = '$request->fname', Last_Name = '$request->lname', User_Name = '$request->username', Password = '$request->password', Email = '$request->email' WHERE Student_ID = $request->s_id";
 			$goodToGo = mysql_query($query);
 			if($goodToGo)
-			{
-				$response = array( 'success'=>true, 'data'=>$request );
-			}
+				return '{"success":true,"students":[' . json_encode($request) . ']}';
 			else
-			{
-				$response = array( 'success'=>false, 'data'=>$request );
-			}
-			return $response;
+				return '{"success":false,"students":[' . json_encode($request) . ']}';
+			return '{"success":false}';	
 		}
     }
 	
@@ -78,14 +73,10 @@ class studentController
 			$query = "DELETE FROM Student WHERE Student_ID = $request->s_id LIMIT 1";
 			$goodToGo = mysql_query($query);
 			if($goodToGo)
-			{
-				$response = array( 'success'=>true, 'data'=>$request );
-			}
+				return '{"success":true,"students":[' . json_encode($request) . ']}';
 			else
-			{
-				$response = array( 'success'=>false, 'data'=>$request );
-			}
-			return $response;
+				return '{"success":false,"students":[' . json_encode($request) . ']}';
+			return '{"success":false}';	
     }
 }
 ?>
