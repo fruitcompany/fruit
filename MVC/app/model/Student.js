@@ -34,5 +34,5 @@ Ext.define('GPAS.model.Student', {
             root: 'students'
         }
     },
-    hasMany: 'GPAS.model.Path'
+    hasMany : {model: 'GPAS.model.Path', name: 'paths'}
 });
