@@ -26,7 +26,7 @@ my $query = "SELECT Student_ID FROM Student WHERE User_Name = '$uname' AND Passw
 my $h = runSql($query);
 
 my @row_ary  = $h->fetchrow_array;
-
+say @row_ary;
 for my $row (@row_ary) {
     say $row;
 }
