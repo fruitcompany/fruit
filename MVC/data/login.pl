@@ -10,35 +10,28 @@ use strict;
 use warnings;
 
 # MYSQL CONFIG VARIABLES
-#$database = "gpas";
-#$user     = "gpas";
-#$pw       = "r3dh0tSvr*";
-#$host     = "localhost";
-##$host     = "jd-research.ecs.csun.edu";
-#$dsn      = "dbi:mysql:$database:$host";
+my $database = "gpas";
+my $user     = "gpas";
+my $pw       = "r3dh0tSvr*";
+my $host     = "localhost";
+#my $host     = "jd-research.ecs.csun.edu";
+my $dsn      = "dbi:mysql:$database:$host";
 
 
 
 my $q = CGI->new();
-say $q->header(), $q->start_html();
-
-say "<h1>Parameters</h1>";
+say $q->header();
 
 for my $param ($q->param()) {
-    my $safe_param = $q->escapeHTML($param);
+    #my $safe_param = $q->escapeHTML($param);
 
-    say "<p><strong>$safe_param</strong>: ";
+    #say "<p><strong>$safe_param</strong>: ";
+    say $param;
 
     for my $value ($q->param($param)) {
-        say $q->escapeHTML($value);
+        say $value;
     }
-
-    say '</p>';
 }
-
-say $q->end_html();
-
-
 
 
 
