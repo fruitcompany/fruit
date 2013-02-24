@@ -2,7 +2,7 @@
 Ext.define('GPAS.controller.Paths', {
     extend: 'Ext.app.Controller',
     stores: ['Courses','Classes'],
-    models: ['Course','Class','Path','User'],
+    models: ['Course','Class','Path','Student'],
     views: [
         'user.List',
         'user.Edit',
