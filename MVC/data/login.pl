@@ -14,7 +14,7 @@ my $cgi = CGI->new;
 #$host     = "localhost";
 ##$host     = "jd-research.ecs.csun.edu";
 #$dsn      = "dbi:mysql:$database:$host";
-
+print $cgi->header(-type => "text/html", -charset => "utf-8");
 
 for my $param ($q->param()) {
     my $safe_param = $q->escapeHTML($param);
