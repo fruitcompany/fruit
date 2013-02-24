@@ -20,7 +20,10 @@ Ext.define('GPAS.model.Student', {
             destroy : 'app/rest.php?_m=student&_verb=delete'    
         },
         type : 'ajax',
-        reader : 'json'
+        reader : {
+            type: 'json',
+            rootProperty: 'students'
+        }
     },
     hasMany: 'GPAS.model.Path'
 });
