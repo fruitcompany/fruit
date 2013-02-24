@@ -116,8 +116,7 @@ Ext.define('GPAS.controller.Paths', {
 				console.log("loaded user", user);
 			    }
 			});
-			//user.load(Number(text));
-			console.log('success');
+			
 			//log.destroy();
 			//Ext.create('GPAS.view.PathManager');
 		    } else {
