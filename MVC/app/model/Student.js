@@ -22,7 +22,7 @@ Ext.define('GPAS.model.Student', {
         type : 'ajax',
         reader : {
             type: 'json',
-            rootProperty: 'students'
+            root: 'students'
         }
     },
     hasMany: 'GPAS.model.Path'
