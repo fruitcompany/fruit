@@ -1,6 +1,15 @@
 Ext.define('GPAS.model.Student', {
     extend: 'Ext.data.Model',
-    fields: ['id', 'Student_ID', 'First_Name', 'Last_Name', 'User_Name', 'Password', 'Email'],
+        
+    fields : [
+        { name: 'id'},
+        { name:  'Student_ID',  type: 'number'},
+        { name:  'First_Name',  type: 'string'},
+        { name:  'Last_Name',   type: 'string'},
+        { name:  'User_Name',   type: 'string'},
+        { name:  'Password',    type: 'string'},
+        { name:  'Email',       type: 'string'}
+    ],
     
     validations: [
         {type: 'presence', field: 'User_Name'},

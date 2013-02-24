@@ -1,6 +1,17 @@
 Ext.define('GPAS.model.Class', {
     extend: 'Ext.data.Model',
-    fields: ['id', 'Class_ID', 'Course_Name', 'Year', 'Term', 'Department', 'Course_Title', 'Description', 'Units', 'Type'],
+    fields: [
+	{ name : 'id',	        type : 'string' },
+	{ name : 'Class_ID',    type : 'number' },
+	{ name : 'Course_Name', type : 'string' },
+	{ name : 'Year',	type : 'number' },
+	{ name : 'Term',        type : 'string' },
+	{ name : 'Department',  type : 'string' },
+	{ name : 'Course_Title',type : 'string' },
+	{ name : 'Description', type : 'string' },
+	{ name : 'Units', 	type : 'number' },
+	{ name : 'Type', 	type : 'string' }
+    ],
     
     idProperty: 'id',
     proxy: {
