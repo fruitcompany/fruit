@@ -1,15 +1,15 @@
 Ext.define('GPAS.model.Student', {
     extend: 'Ext.data.Model',
-    fields: ['id', 's_id', 'fname', 'lname', 'username', 'password', 'email'],
+    fields: ['id', 'Student_ID', 'First_Name', 'Last_Name', 'User_Name', 'Password', 'Email'],
     
     validations: [
-        {type: 'presence', field: 'username'},
-        {type: 'presence', field: 's_id'},
-        {type: 'presence', field: 'fname'},
-        {type: 'presence', field: 'lname'},
-        {type: 'presence', field: 'email'},
-        {type: 'length', field: 'username', min: 2},
-        {type: 'format', field: 'email', matcher: /[a-z]@[a-z].com/}
+        {type: 'presence', field: 'User_Name'},
+        {type: 'presence', field: 'Student_ID'},
+        {type: 'presence', field: 'First_Name'},
+        {type: 'presence', field: 'Last_Name'},
+        {type: 'presence', field: 'Email'},
+        {type: 'length', field: 'User_Name', min: 2},
+        {type: 'format', field: 'Email', matcher: /[a-z]@[a-z].com/}
     ],
     idProperty: 'id',
     proxy: {
@@ -21,5 +21,6 @@ Ext.define('GPAS.model.Student', {
         },
         type : 'ajax',
         reader : 'json'
-    }
+    },
+    hasMany: 'GPAS.model.Path'
 });

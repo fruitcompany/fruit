@@ -9,8 +9,9 @@ Ext.define('GPAS.view.Login' ,{
 	id:'horz1',
 	region:'north',
 	layout: {
-		type:'hbox',
+	    type:'hbox',
 	},
+	margins: '5 0 5 5',
 	items: [{
 		id: 'icon',
 		html: '<img src="images/fruit_cup_logo_white_text.jpg" width="100">',
@@ -40,6 +41,7 @@ Ext.define('GPAS.view.Login' ,{
 	    pack:'center',
 	    align:'middle'
 	},
+	
 	margins: '5 0 5 5',
 	items: [{
 	    id: 'login',
@@ -47,9 +49,11 @@ Ext.define('GPAS.view.Login' ,{
 	    border:0,
 	    layout: {
 		type:'auto',
-		pack: 'center',
-		padding: 10
+		//pack: 'center',
+		padding: 10,
+		align:'right',
 	    },
+	    height: 350,
 	    region: 'west',
 	    items: [{
 		id: 'username',
@@ -61,7 +65,7 @@ Ext.define('GPAS.view.Login' ,{
 		xtype: 'textfield',
 		inputType: 'password',
 		fieldLabel: 'Password'
-	    },{
+	    }, {
 		id: 'login_button',
 		xtype: 'button',
 		text: 'Login',
@@ -78,7 +82,7 @@ Ext.define('GPAS.view.Login' ,{
 	    }],
 	}, {
 	    id: 'divider',
-	    html: '<img src="images/divider.jpg" width="10" height="300">',
+	    html: '<img src="images/divider.jpg" width="10" height="500">',
 	    region: 'center',
 	    layout: 'fit',
 	    border: 0,
@@ -90,6 +94,7 @@ Ext.define('GPAS.view.Login' ,{
 		pack: 'center',
 		padding: 10
 	    },
+	    height: 350,
 	    border: 0,
 	    region: 'east',
 	    items: [{
