@@ -43,7 +43,7 @@ Ext.define('GPAS.controller.Paths', {
 		    var p = textfield.up('panel'),
 			tfs = p.query('textfield'),
 			valid = false,
-			sid,uname;
+			a = false;
 		    
 		    Ext.each(tfs, function(t){
 			valid = t.isValid();
@@ -63,7 +63,7 @@ Ext.define('GPAS.controller.Paths', {
 				    
 				if(success && text.length>5){
 				    valid = false;
-				    alert("Username or Student ID already in use.");
+				    a = true;
 				} else {
 				    valid = true;
 				}
@@ -73,7 +73,9 @@ Ext.define('GPAS.controller.Paths', {
 			});   
 		    }
 		    Ext.getCmp('create_button').setDisabled(!valid);
-		    
+		    if(a){
+			alert("Username or Student ID already in use.");
+		    }
 		    //console.log("change", p, p.query('textfield'),textfield, newV,oldV);
 		    
 		},
