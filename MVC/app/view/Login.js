@@ -123,7 +123,7 @@ Ext.define('GPAS.view.Login' ,{
 		checkChangeBuffer: 1000,
 		allowBlank: false,
 		validator: function(val){
-		    var valid = true;
+		    var valid;
 		    Ext.Ajax.request({
 			url: 'data/checkUser.pl',
 			method: 'POST',
