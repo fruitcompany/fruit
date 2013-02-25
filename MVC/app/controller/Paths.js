@@ -162,7 +162,13 @@ Ext.define('GPAS.controller.Paths', {
 	
 	pathPanel.setLoading(true);
 	Ext.defer(function(){
-	    var path = Ext.ModelManager.getModel('GPAS.model.Path').load(1);
+	    var path;
+	    Ext.ModelManager.getModel('GPAS.model.Path').load(1,{
+		success:function(p){
+		    console.log("SUCCESS!!",p);
+		    path = p;
+		}
+	    });
 	    console.log(path);
 	    pathPanel.on('add',function(){
 		pathPanel.setLoading(false);
