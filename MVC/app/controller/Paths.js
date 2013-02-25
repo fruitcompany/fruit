@@ -84,7 +84,7 @@ Ext.define('GPAS.controller.Paths', {
 	    classes 	= pathData.classes().getRange(),
 	    numClasses 	= classes.length;
 	    
-	console.log(pathData, pathData.classes());
+	console.log(pathData, classes);
 	if(classes){
 	    SY = classes[0].get('Year');
 	    SS = classes[0].get('Term');
