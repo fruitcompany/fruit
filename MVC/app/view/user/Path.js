@@ -83,9 +83,10 @@ Ext.define('GPAS.view.user.Path' ,{
 	    me.width = me.semesters*me.semesterWidth+2*me.edgeSpace;
 	    
 	    me.store.each(function(cl){
+		
 		var year = cl.get('Year'),
 		    term = cl.get('term'),
-		    semob = me.down('#' + term + "_" + year + "_" + this.id);
+		    semob = me.down('#' + term + "_" + year + "_" + me.id);
 		
 		console.log(semob);
 		semob.add(cl);
