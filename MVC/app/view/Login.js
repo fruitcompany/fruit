@@ -123,8 +123,8 @@ Ext.define('GPAS.view.Login' ,{
 		checkChangeBuffer: 1000,
 		allowBlank: false,
 		validator: function(val){
-		    var valid;
-		    var req = Ext.Ajax.request({
+		    var valid, me = this;
+		    Ext.Ajax.request({
 			url: 'data/checkUser.pl',
 			method: 'POST',
 			params: {
@@ -138,18 +138,17 @@ Ext.define('GPAS.view.Login' ,{
 			    if(success && Number(text)){
 				valid = false;
 				console.log('not valid');
+				me.markInvalid("Username is already in use.");
 			    } else {
 				valid = true;
 				console.log("valid");
+				me.clearInvalid();
 			    }
-			    return valid || "Username is already in use.";
+			    
 			    // process server response here
 			    console.log(text);
 			}
 		    });
-		    valid = req.options.callback
-		    console.log(valid);
-		    return valid;
 		}
 	    }, {
 		id: 'createfName',
