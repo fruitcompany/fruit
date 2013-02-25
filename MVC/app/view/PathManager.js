@@ -34,8 +34,9 @@ Ext.define('GPAS.view.PathManager' ,{
         autoScroll:true,
         items: {            	
             xtype: 'button',
-            iconCls: 'add-icon',
-            scale: 'large',
+            text: "Add Path",
+            //iconCls: 'add-icon',
+            //scale: 'large',
             action:'add_path'
         }
     }]
