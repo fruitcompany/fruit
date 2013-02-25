@@ -61,11 +61,13 @@ Ext.define('GPAS.controller.Paths', {
 			    callback: function(options, success, response){
 				var text = response.responseText;
 				    
-				if(success && text.length>5){
+				if(success && Number(text)){
 				    valid = false;
 				    a = true;
+				    console.log('not valid');
 				} else {
 				    valid = true;
+				    console.log("valid");
 				}
 				// process server response here
 				console.log(text);
