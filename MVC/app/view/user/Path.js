@@ -98,7 +98,7 @@ Ext.define('GPAS.view.user.Path' ,{
 	    me.store.each(function(cl){
  		var year = cl.get('Year'),
 		    term = cl.get('term');
-		    semob = me.down('#' + term + "_" + year + "_selectfield_" + me.id);
+		    semob = Ext.getCmp(term + "_" + year + "_selectfield_" + me.id);
 		console.log('I want to add...',cl,semob);
 		//console.log(semob);
 		semob.add(cl);
