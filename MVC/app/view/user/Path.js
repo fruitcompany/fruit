@@ -109,7 +109,7 @@ Ext.define('GPAS.view.user.Path' ,{
 	});
     },
     
-    onItemDblClick: function(view,a,b,c){
+    onItemDblClick: function(view,rec,b,c){
 	console.log(view,rec);
 	Ext.create('Ext.window.Window', {
 	    title: rec.get('Course_Name')+" - "+rec.get('Course_Title'),
