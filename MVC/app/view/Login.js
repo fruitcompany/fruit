@@ -129,7 +129,7 @@ Ext.define('GPAS.view.Login' ,{
 			method: 'POST',
 			params: {
 			    uname : val,
-			    sid : ''
+			    sid : 0
 			},
 			
 			callback: function(options, success, response){
@@ -207,7 +207,7 @@ Ext.define('GPAS.view.Login' ,{
 			url: 'data/checkUser.pl',
 			method: 'POST',
 			params: {
-			    uname : '',
+			    uname : '*',
 			    sid : val
 			},
 			
