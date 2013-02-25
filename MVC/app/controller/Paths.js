@@ -29,9 +29,9 @@ Ext.define('GPAS.controller.Paths', {
     init: function() {
         this.control({
 	    'newpath > button': {
-                makenewpath: function(win, major, year){
+                makenewpath: function(win, major, year,sem){
 		    win.close();
-		    this.addNewPath(major,year);
+		    this.addNewPath(major,year,sem);
 		}
             },
             'login > panel > panel > button': {
@@ -138,14 +138,6 @@ Ext.define('GPAS.controller.Paths', {
 				console.log("loaded user", user);
 				log.destroy();
 				controller.buildPathManager(user);
-				//user.paths().each(function(path) {
-				//    console.log(path.get('id')); //"shipped
-				//
-				//    //we can even iterate over each Order's OrderItems:
-				//    path.classes().each(function(cl) {
-				//	console.log(cl.get('Course_Name'));
-				//    });
-				//});
 			    }
 			});
 			
@@ -165,16 +157,22 @@ Ext.define('GPAS.controller.Paths', {
         console.log('The panel was rendered');
     },
     
-    addNewPath: function(major, year) {
+    addNewPath: function(major, year, sem) {
 	pathPanel = this.getPathPanel();
 	
 	pathPanel.setLoading(true);
 	Ext.defer(function(){
-	    
+	    var path = Ext.ModelManager.getModel('GPAS.model.Path').load(1);
+	    console.log(path);
 	    pathPanel.on('add',function(){
 		pathPanel.setLoading(false);
 	    },{single:true});
-	    pathPanel.insert(pathPanel.items.length-1, Ext.create('GPAS.view.user.Path'));
+	    pathPanel.insert(pathPanel.items.length-1, Ext.create('GPAS.view.user.Path', {
+		store		 : path.classes(),
+		semesters 	 : 15,
+		startingYear     : year,
+		startingSemester : sem
+	    }));
 	},20);
     	
     	

@@ -18,13 +18,20 @@ Ext.define('GPAS.view.NewPath' ,{
         value: '2008',
         store: ['2008','2009','2010','2011','2012']
     },{
+        xtype: 'combo',
+        fieldLabel: 'Select Starting Semester',
+        action: 'selsem',
+        value: 'FALL',
+        store: ['FALL','WINTER','SPRIN','SUMM']
+    },{
         xtype: 'button',
         text: 'Submit',
         handler: function(button){
             var win = button.up('newpath');
             button.fireEvent('makenewpath', win,
                 win.down('combo[action=selmajor]').getValue(),
-                win.down('combo[action=selyear]').getValue());
+                win.down('combo[action=selyear]').getValue(),
+                win.down('combo[action=selsem]').getValue());
         }
     }]
 });
