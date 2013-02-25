@@ -81,15 +81,15 @@ Ext.define('GPAS.view.user.Path' ,{
 		}]	
 	    }]);
 	    me.width = me.semesters*me.semesterWidth+2*me.edgeSpace;
-	    
+	    console.log(me.store);
 	    me.store.each(function(cl){
 		
 		var year = cl.get('Year'),
-		    term = cl.get('term'),
-		    semob = me.down('#' + term + "_" + year + "_" + me.id);
-		
-		console.log(semob);
-		semob.add(cl);
+		    term = cl.get('term');
+		    //semob = me.down('#' + term + "_" + year + "_" + me.id);
+		console.log('I want to add...',cl);
+		//console.log(semob);
+		//semob.add(cl);
 	    });
 	    
 	    this.callParent(arguments);
