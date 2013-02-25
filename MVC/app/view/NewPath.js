@@ -22,7 +22,7 @@ Ext.define('GPAS.view.NewPath' ,{
         fieldLabel: 'Select Starting Semester',
         action: 'selsem',
         value: 'FALL',
-        store: ['FALL','WINTER','SPRIN','SUMM']
+        store: ['FALL','WINTER','SPRING','SUMMER']
     },{
         xtype: 'button',
         text: 'Submit',
