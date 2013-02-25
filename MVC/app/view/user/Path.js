@@ -86,10 +86,10 @@ Ext.define('GPAS.view.user.Path' ,{
 		
 		var year = cl.get('Year'),
 		    term = cl.get('term');
-		    //semob = me.down('#' + term + "_" + year + "_" + me.id);
-		console.log('I want to add...',cl);
+		    semob = me.down('semester[itemId=' + term + "_" + year + "_" + me.id+"]");
+		console.log('I want to add...',cl," to ",semob);
 		//console.log(semob);
-		//semob.add(cl);
+		semob.add(cl);
 	    });
 	    
 	    this.callParent(arguments);
