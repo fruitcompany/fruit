@@ -21,9 +21,9 @@ my $q = CGI->new();
 say $q->header();
 
 my $uname = $q->param('uname');
-my $sid = $q->param('sid');
+#my $sid = $q->param('sid');
 
-my $query = "SELECT Student_ID FROM Student WHERE Student_ID = '$sid' OR User_Name = '$uname'";
+my $query = "SELECT Student_ID FROM Student WHERE User_Name = '$uname'";
 my $h = runSql($query);
 
 my @row_ary  = $h->fetchrow_array;
