@@ -34,7 +34,7 @@ Ext.define('GPAS.view.PathManager' ,{
         autoScroll:true,
         layout:{
             type: 'auto',
-            padding: 10
+            padding: 18
         },
         items: {            	
             xtype: 'button',

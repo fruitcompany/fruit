@@ -97,7 +97,7 @@ Ext.define('GPAS.view.user.Path' ,{
 		}
 	    }]	
 	}]);
-	me.width = me.semesters*me.semesterWidth+2*me.edgeSpace;
+	//me.width = me.semesters*me.semesterWidth+2*me.edgeSpace;
 	
 	
 	this.callParent(arguments);
