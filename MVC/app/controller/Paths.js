@@ -40,9 +40,46 @@ Ext.define('GPAS.controller.Paths', {
             },
 	    'login > panel > panel > textfield': {
                 change: function(textfield, newV, oldV){
-		    var p = textfield.up('panel');
+		    var p = textfield.up('panel'),
+			tfs = p.query('textfield'),
+			valid = false,
+			sid,uname;
 		    
-		    console.log("change", p, p.down('textfield'),textfield, newV,oldV);
+		    Ext.each(tfs, function(t){
+			valid = t.isValid();
+			if(valid && t.getId == 'createStudentID'){
+			    sid = t.getValue()
+			} else if (valid && t.getId == 'createuName'){
+			    uname = t.getValue();
+			}
+			return valid;
+		    });
+		    if(valid){
+			Ext.Ajax.request({
+			    url: 'data/checkUser.pl',
+			    method: 'POST',
+			    params: {
+				uname : uname,
+				sid : sid
+			    },
+			    
+			    callback: function(options, success, response){
+				var text = response.responseText;
+				    
+				if(success && text.length>5){
+				    valid = false;
+				    alert("Username or Student ID already in use.");
+				} else {
+				    valid = true;
+				}
+				// process server response here
+				console.log(text);
+			    }
+			});   
+		    }
+		    Ext.getCmp('create_button').setDisabled(!valid);
+		    
+		    //console.log("change", p, p.query('textfield'),textfield, newV,oldV);
 		    
 		},
 		validitychange: function(textfield, isValid, op){
@@ -134,8 +171,8 @@ Ext.define('GPAS.controller.Paths', {
 		url: 'data/login.pl',
 		method: 'POST',
 		params: {
-		    username : info.uName,
-		    password : info.pName
+		    username : info.User_Name,
+		    password : info.Password
 		},
 		
 		callback: function(options, success, response){
@@ -152,9 +189,6 @@ Ext.define('GPAS.controller.Paths', {
 				controller.buildPathManager(user);
 			    }
 			});
-			
-			//log.destroy();
-			//Ext.create('GPAS.view.PathManager');
 		    } else {
 			alert("Incorrected Username or Password");
 		    }
@@ -162,6 +196,8 @@ Ext.define('GPAS.controller.Paths', {
 		    console.log(text);
 		}
 	    });   
+	} else {
+	    Ext.ModelManager.getModel('GPAS.model.Student').create(info);
 	}
     },
 

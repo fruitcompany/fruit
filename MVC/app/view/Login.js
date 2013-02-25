@@ -55,6 +55,7 @@ Ext.define('GPAS.view.Login' ,{
 		align:'right',
 	    },
 	    height: 350,
+	    width: 361,
 	    region: 'west',
 	    items: [{
 		id: 'loginMessage',
@@ -64,7 +65,7 @@ Ext.define('GPAS.view.Login' ,{
 		style: {
 			'font-size': '20px'
 		}
-		}, {
+	    }, {
 		id: 'username',
 		xtype: 'textfield',
 		fieldLabel: 'Username',
@@ -104,6 +105,7 @@ Ext.define('GPAS.view.Login' ,{
 		padding: 10
 	    },
 	    height: 350,
+	    width: 361,
 	    border: 0,
 	    region: 'east',
 	    items: [{
@@ -118,26 +120,26 @@ Ext.define('GPAS.view.Login' ,{
 		id: 'createuName',
 		xtype: 'textfield',
 		fieldLabel: 'Username',
-		checkChangeBuffer: 100,
+		checkChangeBuffer: 1000,
 		allowBlank: false
 	    }, {
 		id: 'createfName',
 		xtype: 'textfield',
 		fieldLabel: 'First Name',
-		checkChangeBuffer: 100,
+		checkChangeBuffer: 1000,
 		allowBlank: false
 	    }, {
 		id: 'createlName',
 		xtype: 'textfield',
 		fieldLabel: 'Last Name',
-		checkChangeBuffer: 100,
+		checkChangeBuffer: 1000,
 		allowBlank: false
 	    }, {
 		id: 'createPassword',
 		xtype: 'textfield',
 		inputType: 'password',
 		fieldLabel: 'Password',
-		checkChangeBuffer: 100,
+		checkChangeBuffer: 1000,
 		allowBlank: false
 	    }, {
 		id: 'createRetypePassword',
@@ -145,7 +147,7 @@ Ext.define('GPAS.view.Login' ,{
 		inputType: 'password',
 		fieldLabel: 'Retype Password',
 		allowBlank: false,
-		checkChangeBuffer: 100,
+		checkChangeBuffer: 1000,
 		validator:function(val){
 		    return Ext.getCmp('createPassword').getValue() == val ? true : "Passwords do not match";
 		}
@@ -154,14 +156,14 @@ Ext.define('GPAS.view.Login' ,{
 		xtype: 'textfield',
 		inputType: 'email',
 		fieldLabel: 'Email',
-		checkChangeBuffer: 100,
+		checkChangeBuffer: 1000,
 		allowBlank: false
 	    }, {
 		id: 'createRetypeEmail',
 		xtype: 'textfield',
 		inputType: 'email',
 		fieldLabel: 'Retype Email',
-		checkChangeBuffer: 100,
+		checkChangeBuffer: 1000,
 		allowBlank: false,
 		validator:function(val){
 		    return Ext.getCmp('createEmail').getValue() == val ? true : "Email addresses do not match";
@@ -171,7 +173,7 @@ Ext.define('GPAS.view.Login' ,{
 		xtype: 'textfield',
 		inputType: 'number',
 		fieldLabel: 'Student ID',
-		checkChangeBuffer: 100,
+		checkChangeBuffer: 1000,
 		allowBlank: false
 	    }, {
 		id: 'create_button',
@@ -193,13 +195,12 @@ Ext.define('GPAS.view.Login' ,{
 			console.log('Creating User...',fName,pName,rpName,eName,reName,sName);
 		    
 			button.fireEvent('login', true, {
-			    'fName' : fName,
-			    'lName' : lName,
-			    'pName' : pName,
-			    'rpName': rpName,
-			    'eName'	: eName,
-			    'reName': reName,
-			    'sName' : sName
+			    'User_Name'  : uName.getValue(),
+			    'First_Name' : fName.getValue(),
+			    'Last_Name'  : lName.getValue(),
+			    'Password'   : pName.getValue(),
+			    'Email' 	 : eName.getValue(),
+			    'Student_ID' : sName.getValue()
 			});
 		    }
 		}
