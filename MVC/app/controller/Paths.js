@@ -84,32 +84,34 @@ Ext.define('GPAS.controller.Paths', {
 	    classes 	= pathData.classes().getRange(),
 	    numClasses 	= classes.length;
 	    
-	console.log(pathData, pathData.classes());
-	
-	SY = classes[0].get('Year');
-	SS = classes[0].get('Term');
-	LY = classes[numClasses-1].get('Year');
-	LS = classes[numClasses-1].get('Term');
-	
-	semesters = (LY-SY)*4-
-		    ((SS == 'Spring') ? 0 :
-		    ((SS == 'Summer') ? 1 :
-		    ((SS == 'Fall')   ? 2 : 1)))-
-		    ((LS == 'Spring') ? 3 :
-		    ((LS == 'Summer') ? 2 :
-		    ((LS == 'Fall')   ? 1 : 0)));
-	
-	console.log('semesters: ',semesters);
-	
-	path = Ext.create('GPAS.view.user.Path',{
-	    semesters 	     : semesters,
-	    startingYear     : SY,
-	    startingSemester : SS
-	});
-	
-	path.store.loadRecords(classes);
-	
-	pathPanel.insert(pathPanel.items.length-1, path);
+	console.log(pathData, classes);
+	if(classes){
+	    SY = classes[0].get('Year');
+	    SS = classes[0].get('Term');
+	    LY = classes[numClasses-1].get('Year');
+	    LS = classes[numClasses-1].get('Term');
+	    
+	    semesters = (LY-SY)*4-
+			((SS == 'Spring') ? 0 :
+			((SS == 'Summer') ? 1 :
+			((SS == 'Fall')   ? 2 : 3)))+
+			((LS == 'Spring') ? 1 :
+			((LS == 'Summer') ? 2 :
+			((LS == 'Fall')   ? 3 : 4)));
+	    
+	    console.log('semesters: ',semesters);
+	    
+	    path = Ext.create('GPAS.view.user.Path', {
+		semesters 	 : semesters,
+		startingYear     : SY,
+		startingSemester : SS
+	    });
+	    
+	    path.store.loadRecords(classes);
+	    console.log(path.store);
+	    
+	    pathPanel.insert(pathPanel.items.length-1, path);
+	}
     },
     
     loginUser: function(create, info){
