@@ -223,11 +223,13 @@ Ext.define('GPAS.controller.Paths', {
 	    });   
 	} else {
 	    console.log('hey');
-	    Ext.ModelManager.getModel('GPAS.model.Student').create(info,{
+	    var user = Ext.create('GPAS.model.Student',info);
+	    user.save({
 		callback:function(a,b,c){
 		    console.log('Success loading user/student',a,b,c)
 		}
 	    });
+	    
 	    console.log('hey');
 	}
     },
