@@ -22,6 +22,9 @@ Ext.define('GPAS.model.Class', {
             destroy : 'app/rest.php?_m=class&_verb=delete'    
         },
         type : 'ajax',
-        reader : 'json'
+        reader : {
+	    type : 'json',
+	    root : 'classes'
+	}
     }
 });
