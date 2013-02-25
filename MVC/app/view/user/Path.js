@@ -120,9 +120,9 @@ Ext.define('GPAS.view.user.Path' ,{
 		xtype: 'panel',
 		border: false,
 		frame: true,
-		html:'<p><strong>Term: </strong>'+rec.get('Term')+"&nbsp;&nbsp;<strong>Year: </strong>"+rec.get('Year')+'&nbsp;&nbsp;<strong>Department: </strong>'+rec.get('Department')+"<br/>"
-		    +'<strong>Type: </strong>'+rec.get('Type')+"&nbsp;&nbsp;<strong>Units: </strong>"+rec.get('Units')+'<br/>'
-		    +'<strong>Description: </strong><br/><p>'+rec.get('Description')+'</p></p>'
+		html:'<p><b>Term: </b>'+rec.get('Term')+"&nbsp;&nbsp;&nbsp;&nbsp;<b>Year: </b>"+rec.get('Year')+"<br/>"
+		    +'<b>Department: </b>'+rec.get('Department')+'&nbsp;&nbsp;&nbsp;&nbsp;<b>Type: </b>'+rec.get('Type')+"&nbsp;&nbsp;&nbsp;&nbsp;<b>Units: </b>"+rec.get('Units')+'<br/>'
+		    +'<b>Description: </b><br/><p>'+rec.get('Description')+'</p></p>'
 	    }
 	}).show();
     }
