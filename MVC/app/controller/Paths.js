@@ -99,7 +99,7 @@ Ext.define('GPAS.controller.Paths', {
 		    ((LS == 'Summer') ? 2 :
 		    ((LS == 'Fall')   ? 1 : 0)));
 	
-	comsole.log('semesters: ',semesters);
+	console.log('semesters: ',semesters);
 	
 	path = Ext.create('GPAS.view.user.Path',{
 	    semesters 	     : semesters,
