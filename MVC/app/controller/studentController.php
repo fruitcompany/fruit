@@ -30,6 +30,7 @@ class studentController
 	  	while($row = mysql_fetch_array($qResult, MYSQL_ASSOC))
 	  	{
 			$params = new stdClass();
+			$params->studentRequest = true;
 			$params->s_id = $row["Student_ID"];
 			$pathControl = new pathController();
 

@@ -49,7 +49,8 @@ class pathController
 		}
 		else if($request->s_id)
 		{
-			$query = "SELECT Path_Choice.Path_ID FROM gpas.Path_Choice, gpas.Path_Rank
+			$query = "SELECT Path_Choice.Path_ID 
+					  FROM gpas.Path_Choice, gpas.Path_Rank
 					  WHERE Path_Choice.Student_ID = $request->s_id and Path_Choice.Path_ID = Path_Rank.Path_ID
 					  ORDER BY Path_Rank.Path_Rank ASC";
 					  
@@ -60,6 +61,7 @@ class pathController
 				while($row = mysql_fetch_array($qResult, MYSQL_ASSOC))
 				{
 					$params = new stdClass();
+					$params->studentRequest = true;
 					$params->id = $row["Path_ID"];
 					$tempArray["id"] = $row["Path_ID"];
 					$tempArray["classes"] = $this->readAction($params);
@@ -68,8 +70,14 @@ class pathController
 				
 			}
 		}
-		
-	  	return $pathResult;
+		if(isset($request->studentRequest))
+		{
+			return $pathResult;
+		}
+		else
+		{
+			return '{"success":true,"paths":[' . json_encode($pathResult) . ']}';
+		}
     }
  
     public function createAction($request) {
