@@ -3,7 +3,7 @@ Ext.define('GPAS.view.Login' ,{
     alias : 'widget.login',
     layout: {
 	type: 'border',
-	padding: 5
+	//padding: 5
     },		
     items: [{
 	id:'horz1',
@@ -11,7 +11,7 @@ Ext.define('GPAS.view.Login' ,{
 	layout: {
 	    type:'hbox',
 	},
-	margins: '5 0 5 5',
+	margins: '0 0 5 0',
 	items: [{
 		id: 'icon',
 		html: '<img src="images/fruit_cup_logo_white_text.jpg" width="100">',
@@ -43,7 +43,7 @@ Ext.define('GPAS.view.Login' ,{
 	    align:'middle'
 	},
 	
-	margins: '5 0 5 5',
+	margins: '5 0 0 0',
 	items: [{
 	    id: 'login',
 	    xtype: 'panel',
