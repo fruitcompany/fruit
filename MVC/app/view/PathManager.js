@@ -14,20 +14,20 @@ Ext.define('GPAS.view.PathManager' ,{
         height: 180,
         region: 'north',
         html: '<img src="images/header.png" width="100%">'
-        },{
+    },{
         xtype:'panel',
         width: 100,
         region: 'west',
         html: 'This is where info on paths will go',
-        items:[{
-            xtype:'button',
-            text:'Add Path',
-            action:'add_path'
-        },{
-            xtype:'button',
-            text:'test',
-            action:'test'
-        }]
+        //items:[{
+        //    xtype:'button',
+        //    text:'Add Path',
+        //    action:'add_path'
+        //},{
+        //    xtype:'button',
+        //    text:'test',
+        //    action:'test'
+        //}]
     },{
         xtype: 'panel',
         region: 'center',
