@@ -6,10 +6,10 @@ Ext.define('GPAS.view.user.Path' ,{
 	
 	semesterWidth	: 125,
 	
-	semesterNames	: ["Fall","Winter","Spring","Summer"],
+	semesterNames	: ["FALL","WINTER","SPRING","SUMMER"],
 	
 	startingYear	: 2008,
-	startingSemester: "Fall",
+	startingSemester: "FALL",
 	
 	
 	edgeSpace		: 100,
@@ -50,7 +50,7 @@ Ext.define('GPAS.view.user.Path' ,{
 		    listTitle	: semester + " " + year,
 		    store	: []
 		});
-		if(semester=="Winter"){year++;}
+		if(semester=="WINTER"){year++;}
 		i++;
 	    }
 	    me.items = semArray.concat([{
