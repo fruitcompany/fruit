@@ -204,7 +204,7 @@ Ext.define('GPAS.view.Login' ,{
 		checkChangeBuffer: 1000,
 		allowBlank: false,
 		validator: function(val){
-		    var valid = true;
+		    var valid, me = this;
 		    Ext.Ajax.request({
 			url: 'data/checkUser.pl',
 			method: 'POST',
@@ -215,19 +215,21 @@ Ext.define('GPAS.view.Login' ,{
 			
 			callback: function(options, success, response){
 			    var text = response.responseText;
-			    console.log(options,success,response);
+			    
 			    if(success && Number(text)){
 				valid = false;
 				console.log('not valid');
+				me.markInvalid("Username is already in use.");
 			    } else {
 				valid = true;
 				console.log("valid");
+				me.clearInvalid();
 			    }
+			    
 			    // process server response here
 			    console.log(text);
 			}
 		    });
-		    return valid || "Student ID already in use";
 		}
 	    }, {
 		id: 'create_button',

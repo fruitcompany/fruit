@@ -23,7 +23,7 @@ say $q->header();
 my $uname = $q->param('uname');
 my $s_id = $q->param('s_id');
 
-my $query = "SELECT Student_ID FROM Student WHERE User_Name = '$uname' OR Student_ID = $s_id";
+my $query = "SELECT Student_ID FROM Student WHERE User_Name = '$uname'";
 my $h = runSql($query);
 
 my @row_ary  = $h->fetchrow_array;
@@ -31,7 +31,14 @@ for my $row (@row_ary) {
     say $row;
 }
 
+$query = "SELECT Student_ID FROM Student WHERE Student_ID = '$s_id'";
 
+$h = runSql($query);
+
+@row_ary  = $h->fetchrow_array;
+for my $row (@row_ary) {
+    say $row;
+}
 
 #for my $param ($q->param()) {
 #    #my $safe_param = $q->escapeHTML($param);
