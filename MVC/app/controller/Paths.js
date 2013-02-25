@@ -40,6 +40,7 @@ Ext.define('GPAS.controller.Paths', {
             },
 	    'login > panel > panel > textfield': {
                 change: function(textfield, newV, oldV){
+		    var me = this;
 		    
 		    if(textfield.getId()=='createuName'){
 			Ext.Ajax.request({
@@ -62,7 +63,7 @@ Ext.define('GPAS.controller.Paths', {
 				    console.log("valid");
 				    textfield.clearInvalid();
 				}
-				this.setCreateButton(textfield);
+				me.setCreateButton(textfield);
 			    }
 			});
 		    } else if (textfield.getId() =='createStudentID') {
@@ -84,11 +85,11 @@ Ext.define('GPAS.controller.Paths', {
 				    console.log("valid");
 				    textfield.clearInvalid();
 				}
-				this.setCreateButton(textfield);
+				me.setCreateButton(textfield);
 			    }
 			});
 		    } else {
-			this.setCreateButton(textfield)
+			me.setCreateButton(textfield)
 		    }
 		    
 		    
