@@ -35,7 +35,19 @@ Ext.define('GPAS.controller.Paths', {
 		}
             },
             'login > panel > panel > button': {
-                login: this.loginUser
+                login: this.loginUser,
+		
+            },
+	    'login > panel > panel > textfield': {
+                change: function(textfield, newV, oldV){
+		    var p = textfield.up('panel');
+		    
+		    console.log("change", p, p.down('textfield'),textfield, newV,oldV);
+		    
+		},
+		validitychange: function(textfield, isValid, op){
+		    console.log("Validity change", textfield, isValid, op);
+		}
             },
 	    'viewport > userlist': {
                 itemdblclick: this.editUser

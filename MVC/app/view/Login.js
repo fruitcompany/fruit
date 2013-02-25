@@ -112,73 +112,96 @@ Ext.define('GPAS.view.Login' ,{
 		text: 'First time to the site? Create an account!',
 		margins: '5 0 25 0',
 		style: {
-			'font-size': '20px'
+		    'font-size': '20px'
 		}
-		}, {
+	    }, {
 		id: 'createuName',
 		xtype: 'textfield',
 		fieldLabel: 'Username',
+		checkChangeBuffer: 100,
 		allowBlank: false
 	    }, {
 		id: 'createfName',
 		xtype: 'textfield',
 		fieldLabel: 'First Name',
+		checkChangeBuffer: 100,
 		allowBlank: false
 	    }, {
 		id: 'createlName',
 		xtype: 'textfield',
 		fieldLabel: 'Last Name',
+		checkChangeBuffer: 100,
 		allowBlank: false
 	    }, {
 		id: 'createPassword',
 		xtype: 'textfield',
 		inputType: 'password',
-		fieldLabel: 'Password'
+		fieldLabel: 'Password',
+		checkChangeBuffer: 100,
+		allowBlank: false
 	    }, {
 		id: 'createRetypePassword',
 		xtype: 'textfield',
 		inputType: 'password',
-		fieldLabel: 'Retype Password'
+		fieldLabel: 'Retype Password',
+		allowBlank: false,
+		checkChangeBuffer: 100,
+		validator:function(val){
+		    return Ext.getCmp('createPassword').getValue() == val ? true : "Passwords do not match";
+		}
 	    }, {
 		id: 'createEmail',
 		xtype: 'textfield',
 		inputType: 'email',
-		fieldLabel: 'Email'
+		fieldLabel: 'Email',
+		checkChangeBuffer: 100,
+		allowBlank: false
 	    }, {
 		id: 'createRetypeEmail',
 		xtype: 'textfield',
 		inputType: 'email',
-		fieldLabel: 'Retype Email'
+		fieldLabel: 'Retype Email',
+		checkChangeBuffer: 100,
+		allowBlank: false,
+		validator:function(val){
+		    return Ext.getCmp('createEmail').getValue() == val ? true : "Email addresses do not match";
+		}
 	    }, {
 		id: 'createStudentID',
 		xtype: 'textfield',
 		inputType: 'number',
-		fieldLabel: 'Student ID'
+		fieldLabel: 'Student ID',
+		checkChangeBuffer: 100,
+		allowBlank: false
 	    }, {
 		id: 'create_button',
 		xtype: 'button',
+		disabled: true,
 		text: 'Create Account',
 		handler: function(button) {
 		    //console.log(button.up('panel').down('textfield'));
-		    var uName  = Ext.getCmp('createuName').getValue();
-		    var fName  = Ext.getCmp('createfName').getValue();
-		    var lName  = Ext.getCmp('createlName').getValue();
-		    var pName  = Ext.getCmp('createPassword').getValue();
-		    var rpName = Ext.getCmp('createRetypePassword').getValue();
-		    var eName  = Ext.getCmp('createEmail').getValue();
-		    var reName = Ext.getCmp('createRetypeEmail').getValue();
-		    var sName  = Ext.getCmp('createStudentID').getValue();
-		    console.log('Creating User...',fName,pName,rpName,eName,reName,sName);
+		    var uName  = Ext.getCmp('createuName');
+		    var fName  = Ext.getCmp('createfName');
+		    var lName  = Ext.getCmp('createlName');
+		    var pName  = Ext.getCmp('createPassword');
+		    var rpName = Ext.getCmp('createRetypePassword');
+		    var eName  = Ext.getCmp('createEmail');
+		    var reName = Ext.getCmp('createRetypeEmail');
+		    var sName  = Ext.getCmp('createStudentID');
+		    if(uName.isValid() && fName.isValid() && lName.isValid() && pName.isValid() &&
+		       rpName.isValid() && eName.isValid() && reName.isValid() && sName.isValid()){
+			console.log('Creating User...',fName,pName,rpName,eName,reName,sName);
 		    
-		    button.fireEvent('login', true, {
-			'fName' : fName,
-			'lName' : lName,
-			'pName' : pName,
-			'rpName': rpName,
-			'eName'	: eName,
-			'reName': reName,
-			'sName' : sName
-		    });
+			button.fireEvent('login', true, {
+			    'fName' : fName,
+			    'lName' : lName,
+			    'pName' : pName,
+			    'rpName': rpName,
+			    'eName'	: eName,
+			    'reName': reName,
+			    'sName' : sName
+			});
+		    }
 		}
 	    }],
 	}]
