@@ -11,8 +11,9 @@ Ext.define('GPAS.view.user.Path' ,{
     startingYear	: 2008,
     startingSemester: "FALL",
     
+    border		: 0,
     
-    edgeSpace		: 100,
+    edgeSpace		: 0,
     
     layout: {
 	    type:'hbox',
@@ -119,6 +120,7 @@ Ext.define('GPAS.view.user.Path' ,{
 	    items: {  // Let's put an empty grid in just to illustrate fit layout
 		xtype: 'panel',
 		border: false,
+		autoScroll: true,
 		frame: true,
 		html:'<p><b>Term: </b>'+rec.get('Term')+"&nbsp;&nbsp;&nbsp;&nbsp;<b>Year: </b>"+rec.get('Year')+"<br/>"
 		    +'<b>Department: </b>'+rec.get('Department')+'&nbsp;&nbsp;&nbsp;&nbsp;<b>Type: </b>'+rec.get('Type')+"&nbsp;&nbsp;&nbsp;&nbsp;<b>Units: </b>"+rec.get('Units')+'<br/>'

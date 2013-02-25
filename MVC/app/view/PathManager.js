@@ -32,6 +32,10 @@ Ext.define('GPAS.view.PathManager' ,{
         xtype: 'panel',
         region: 'center',
         autoScroll:true,
+        layout:{
+            type: 'auto',
+            padding: 10
+        },
         items: {            	
             xtype: 'button',
             text: "Add Path",
