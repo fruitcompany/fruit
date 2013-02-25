@@ -109,7 +109,8 @@ Ext.define('GPAS.view.user.Path' ,{
 	});
     },
     
-    onItemDblClick: function(view){
+    onItemDblClick: function(view,a,b,c){
+	console.log(view,a,b,c);
 	console.log("hey you clicked me",view.getSelectionModel().getSelection());
     }
 });
