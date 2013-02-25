@@ -38,29 +38,22 @@ Ext.define('GPAS.view.user.Path' ,{
 	
 	    while(i<me.semesters){
 		semester = semnms[(i+sem)%semcnt];
-		
-		newSem = Ext.create('GPAS.view.user.Semester', {
+		var newStore = Ext.create('GPAS.store.Classes');
+		me.store.each(function(rec){
+		    if(rec.get('Year') == year && rec.get('Term') == semester){
+			newStore.add(rec);
+		    }
+		});
+		semArray.push({
+		    xtype	: 'semester',
 		    width	: me.semesterWidth,
 		    semester	: semester,
 		    year	: year,
 		    itemId	: semester + "_" + year + "_" + me.id,
 		    id		: semester + "_" + year+"_selectfield_"+me.id,
 		    listTitle	: semester + " " + year,
-		    store	: []
+		    store	: newStore
 		});
-		
-		semArray.push(newSem);
-		//semArray.push({
-		//    xtype	: 'semester',
-		//    width	: me.semesterWidth,
-		//    semester	: semester,
-		//    year	: year,
-		//    itemId	: semester + "_" + year + "_" + me.id,
-		//    id		: semester + "_" + year+"_selectfield_"+me.id,
-		//    listTitle	: semester + " " + year,
-		//    store	: []
-		//});
-		
 		if(semester=="WINTER"){year++;}
 		i++;
 	    }
@@ -95,14 +88,6 @@ Ext.define('GPAS.view.user.Path' ,{
 	    }]);
 	    me.width = me.semesters*me.semesterWidth+2*me.edgeSpace;
 	    
-	    me.store.each(function(cl){
- 		var year = cl.get('Year'),
-		    term = cl.get('term');
-		    semob = Ext.getCmp(term + "_" + year + "_selectfield_" + me.id);
-		console.log('I want to add...',cl,semob);
-		//console.log(semob);
-		semob.add(cl);
-	    });
 	    
 	    this.callParent(arguments);
 	},
