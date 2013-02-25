@@ -76,7 +76,7 @@ class pathController
 		}
 		else
 		{
-			return '{"success":true,"paths":[' . json_encode($pathResult) . ']}';
+			return '{"success":true,"paths":[{"classes":' . json_encode($pathResult) . '}]}';
 		}
     }
  
