@@ -23,8 +23,6 @@ say $q->header();
 my $uname = $q->param('uname');
 my $sid = $q->param('sid');
 
-say $uname." - ".$sid;
-
 my $query = "SELECT Student_ID FROM Student WHERE Student_ID = '$sid' OR User_Name = '$uname'";
 my $h = runSql($query);
 
@@ -33,6 +31,35 @@ for my $row (@row_ary) {
     say $row;
 }
 
+
+
+#for my $param ($q->param()) {
+#    #my $safe_param = $q->escapeHTML($param);
+#
+#    #say "<p><strong>$safe_param</strong>: ";
+#    say $param;
+#
+#    for my $value ($q->param($param)) {
+#        say $value;
+#    }
+#}
+
+
+
+#print $cgi->header(-type => "text/plain", -charset => "utf-8");
+#print "hello";
+#for my $param ($q->param()) {
+#    my $safe_param = $q->escapeHTML($param);
+#    print $param;
+#    for my $value ($q->param($param)) {
+#        print $value;
+#    }
+#}
+
+
+
+#print $cgi->header(-type => "application/json", -charset => "utf-8");
+#print $cgi->param("username").", ".$cgi->param("password");
 
 sub runSql {
     my($sql)    = @_;
