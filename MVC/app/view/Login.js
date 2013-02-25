@@ -85,8 +85,8 @@ Ext.define('GPAS.view.Login' ,{
 		    var uName = Ext.getCmp('username').getValue();
 		    var pName = Ext.getCmp('password').getValue();
 		    button.fireEvent('login', false, {
-			'uName' : uName,
-			'pName' : pName
+			'User_Name' : uName,
+			'Password' : pName
 		    });
 		}
 	    }],

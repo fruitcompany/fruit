@@ -23,6 +23,8 @@ say $q->header();
 my $uname = $q->param('uname');
 my $sid = $q->param('sid');
 
+say $uname." - ".$sid;
+
 my $query = "SELECT Student_ID FROM Student WHERE Student_ID = '$sid' OR User_Name = '$uname'";
 my $h = runSql($query);
 
