@@ -50,6 +50,35 @@ Ext.define('GPAS.controller.Paths', {
 			return valid;
 		    });
 		    
+		    if(Ext.getCmp('createuName').isValid() || Ext.getCmp('createStudentID').isValid()){
+			var valid, me = this;
+			Ext.Ajax.request({
+			    url: 'data/checkUser.pl',
+			    method: 'POST',
+			    params: {
+				uname : Ext.getCmp('createuName').getValue(),
+				s_id : Ext.getCmp('createStudentID').getValue()
+			    },
+			    
+			    callback: function(options, success, response){
+				var text = response.responseText;
+				
+				if(success && Number(text)){
+				    valid = false;
+				    console.log('not valid');
+				    me.markInvalid("Username is already in use.");
+				} else {
+				    valid = true;
+				    console.log("valid");
+				    //me.clearInvalid();
+				}
+				
+				// process server response here
+				console.log(text);
+			    }
+			});
+		    }
+		    
 		    Ext.getCmp('create_button').setDisabled(!valid);
 		},
 		validitychange: function(textfield, isValid, op){
