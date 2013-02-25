@@ -81,7 +81,7 @@ Ext.define('GPAS.controller.Paths', {
     loadPath: function(pm, pathData) {
 	var pathPanel = this.getPathPanel(),
 	    path, semesters, SY,SS,LS,LY,
-	    classes 	= pathData.classes(),
+	    classes 	= pathData.classes().getRange(),
 	    numClasses 	= classes.length;
 	    
 	console.log(pathData, pathData.classes());
@@ -89,7 +89,7 @@ Ext.define('GPAS.controller.Paths', {
 	SY = classes[0].get('Year');
 	SS = classes[0].get('Term');
 	LY = classes[numClasses].get('Year');
-	LS = pathData.classes[numClasses].get('Term');
+	LS = classes[numClasses].get('Term');
 	
 	semesters = (LY-SY)*4-
 		    ((SS == 'Spring') ? 0 :
