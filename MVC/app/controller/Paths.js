@@ -224,10 +224,15 @@ Ext.define('GPAS.controller.Paths', {
 	} else {
 	    var user = Ext.create('GPAS.model.Student',info);
 	    user.save({
-		callback:function(u,b,c){
+		success:function(u,b,c){
+		    var log = controller.getLog();
 		    console.log('Success loading user/student',u,b,c)
 		    log.destroy();
 		    controller.buildPathManager(u);
+		},
+		failure:function(a,b,c){
+		    alert('Failure to log in');
+		    console.log(a,b,c);
 		}
 	    });
 	}
