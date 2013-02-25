@@ -109,9 +109,12 @@ Ext.define('GPAS.controller.Paths', {
 		
 		callback: function(options, success, response){
 		    var text = response.responseText,
-			log = controller.getLog();
-		    if(success && text){
-			Ext.ModelManager.getModel('GPAS.model.Student').load(Number(text),{
+			log = controller.getLog(),
+			id = Number(text);
+			
+		    if(success && id){
+			console.log("id",id);
+			Ext.ModelManager.getModel('GPAS.model.Student').load(id,{
 			    success: function(user){
 				console.log("loaded user", user);
 				user.paths().each(function(path) {
