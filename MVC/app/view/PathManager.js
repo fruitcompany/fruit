@@ -11,7 +11,7 @@ Ext.define('GPAS.view.PathManager' ,{
     },
     items: [{
         xtype:'panel',
-        //height: 100,
+        height: 180,
         region: 'north',
         html: '<img src="images/header.png" width="100%">'
         },{
