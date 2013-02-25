@@ -124,7 +124,7 @@ Ext.define('GPAS.view.Login' ,{
 		allowBlank: false,
 		validator: function(val){
 		    var valid;
-		    Ext.Ajax.request({
+		    var req = Ext.Ajax.request({
 			url: 'data/checkUser.pl',
 			method: 'POST',
 			params: {
@@ -142,11 +142,13 @@ Ext.define('GPAS.view.Login' ,{
 				valid = true;
 				console.log("valid");
 			    }
+			    
 			    // process server response here
 			    console.log(text);
 			}
 		    });
-		    return valid || "Username already in use";
+		    console.log(req);
+		    
 		}
 	    }, {
 		id: 'createfName',
