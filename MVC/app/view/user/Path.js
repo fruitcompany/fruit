@@ -110,7 +110,20 @@ Ext.define('GPAS.view.user.Path' ,{
     },
     
     onItemDblClick: function(view,a,b,c){
-	console.log(view,a,b,c);
-	console.log("hey you clicked me",view.getSelectionModel().getSelection());
+	console.log(view,rec);
+	Ext.create('Ext.window.Window', {
+	    title: rec.get('Course_Name')+" - "+rec.get('Course_Title'),
+	    height: 200,
+	    width: 400,
+	    layout: 'fit',
+	    items: {  // Let's put an empty grid in just to illustrate fit layout
+		xtype: 'panel',
+		border: false,
+		frame: true,
+		html:'<p><strong>Term: </strong>'+rec.get('Term')+"&nbsp;&nbsp;<strong>Year: </strong>"+rec.get('Year')+'&nbsp;&nbsp;<strong>Department: </strong>'+rec.get('Department')+"<br/>"
+		    +'<strong>Type: </strong>'+rec.get('Type')+"&nbsp;&nbsp;<strong>Units: </strong>"+rec.get('Units')+'<br/>'
+		    +'<strong>Description: </strong><br/><p>'+rec.get('Description')+'</p></p>'
+	    }
+	}).show();
     }
 });
