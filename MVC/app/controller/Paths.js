@@ -47,11 +47,6 @@ Ext.define('GPAS.controller.Paths', {
 		    
 		    Ext.each(tfs, function(t){
 			valid = t.isValid();
-			if(valid && t.getId == 'createStudentID'){
-			    sid = t.getValue()
-			} else if (valid && t.getId == 'createuName'){
-			    uname = t.getValue();
-			}
 			return valid;
 		    });
 		    if(valid){
@@ -59,8 +54,8 @@ Ext.define('GPAS.controller.Paths', {
 			    url: 'data/checkUser.pl',
 			    method: 'POST',
 			    params: {
-				uname : uname,
-				sid : sid
+				uname : Ext.getCmp('createuName').getValue(),
+				sid : Ext.getCmp('createStudentID').getValue()
 			    },
 			    
 			    callback: function(options, success, response){
