@@ -142,13 +142,14 @@ Ext.define('GPAS.view.Login' ,{
 				valid = true;
 				console.log("valid");
 			    }
-			    
+			    return valid || "Username is already in use.";
 			    // process server response here
 			    console.log(text);
 			}
 		    });
-		    console.log(req);
-		    
+		    valid = req.options.callback
+		    console.log(valid);
+		    return valid;
 		}
 	    }, {
 		id: 'createfName',
