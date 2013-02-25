@@ -88,8 +88,8 @@ Ext.define('GPAS.controller.Paths', {
 	
 	SY = classes[0].get('Year');
 	SS = classes[0].get('Term');
-	LY = classes[numClasses].get('Year');
-	LS = classes[numClasses].get('Term');
+	LY = classes[numClasses-1].get('Year');
+	LS = classes[numClasses-1].get('Term');
 	
 	semesters = (LY-SY)*4-
 		    ((SS == 'Spring') ? 0 :
