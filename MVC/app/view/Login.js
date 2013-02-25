@@ -134,7 +134,7 @@ Ext.define('GPAS.view.Login' ,{
 			
 			callback: function(options, success, response){
 			    var text = response.responseText;
-				
+			    console.log(options,success,response);
 			    if(success && Number(text)){
 				valid = false;
 				console.log('not valid');
@@ -213,7 +213,7 @@ Ext.define('GPAS.view.Login' ,{
 			
 			callback: function(options, success, response){
 			    var text = response.responseText;
-				
+			    console.log(options,success,response);
 			    if(success && Number(text)){
 				valid = false;
 				console.log('not valid');
