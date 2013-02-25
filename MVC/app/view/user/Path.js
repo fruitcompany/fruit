@@ -32,10 +32,8 @@ Ext.define('GPAS.view.user.Path' ,{
 	    year	= me.startingYear,
 	    semester="";
 
-	    me.store = Ext.data.StoreManager.lookup(me.store || 'ext-empty-store');
-	    me.store.on('load',function(st, recs, success, op){
-		console.log('store has loaded',recs,success);
-	    });
+	    //me.store = Ext.data.StoreManager.lookup(me.store || 'ext-empty-store');
+	    
 // ------------------------------------------------------------------------------------------------------------
 	
 	    while(i<me.semesters){
@@ -45,7 +43,7 @@ Ext.define('GPAS.view.user.Path' ,{
 		    width	: me.semesterWidth,
 		    semester	: semester,
 		    year	: year,
-		    name	: semester + "_" + year + "_" + me.id,
+		    itemId	: semester + "_" + year + "_" + me.id,
 		    id		: semester + "_" + year+"_selectfield_"+me.id,
 		    listTitle	: semester + " " + year,
 		    store	: []
@@ -83,21 +81,20 @@ Ext.define('GPAS.view.user.Path' ,{
 		}]	
 	    }]);
 	    me.width = me.semesters*me.semesterWidth+2*me.edgeSpace;
-		
-// ------------------------------------------------------------------------------------------------------------	
-		console.log(me,me.store,me.store.getTotalCount(),me.store.getRange());
-	
-// 		if(me.store.getTotalCount()){
-			me.loadData(me.store.getRange())
-// 		}	
-		
-		
-		this.callParent(arguments);
+	    
+	    this.store.each(function(cl){
+		var year = cl.get('Year'),
+		    term = cl.get('term');
+		this.down('#' + term + "_" + year + "_" + this.id).add(cl);
+	    });
+	    
+	    this.callParent(arguments);
 	},
 	
 	loadData: function(data) {
-		Ext.each(data, function(rec) {
-			console.log(rec);
-		});
+	    Ext.each(data, function(rec) {
+		console.log(rec);
+		
+	    });
 	}
 });

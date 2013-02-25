@@ -99,16 +99,15 @@ Ext.define('GPAS.controller.Paths', {
 			((LS == 'SUMMER') ? 2 :
 			((LS == 'FALL')   ? 3 : 4)));
 	    
-	    console.log('semesters: ',semesters);
 	    
 	    path = Ext.create('GPAS.view.user.Path', {
+		store		 : pathData.classes(),
 		semesters 	 : semesters,
 		startingYear     : SY,
 		startingSemester : SS
 	    });
 	    
-	    path.store.loadRecords(classes);
-	    console.log(path.store);
+	    //path.store.loadRecords(classes);
 	    
 	    pathPanel.insert(pathPanel.items.length-1, path);
 	}
