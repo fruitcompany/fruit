@@ -162,23 +162,21 @@ Ext.define('GPAS.controller.Paths', {
 	
 	pathPanel.setLoading(true);
 	Ext.defer(function(){
-	    var path;
 	    Ext.ModelManager.getModel('GPAS.model.Path').load(1,{
-		success:function(p){
-		    console.log("SUCCESS!!",p);
-		    path = p;
+		success:function(path){
+		    console.log("SUCCESS!!",path);
+		    
+		    pathPanel.on('add',function(){
+			pathPanel.setLoading(false);
+		    },{single:true});
+		    pathPanel.insert(pathPanel.items.length-1, Ext.create('GPAS.view.user.Path', {
+			store		 : path.classes(),
+			semesters 	 : 15,
+			startingYear     : year,
+			startingSemester : sem
+		    }));
 		}
 	    });
-	    console.log(path);
-	    pathPanel.on('add',function(){
-		pathPanel.setLoading(false);
-	    },{single:true});
-	    pathPanel.insert(pathPanel.items.length-1, Ext.create('GPAS.view.user.Path', {
-		store		 : path.classes(),
-		semesters 	 : 15,
-		startingYear     : year,
-		startingSemester : sem
-	    }));
 	},20);
     	
     	
