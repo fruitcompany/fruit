@@ -11,7 +11,10 @@ Ext.define('GPAS.model.Path', {
             destroy : 'app/rest.php?_m=path&_verb=delete'    
         },
         type : 'ajax',
-        reader : 'json'
+        reader : {
+            type : 'json',
+            root : 'paths'
+        }
     },
     hasMany : {model: 'GPAS.model.Class', name: 'classes' }
 });
