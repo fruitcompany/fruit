@@ -2,7 +2,7 @@ Ext.define('GPAS.view.user.Path' ,{
     extend: 'Ext.panel.Panel',
     alias : 'widget.path',
 
-	semesters		: 20,
+	semesters	: 20,
 	
 	semesterWidth	: 125,
 	

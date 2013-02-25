@@ -69,36 +69,54 @@ Ext.define('GPAS.controller.Paths', {
         });
     },
     
+    buildPathManager: function(user){
+	var pm = Ext.create('GPAS.view.PathManager'),
+	    controller = this;
+	
+	user.paths().each(function(path){
+	    controller.loadPath(pm,path);
+	});
+    },
     
+    loadPath: function(pm, pathData) {
+	var pathPanel = this.getPathPanel(),
+	    path, semesters, SY,SS,LS,LY,
+	    classes 	= pathData.classes().getRange(),
+	    numClasses 	= classes.length;
+	    
+	console.log(pathData, pathData.classes());
+	
+	SY = classes[0].get('Year');
+	SS = classes[0].get('Term');
+	LY = classes[numClasses-1].get('Year');
+	LS = classes[numClasses-1].get('Term');
+	
+	semesters = (LY-SY)*4-
+		    ((SS == 'Spring') ? 0 :
+		    ((SS == 'Summer') ? 1 :
+		    ((SS == 'Fall')   ? 2 : 1)))-
+		    ((LS == 'Spring') ? 3 :
+		    ((LS == 'Summer') ? 2 :
+		    ((LS == 'Fall')   ? 1 : 0)));
+	
+	console.log('semesters: ',semesters);
+	
+	path = Ext.create('GPAS.view.user.Path',{
+	    semesters 	     : semesters,
+	    startingYear     : SY,
+	    startingSemester : SS
+	});
+	
+	path.store.loadRecords(classes);
+	
+	pathPanel.insert(pathPanel.items.length-1, path);
+    },
     
     loginUser: function(create, info){
 	console.log('login...',create,info);
 	var controller = this;
 	
-	
 	if(!create){
-	    
-	    //Ext.ModelManager.getModel('GPAS.model.Student').load()
-	    
-	//    Ext.Ajax.request({
-	//	url: 'data/Classes.json',
-	//	reader:'json',
-	//	success: function(response){
-	//	    var text = response.responseText,
-	//		log = controller.getLog();
-	//	    
-	//	    log.destroy();
-	//	    var pm = Ext.create('GPAS.view.PathManager'),
-	//		path = Ext.create('GPAS.view.user.Path');
-	//	    
-	//	    pm.down('panel[region=center]').insert(0,path);
-	//	    path.store.loadData(Ext.JSON.decode(text));
-	//	    // process server response here
-	//	    console.log(response);
-	//	    
-	//	}
-	//    });
-
 	    Ext.Ajax.request({
 		url: 'data/login.pl',
 		method: 'POST',
@@ -109,11 +127,24 @@ Ext.define('GPAS.controller.Paths', {
 		
 		callback: function(options, success, response){
 		    var text = response.responseText,
-			log = controller.getLog();
-		    if(success && text){
-			Ext.ModelManager.getModel('GPAS.model.Student').load(Number(text),{
+			log = controller.getLog(),
+			id = Number(text);
+			
+		    if(success && id){
+			console.log("id",id);
+			Ext.ModelManager.getModel('GPAS.model.Student').load(id,{
 			    success: function(user){
 				console.log("loaded user", user);
+				log.destroy();
+				controller.buildPathManager(user);
+				//user.paths().each(function(path) {
+				//    console.log(path.get('id')); //"shipped
+				//
+				//    //we can even iterate over each Order's OrderItems:
+				//    path.classes().each(function(cl) {
+				//	console.log(cl.get('Course_Name'));
+				//    });
+				//});
 			    }
 			});
 			
@@ -124,35 +155,9 @@ Ext.define('GPAS.controller.Paths', {
 		    }
 		    // process server response here
 		    console.log(text);
-		    
 		}
-	    });
-	    
-	    
+	    });   
 	}
-	//Ext.Ajax.request({
-	//    url: 'data/User.pl',
-	//    method: 'Post',
-	//	jsonData: Ext.encode({
-	//	    create	: create,
-	//	    info	: info
-	//	}),
-	//    dataType:'json',
-	//
-	//    headers: { 'Content-Type' : 'application/json' },
-	//
-	//    success: function(response){
-	//	var text = response.responseText,
-	//	    log = controller.getLog();
-	//	
-	//	log.destroy();
-	//	Ext.create('GPAS.view.PathManager');
-	//	
-	//	// process server response here
-	//	console.log(text);
-	//	
-	//    }
-	//});
     },
 
     onPanelRendered: function() {
