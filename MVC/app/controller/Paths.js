@@ -41,63 +41,62 @@ Ext.define('GPAS.controller.Paths', {
 	    'login > panel > panel > textfield': {
                 change: function(textfield, newV, oldV){
 		    
-		//    if(textfield.getId()=='createuName'){
-		//	Ext.Ajax.request({
-		//	    url: 'data/checkUser.pl',
-		//	    method: 'POST',
-		//	    params: {
-		//		uname : textfield.getValue(),
-		//		s_id : ''
-		//	    },
-		//	    
-		//	    callback: function(options, success, response){
-		//		var text = response.responseText;
-		//		
-		//		if(success && Number(text)){
-		//		    
-		//		    console.log('not valid');
-		//		    textfield.markInvalid("Username is already in use.");
-		//		} else {
-		//		    
-		//		    console.log("valid");
-		//		    //textfield.clearInvalid();
-		//		}
-		//		
-		//		// process server response here
-		//		console.log(text);
-		//	    }
-		//	});
-		//    } else if (textfield.getId() =='createStudentID') {
-		//	Ext.Ajax.request({
-		//	    url: 'data/checkUser.pl',
-		//	    method: 'POST',
-		//	    params: {
-		//		uname : '',
-		//		s_id : textfield.getValue()
-		//	    },
-		//	    
-		//	    callback: function(options, success, response){
-		//		var text = response.responseText;
-		//		
-		//		if(success && Number(text)){
-		//		    console.log('not valid');
-		//		    textfield.markInvalid("Student ID is already in use.");
-		//		} else {
-		//		    console.log("valid");
-		//		    textfield.clearInvalid();
-		//		}
-		//		this.setCreateButton(textfield);
-		//	    }
-		//	});
-		//    } else {
+		    if(textfield.getId()=='createuName'){
+			Ext.Ajax.request({
+			    url: 'data/checkUser.pl',
+			    method: 'POST',
+			    params: {
+				uname : textfield.getValue(),
+				s_id : ''
+			    },
+			    
+			    callback: function(options, success, response){
+				var text = response.responseText;
+				
+				if(success && Number(text)){
+				    
+				    console.log('not valid');
+				    textfield.markInvalid("Username is already in use.");
+				} else {
+				    
+				    console.log("valid");
+				    //textfield.clearInvalid();
+				}
+				
+				// process server response here
+				console.log(text);
+			    }
+			});
+		    } else if (textfield.getId() =='createStudentID') {
+			Ext.Ajax.request({
+			    url: 'data/checkUser.pl',
+			    method: 'POST',
+			    params: {
+				uname : '',
+				s_id : textfield.getValue()
+			    },
+			    
+			    callback: function(options, success, response){
+				var text = response.responseText;
+				
+				if(success && Number(text)){
+				    console.log('not valid');
+				    textfield.markInvalid("Student ID is already in use.");
+				} else {
+				    console.log("valid");
+				    textfield.clearInvalid();
+				}
+				this.setCreateButton(textfield);
+			    }
+			});
+		    } else {
 			this.setCreateButton(textfield)
-		    //}
+		    }
 		    
 		    
 		},
 		validitychange: function(textfield, isValid, op){
 		    console.log("Validity change", textfield, isValid, op);
-		    this.setCreateButton(textfield);
 		}
             },
 	    'viewport > userlist': {

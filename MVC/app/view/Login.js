@@ -122,34 +122,34 @@ Ext.define('GPAS.view.Login' ,{
 		fieldLabel: 'Username',
 		checkChangeBuffer: 1000,
 		allowBlank: false,
-		validator: function(val){
-		    var me = this;
-		    Ext.Ajax.request({
-			url: 'data/checkUser.pl',
-			method: 'POST',
-			params: {
-			    uname : me.getValue(),
-			    s_id : ''
-			},
-			
-			callback: function(options, success, response){
-			    var text = response.responseText;
-			    
-			    if(success && Number(text)){
-				
-				console.log('not valid');
-				me.markInvalid("Username is already in use.");
-			    } else {
-				
-				console.log("valid");
-				me.clearInvalid();
-			    }
-			    
-			    // process server response here
-			    console.log(text);
-			}
-		    });
-		}
+		//validator: function(val){
+		//    var valid, me = this;
+		//    Ext.Ajax.request({
+		//	url: 'data/checkUser.pl',
+		//	method: 'POST',
+		//	params: {
+		//	    uname : val,
+		//	    s_id : ''
+		//	},
+		//	
+		//	callback: function(options, success, response){
+		//	    var text = response.responseText;
+		//	    
+		//	    if(success && Number(text)){
+		//		valid = false;
+		//		console.log('not valid');
+		//		me.markInvalid("Username is already in use.");
+		//	    } else {
+		//		valid = true;
+		//		console.log("valid");
+		//		me.clearInvalid();
+		//	    }
+		//	    
+		//	    // process server response here
+		//	    console.log(text);
+		//	}
+		//    });
+		//}
 	    }, {
 		id: 'createfName',
 		xtype: 'textfield',
@@ -203,30 +203,9 @@ Ext.define('GPAS.view.Login' ,{
 		fieldLabel: 'Student ID',
 		checkChangeBuffer: 1000,
 		allowBlank: false,
-		validator: function(val){
-		    var me = this;
-		    Ext.Ajax.request({
-			url: 'data/checkUser.pl',
-			method: 'POST',
-			params: {
-			    uname : '',
-			    s_id : me.getValue()
-			},
-			
-			callback: function(options, success, response){
-			    var text = response.responseText;
-			    
-			    if(success && Number(text)){
-				console.log('not valid');
-				me.markInvalid("Student ID is already in use.");
-			    } else {
-				console.log("valid");
-				me.clearInvalid();
-			    }
-			    //this.setCreateButton(textfield);
-			}
-		    });
-		}
+		//validator: function(val){
+		//    
+		//}
 	    }, {
 		id: 'create_button',
 		xtype: 'button',
