@@ -82,10 +82,10 @@ Ext.define('GPAS.view.user.Path' ,{
 	    }]);
 	    me.width = me.semesters*me.semesterWidth+2*me.edgeSpace;
 	    
-	    this.store.each(function(cl){
+	    me.store.each(function(cl){
 		var year = cl.get('Year'),
 		    term = cl.get('term');
-		this.down('#' + term + "_" + year + "_" + this.id).add(cl);
+		me.down('#' + term + "_" + year + "_" + this.id).add(cl);
 	    });
 	    
 	    this.callParent(arguments);
