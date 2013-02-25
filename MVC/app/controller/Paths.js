@@ -51,7 +51,7 @@ Ext.define('GPAS.controller.Paths', {
 		    });
 		    
 		    if(Ext.getCmp('createuName').isValid() || Ext.getCmp('createStudentID').isValid()){
-			var valid, me = this;
+			var valid;
 			Ext.Ajax.request({
 			    url: 'data/checkUser.pl',
 			    method: 'POST',
@@ -66,11 +66,11 @@ Ext.define('GPAS.controller.Paths', {
 				if(success && Number(text)){
 				    valid = false;
 				    console.log('not valid');
-				    me.markInvalid("Username is already in use.");
+				    textfield.markInvalid("Username is already in use.");
 				} else {
 				    valid = true;
 				    console.log("valid");
-				    //me.clearInvalid();
+				    //textfield.clearInvalid();
 				}
 				
 				// process server response here
