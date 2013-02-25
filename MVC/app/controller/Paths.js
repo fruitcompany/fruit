@@ -40,35 +40,25 @@ Ext.define('GPAS.controller.Paths', {
             },
 	    'login > panel > panel > textfield': {
                 change: function(textfield, newV, oldV){
-		    var p = textfield.up('panel'),
-			tfs = p.query('textfield'),
-			valid = false,
-			a = false;
 		    
-		    Ext.each(tfs, function(t){
-			valid = t.isValid();
-			return valid;
-		    });
-		    
-		    if(Ext.getCmp('createuName').isValid() || Ext.getCmp('createStudentID').isValid()){
-			var valid;
+		    if(textfield.getId()=='createuName'){
 			Ext.Ajax.request({
 			    url: 'data/checkUser.pl',
 			    method: 'POST',
 			    params: {
-				uname : Ext.getCmp('createuName').getValue(),
-				s_id : Ext.getCmp('createStudentID').getValue()
+				uname : textfield.getValue(),
+				s_id : ''
 			    },
 			    
 			    callback: function(options, success, response){
 				var text = response.responseText;
 				
 				if(success && Number(text)){
-				    valid = false;
+				    
 				    console.log('not valid');
 				    textfield.markInvalid("Username is already in use.");
 				} else {
-				    valid = true;
+				    
 				    console.log("valid");
 				    //textfield.clearInvalid();
 				}
@@ -77,9 +67,33 @@ Ext.define('GPAS.controller.Paths', {
 				console.log(text);
 			    }
 			});
+		    } else if (textfield.getId() =='createStudentID') {
+			Ext.Ajax.request({
+			    url: 'data/checkUser.pl',
+			    method: 'POST',
+			    params: {
+				uname : '',
+				s_id : textfield.getValue()
+			    },
+			    
+			    callback: function(options, success, response){
+				var text = response.responseText;
+				
+				if(success && Number(text)){
+				    console.log('not valid');
+				    textfield.markInvalid("Student ID is already in use.");
+				} else {
+				    console.log("valid");
+				    textfield.clearInvalid();
+				}
+				this.setCreateButton(textfield);
+			    }
+			});
+		    } else {
+			this.setCreateButton(textfield)
 		    }
 		    
-		    Ext.getCmp('create_button').setDisabled(!valid);
+		    
 		},
 		validitychange: function(textfield, isValid, op){
 		    console.log("Validity change", textfield, isValid, op);
@@ -115,6 +129,19 @@ Ext.define('GPAS.controller.Paths', {
 //                 itemdblclick: this.editUser
 //             }
         });
+    },
+    
+    setCreateButton: function(textfield) {
+	var p = textfield.up('panel'),
+	    tfs = p.query('textfield'),
+	    valid = false;
+	
+	Ext.each(tfs, function(t){
+	    valid = t.isValid();
+	    return valid;
+	});
+	
+	Ext.getCmp('create_button').setDisabled(!valid);
     },
     
     buildPathManager: function(user){
