@@ -19,7 +19,7 @@ class pathController
 		$pathClasses = array();
 		if(isset($request->id))
 		{
-			$query = "Class_ID FROM  Path WHERE Path_ID = 2 ORDER BY `Order`";
+			$query = "SELECT Class_ID FROM  `Path` WHERE Path_ID = $request->id ORDER BY `Order`";
 			$qResult = mysql_query($query); 
 				
 			if($qResult != NULL && mysql_num_rows($qResult) > 0)
