@@ -129,12 +129,12 @@ Ext.define('GPAS.view.Login' ,{
 			method: 'POST',
 			params: {
 			    uname : val,
-			    sid : ''
+			    s_id : ''
 			},
 			
 			callback: function(options, success, response){
 			    var text = response.responseText;
-			    console.log(options,success,response);
+			    
 			    if(success && Number(text)){
 				valid = false;
 				console.log('not valid');
@@ -210,7 +210,7 @@ Ext.define('GPAS.view.Login' ,{
 			method: 'POST',
 			params: {
 			    uname : '',
-			    sid : val
+			    s_id : val
 			},
 			
 			callback: function(options, success, response){
