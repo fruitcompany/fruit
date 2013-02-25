@@ -60,11 +60,9 @@ Ext.define('GPAS.controller.Paths', {
 				} else {
 				    
 				    console.log("valid");
-				    //textfield.clearInvalid();
+				    textfield.clearInvalid();
 				}
-				
-				// process server response here
-				console.log(text);
+				this.setCreateButton(textfield);
 			    }
 			});
 		    } else if (textfield.getId() =='createStudentID') {

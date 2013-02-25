@@ -121,7 +121,7 @@ Ext.define('GPAS.view.Login' ,{
 		xtype: 'textfield',
 		fieldLabel: 'Username',
 		checkChangeBuffer: 1000,
-		allowBlank: false,
+		//allowBlank: false,
 		//validator: function(val){
 		//    var valid, me = this;
 		//    Ext.Ajax.request({
@@ -202,7 +202,7 @@ Ext.define('GPAS.view.Login' ,{
 		inputType: 'number',
 		fieldLabel: 'Student ID',
 		checkChangeBuffer: 1000,
-		allowBlank: false,
+		//allowBlank: false,
 		//validator: function(val){
 		//    
 		//}
