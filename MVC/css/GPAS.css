@@ -1,4 +1,4 @@
-button.add-icon {
-	background-image: url(../images/add-icon.png);
+.add-icon {
+	background-image: url(../images/add-icon.png) !important;
 	background-repeat: no-repeat;
 }
