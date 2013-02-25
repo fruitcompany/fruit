@@ -6,10 +6,10 @@ Ext.define('GPAS.view.user.Path' ,{
 	
 	semesterWidth	: 125,
 	
-	semesterNames	: ["Fall","Winter","Spring","Summer"],
+	semesterNames	: ["FALL","WINTER","SPRING","SUMMER"],
 	
 	startingYear	: 2008,
-	startingSemester: "Fall",
+	startingSemester: "FALL",
 	
 	
 	edgeSpace		: 100,
@@ -32,25 +32,29 @@ Ext.define('GPAS.view.user.Path' ,{
 	    year	= me.startingYear,
 	    semester="";
 
-	    me.store = Ext.data.StoreManager.lookup(me.store || 'ext-empty-store');
-	    me.store.on('load',function(st, recs, success, op){
-		console.log('store has loaded',recs,success);
-	    });
+	    //me.store = Ext.data.StoreManager.lookup(me.store || 'ext-empty-store');
+	    
 // ------------------------------------------------------------------------------------------------------------
 	
 	    while(i<me.semesters){
 		semester = semnms[(i+sem)%semcnt];
+		var newStore = Ext.create('GPAS.store.Classes');
+		me.store.each(function(rec){
+		    if(rec.get('Year') == year && rec.get('Term') == semester){
+			newStore.add(rec);
+		    }
+		});
 		semArray.push({
 		    xtype	: 'semester',
 		    width	: me.semesterWidth,
 		    semester	: semester,
 		    year	: year,
-		    name	: semester + "_" + year + "_" + me.id,
+		    itemId	: semester + "_" + year + "_" + me.id,
 		    id		: semester + "_" + year+"_selectfield_"+me.id,
 		    listTitle	: semester + " " + year,
-		    store	: []
+		    store	: newStore
 		});
-		if(semester=="Winter"){year++;}
+		if(semester=="WINTER"){year++;}
 		i++;
 	    }
 	    me.items = semArray.concat([{
@@ -83,21 +87,15 @@ Ext.define('GPAS.view.user.Path' ,{
 		}]	
 	    }]);
 	    me.width = me.semesters*me.semesterWidth+2*me.edgeSpace;
-		
-// ------------------------------------------------------------------------------------------------------------	
-		console.log(me,me.store,me.store.getTotalCount(),me.store.getRange());
-	
-// 		if(me.store.getTotalCount()){
-			me.loadData(me.store.getRange())
-// 		}	
-		
-		
-		this.callParent(arguments);
+	    
+	    
+	    this.callParent(arguments);
 	},
 	
 	loadData: function(data) {
-		Ext.each(data, function(rec) {
-			console.log(rec);
-		});
+	    Ext.each(data, function(rec) {
+		console.log(rec);
+		
+	    });
 	}
 });

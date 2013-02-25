@@ -84,7 +84,7 @@ Ext.define('GPAS.controller.Paths', {
 	    classes 	= pathData.classes().getRange(),
 	    numClasses 	= classes.length;
 	    
-	console.log(pathData, classes);
+	//console.log(pathData, classes);
 	if(classes){
 	    SY = classes[0].get('Year');
 	    SS = classes[0].get('Term');
@@ -92,23 +92,22 @@ Ext.define('GPAS.controller.Paths', {
 	    LS = classes[numClasses-1].get('Term');
 	    
 	    semesters = (LY-SY)*4-
-			((SS == 'Spring') ? 0 :
-			((SS == 'Summer') ? 1 :
-			((SS == 'Fall')   ? 2 : 3)))+
-			((LS == 'Spring') ? 1 :
-			((LS == 'Summer') ? 2 :
-			((LS == 'Fall')   ? 3 : 4)));
+			((SS == 'SPRING') ? 0 :
+			((SS == 'SUMMER') ? 1 :
+			((SS == 'FALL')   ? 2 : 3)))+
+			((LS == 'SPRING') ? 1 :
+			((LS == 'SUMMER') ? 2 :
+			((LS == 'FALL')   ? 3 : 4)));
 	    
-	    console.log('semesters: ',semesters);
 	    
 	    path = Ext.create('GPAS.view.user.Path', {
+		store		 : pathData.classes(),
 		semesters 	 : semesters,
 		startingYear     : SY,
 		startingSemester : SS
 	    });
 	    
-	    path.store.loadRecords(classes);
-	    console.log(path.store);
+	    //path.store.loadRecords(classes);
 	    
 	    pathPanel.insert(pathPanel.items.length-1, path);
 	}
