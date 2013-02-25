@@ -121,7 +121,33 @@ Ext.define('GPAS.view.Login' ,{
 		xtype: 'textfield',
 		fieldLabel: 'Username',
 		checkChangeBuffer: 1000,
-		allowBlank: false
+		allowBlank: false,
+		validator: function(val){
+		    var valid = true;
+		    Ext.Ajax.request({
+			url: 'data/checkUser.pl',
+			method: 'POST',
+			params: {
+			    uname : val,
+			    sid : ''
+			},
+			
+			callback: function(options, success, response){
+			    var text = response.responseText;
+				
+			    if(success && Number(text)){
+				valid = false;
+				console.log('not valid');
+			    } else {
+				valid = true;
+				console.log("valid");
+			    }
+			    // process server response here
+			    console.log(text);
+			}
+		    });
+		    return valid || "Username already in use";
+		}
 	    }, {
 		id: 'createfName',
 		xtype: 'textfield',
@@ -174,7 +200,33 @@ Ext.define('GPAS.view.Login' ,{
 		inputType: 'number',
 		fieldLabel: 'Student ID',
 		checkChangeBuffer: 1000,
-		allowBlank: false
+		allowBlank: false,
+		validator: function(val){
+		    var valid = true;
+		    Ext.Ajax.request({
+			url: 'data/checkUser.pl',
+			method: 'POST',
+			params: {
+			    uname : '',
+			    sid : val
+			},
+			
+			callback: function(options, success, response){
+			    var text = response.responseText;
+				
+			    if(success && Number(text)){
+				valid = false;
+				console.log('not valid');
+			    } else {
+				valid = true;
+				console.log("valid");
+			    }
+			    // process server response here
+			    console.log(text);
+			}
+		    });
+		    return valid || "Student ID already in use";
+		}
 	    }, {
 		id: 'create_button',
 		xtype: 'button',

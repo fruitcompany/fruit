@@ -49,37 +49,8 @@ Ext.define('GPAS.controller.Paths', {
 			valid = t.isValid();
 			return valid;
 		    });
-		    if(valid){
-			Ext.Ajax.request({
-			    url: 'data/checkUser.pl',
-			    method: 'POST',
-			    params: {
-				uname : Ext.getCmp('createuName').getValue(),
-				sid : Ext.getCmp('createStudentID').getValue()
-			    },
-			    
-			    callback: function(options, success, response){
-				var text = response.responseText;
-				    
-				if(success && Number(text)){
-				    valid = false;
-				    a = true;
-				    console.log('not valid');
-				} else {
-				    valid = true;
-				    console.log("valid");
-				}
-				// process server response here
-				console.log(text);
-			    }
-			});   
-		    }
-		    Ext.getCmp('create_button').setDisabled(!valid);
-		    if(a){
-			alert("Username or Student ID already in use.");
-		    }
-		    //console.log("change", p, p.query('textfield'),textfield, newV,oldV);
 		    
+		    Ext.getCmp('create_button').setDisabled(!valid);
 		},
 		validitychange: function(textfield, isValid, op){
 		    console.log("Validity change", textfield, isValid, op);
