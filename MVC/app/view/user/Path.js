@@ -24,13 +24,15 @@ Ext.define('GPAS.view.user.Path' ,{
 	
 	initComponent: function(){
 	    var i = 0, 
-	    semArray= [], 
-	    me 		= this,
-	    semnms	= me.semesterNames,
-	    sem		= semnms.indexOf(me.startingSemester)
-	    semcnt	= semnms.length,
-	    year	= me.startingYear,
-	    semester="";
+		semArray= [], 
+		me 		= this,
+		semnms	= me.semesterNames,
+		sem		= semnms.indexOf(me.startingSemester)
+		semcnt	= semnms.length,
+		year	= me.startingYear,
+		semester="";
+	    
+	    me.DDGroup = 'DDPath-'+me.id;
 
 	    //me.store = Ext.data.StoreManager.lookup(me.store || 'ext-empty-store');
 	    
@@ -49,6 +51,8 @@ Ext.define('GPAS.view.user.Path' ,{
 		    width	: me.semesterWidth,
 		    semester	: semester,
 		    year	: year,
+		    dragGroup	: me.DDGroup,
+		    dropGroup	: me.DDGroup,
 		    itemId	: semester + "_" + year + "_" + me.id,
 		    id		: semester + "_" + year+"_selectfield_"+me.id,
 		    listTitle	: semester + " " + year,

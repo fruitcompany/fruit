@@ -5,7 +5,7 @@ Ext.define('GPAS.view.user.Semester' ,{
 	store: 'Classes',
 	width: 125,
 	height: 200,
-	displayField: 'c_name',
+	displayField: 'Course_Name',
 	autoScroll:true,
     initComponent: function() {
         
