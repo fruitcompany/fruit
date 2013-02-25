@@ -25,6 +25,7 @@ Ext.define('GPAS.view.Login' ,{
 		html: '<img src="images/4.gif" width="210" height="100">',
 		region: 'center',
 		border: 0,
+		margins: '0 80 0 0'
 	},{
 		xtype:'tbspacer',
 		flex:1
@@ -56,6 +57,14 @@ Ext.define('GPAS.view.Login' ,{
 	    height: 350,
 	    region: 'west',
 	    items: [{
+		id: 'loginMessage',
+		xtype: 'label',
+		text: 'Already have an account? Login Here!',
+		margins: '5 0 25 0',
+		style: {
+			'font-size': '20px'
+		}
+		}, {
 		id: 'username',
 		xtype: 'textfield',
 		fieldLabel: 'Username',
@@ -98,6 +107,14 @@ Ext.define('GPAS.view.Login' ,{
 	    border: 0,
 	    region: 'east',
 	    items: [{
+		id: 'createMessage',
+		xtype: 'label',
+		text: 'First time to the site? Create an account!',
+		margins: '5 0 25 0',
+		style: {
+			'font-size': '20px'
+		}
+		}, {
 		id: 'createuName',
 		xtype: 'textfield',
 		fieldLabel: 'Username',
