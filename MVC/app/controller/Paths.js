@@ -9,8 +9,8 @@ Ext.define('GPAS.controller.Paths', {
         'user.Path',
         'user.Semester',
         'Login',
-	'PathManager',
-	'NewPath'
+		'PathManager',
+		'NewPath'
     ],
     refs: [{
 		selector: 'viewport > panel[region=center]',
@@ -25,23 +25,23 @@ Ext.define('GPAS.controller.Paths', {
 		selector: 'viewport > panel[region=center] > path',
 		ref: 'path'
 	}],
-    
+
     init: function() {
         this.control({
 	    'newpath > button': {
-                makenewpath: function(win, major, year,sem){
-		    win.close();
-		    this.addNewPath(major,year,sem);
-		}
-            },
-            'login > panel > panel > button': {
-                login: this.loginUser,
-		
-            },
+            makenewpath: function(win, major, year,sem){
+			    win.close();
+			    this.addNewPath(major,year,sem);
+			}
+        },
+        'login > panel > panel > button': {
+			login: this.loginUser,
+
+		},
 	    'login > panel > panel > textfield': {
                 change: function(textfield, newV, oldV){
 		    var me = this;
-		    
+
 		    if(textfield.getId()=='createuName'){
 			Ext.Ajax.request({
 			    url: 'data/checkUser.pl',
@@ -50,16 +50,16 @@ Ext.define('GPAS.controller.Paths', {
 				uname : textfield.getValue(),
 				s_id : ''
 			    },
-			    
+
 			    callback: function(options, success, response){
 				var text = response.responseText;
-				
+
 				if(success && Number(text)){
-				    
+
 				    console.log('not valid');
 				    textfield.markInvalid("Username is already in use.");
 				} else {
-				    
+
 				    console.log("valid");
 				    textfield.clearInvalid();
 				}
@@ -74,10 +74,10 @@ Ext.define('GPAS.controller.Paths', {
 				uname : '',
 				s_id : textfield.getValue()
 			    },
-			    
+
 			    callback: function(options, success, response){
 				var text = response.responseText;
-				
+
 				if(success && Number(text)){
 				    console.log('not valid');
 				    textfield.markInvalid("Student ID is already in use.");
@@ -91,8 +91,8 @@ Ext.define('GPAS.controller.Paths', {
 		    } else {
 			me.setCreateButton(textfield)
 		    }
-		    
-		    
+
+
 		},
 		validitychange: function(textfield, isValid, op){
 		    console.log("Validity change", textfield, isValid, op);
@@ -101,22 +101,19 @@ Ext.define('GPAS.controller.Paths', {
 	    'viewport > userlist': {
                 itemdblclick: this.editUser
             },
-            'useredit button[action=save]': {
-                click: this.updateUser
-            },
             'viewport > panel': {
                 render: this.onPanelRendered
             },
             'viewport > panel > button[action=test]': {
-		click: function(){
-		    var path = this.getPathPanel().down('path');
-		    console.log(path.store);
-		}
+			click: function(){
+				var path = this.getPathPanel().down('path');
+				console.log(path.store);
+			}
             },
             'viewport > panel > button[action=add_path]': {
                 click: function(){
-		    addWin = Ext.create('GPAS.view.NewPath').show();
-		}
+					addWin = Ext.create('GPAS.view.NewPath').show();
+				}
             },
             'viewport > panel[region=center] > path > store': {
                 load: this.onPathStoreLoad,
@@ -124,47 +121,49 @@ Ext.define('GPAS.controller.Paths', {
                     console.log("data Changed");
                 }
             },
-            // 'userlist': {
-//                 itemdblclick: this.editUser
-//             }
+			'viewport > panel > button[action=save_path]': {
+				click: function(){
+					console.log("save path");
+				}
+			}
         });
     },
-    
+
     setCreateButton: function(textfield) {
 	var p = textfield.up('panel'),
 	    tfs = p.query('textfield'),
 	    valid = false;
-	
+
 	Ext.each(tfs, function(t){
 	    valid = t.isValid();
 	    return valid;
 	});
-	
+
 	Ext.getCmp('create_button').setDisabled(!valid);
     },
-    
+
     buildPathManager: function(user){
 	var pm = Ext.create('GPAS.view.PathManager'),
 	    controller = this;
-	
+
 	user.paths().each(function(path){
 	    controller.loadPath(pm,path);
 	});
     },
-    
+
     loadPath: function(pm, pathData) {
 	var pathPanel = this.getPathPanel(),
 	    path, semesters, SY,SS,LS,LY,
 	    classes 	= pathData.classes().getRange(),
 	    numClasses 	= classes.length;
-	    
+
 	//console.log(pathData, classes);
 	if(classes){
 	    SY = classes[0].get('Year');
 	    SS = classes[0].get('Term');
 	    LY = classes[numClasses-1].get('Year');
 	    LS = classes[numClasses-1].get('Term');
-	    
+
 	    semesters = (LY-SY)*4-
 			((SS == 'SPRING') ? 0 :
 			((SS == 'SUMMER') ? 1 :
@@ -172,25 +171,25 @@ Ext.define('GPAS.controller.Paths', {
 			((LS == 'SPRING') ? 1 :
 			((LS == 'SUMMER') ? 2 :
 			((LS == 'FALL')   ? 3 : 4)));
-	    
-	    
+
+
 	    path = Ext.create('GPAS.view.user.Path', {
 		store		 : pathData.classes(),
 		semesters 	 : semesters,
 		startingYear     : SY,
 		startingSemester : SS
 	    });
-	    
+
 	    //path.store.loadRecords(classes);
-	    
+
 	    pathPanel.insert(pathPanel.items.length-1, path);
 	}
     },
-    
+
     loginUser: function(create, info){
 	console.log('login...',create,info);
 	var controller = this;
-	
+
 	if(!create){
 	    Ext.Ajax.request({
 		url: 'data/login.pl',
@@ -199,12 +198,12 @@ Ext.define('GPAS.controller.Paths', {
 		    username : info.User_Name,
 		    password : info.Password
 		},
-		
+
 		callback: function(options, success, response){
 		    var text = response.responseText,
 			log = controller.getLog(),
 			id = Number(text);
-			
+
 		    if(success && id){
 			console.log("id",id);
 			Ext.ModelManager.getModel('GPAS.model.Student').load(id,{
@@ -220,7 +219,7 @@ Ext.define('GPAS.controller.Paths', {
 		    // process server response here
 		    console.log(text);
 		}
-	    });   
+	    });
 	} else {
 	    var user = Ext.create('GPAS.model.Student',info);
 	    user.save({
@@ -241,16 +240,16 @@ Ext.define('GPAS.controller.Paths', {
     onPanelRendered: function() {
         console.log('The panel was rendered');
     },
-    
+
     addNewPath: function(major, year, sem) {
 	pathPanel = this.getPathPanel();
-	
+
 	pathPanel.setLoading(true);
 	Ext.defer(function(){
 	    Ext.ModelManager.getModel('GPAS.model.Path').load(1,{
 		success:function(path){
 		    console.log("SUCCESS!!",path);
-		    
+
 		    pathPanel.on('add',function(){
 			pathPanel.setLoading(false);
 		    },{single:true});
@@ -263,8 +262,8 @@ Ext.define('GPAS.controller.Paths', {
 		}
 	    });
 	},20);
-    	
-    	
+
+
     },
     addPanel: function() {
     	pathPanel = this.getPathPanel();

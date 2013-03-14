@@ -19,15 +19,15 @@ Ext.define('GPAS.view.PathManager' ,{
         width: 100,
         region: 'west',
         html: 'This is where info on paths will go',
-        //items:[{
-        //    xtype:'button',
-        //    text:'Add Path',
-        //    action:'add_path'
-        //},{
-        //    xtype:'button',
-        //    text:'test',
-        //    action:'test'
-        //}]
+        items:[{
+            xtype:'button',
+            text:'edit',
+            action:'edit_path'
+        },{
+            xtype:'button',
+            text:'Save',
+            action:'save_path'
+        }]
     },{
         xtype: 'panel',
         region: 'center',
@@ -36,7 +36,7 @@ Ext.define('GPAS.view.PathManager' ,{
             type: 'auto',
             padding: 18
         },
-        items: {            	
+        items: {
             xtype: 'button',
             text: "Add Path",
             //iconCls: 'add-icon',
