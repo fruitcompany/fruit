@@ -125,13 +125,13 @@ Ext.define('GPAS.controller.Paths', {
 				click: function(){
 					console.log("save path");
 					var path = this.getPathPanel().down('path');
-					path.store.add( {
-						Class_ID	: 987654321,
-						Course_Name	: 'Fake Course',
-						Year		: 2008,
-						Term		: 'Fall',
-						Department	: 'Comp Sci'
-					});
+					//path.store.add( {
+					//	Class_ID	: 987654321,
+					//	Course_Name	: 'Fake Course',
+					//	Year		: 2008,
+					//	Term		: 'Fall',
+					//	Department	: 'Comp Sci'
+					//});
 
 					path.store.sync({
 						success: function(a,b,c,d){ console.log("success",a,b,c,d)},
