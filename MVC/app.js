@@ -1,6 +1,6 @@
 Ext.application({
     name: 'GPAS',
-    
+
     controllers: [
         'Paths'
     ],

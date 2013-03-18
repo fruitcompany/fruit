@@ -1,8 +1,8 @@
 Ext.define('GPAS.model.Student', {
     extend: 'Ext.data.Model',
-        
+
     fields : [
-        { name: 'id'},
+        { name: 'id',           convert: function(val,model){ return model.get('Student_ID');}},
         { name:  'Student_ID',  type: 'number'},
         { name:  'First_Name',  type: 'string'},
         { name:  'Last_Name',   type: 'string'},
@@ -10,7 +10,7 @@ Ext.define('GPAS.model.Student', {
         { name:  'Password',    type: 'string'},
         { name:  'Email',       type: 'string'}
     ],
-    
+
     validations: [
         {type: 'presence', field: 'User_Name'},
         {type: 'presence', field: 'Student_ID'},
@@ -26,7 +26,7 @@ Ext.define('GPAS.model.Student', {
             create  : 'app/rest.php?_m=student&_verb=create',
             read    : 'app/rest.php?_m=student&_verb=read',
             update  : 'app/rest.php?_m=student&_verb=update',
-            destroy : 'app/rest.php?_m=student&_verb=delete'    
+            destroy : 'app/rest.php?_m=student&_verb=delete'
         },
         type : 'ajax',
         reader : {
