@@ -16,35 +16,69 @@ var query = window.location.search;
     data[i] = unescape(data[i]);
   }
 
+  var innerHTML=([
+      '<div id="container">',
+        '<div id="masthead">',
+            '<img alt="" height="135" src="images/fruit_cup_logo_white_text.jpg" width="180" />',
+            '<p>IT Support (555) 555-5555</p>',
+        '</div>',
+        '<div id="navigation">',
+            '<ul>',
+                '<li><a href="index.html">Login</a></li>',
+                '<li><a href="../account_manager/index.html">Schedule</a></li>',
+                '<li><a href="../help_page/faq/default.html">Help</a></li>',
+            '</ul>',
+        '</div>',
+      '</div>'
+      ]);
+
 Ext.onReady(function() {
 
-	Ext.create('Ext.Viewport', {
-		layout: 'border',
-		
-		items: [{
-				id:'horz1',
-				region:'north',
-				layout: {
-					type:'hbox',
-					padding: 10
-				},
-				margins: '5 0 5 5',
-				items: [{
+    Ext.create('Ext.Viewport',{
+        layout: 'border',
+        /*items: [
+            {
+                id:'horz1',
+                region:'north',
+                layout: {
+                    type:'hbox',
+                    padding: 10
+                },
+                margins: '5 5 5 5',
+                items: [{
 					id: 'icon',
 					html: '<img src="images/fruit_cup_logo_white_text.jpg" width="200" height="175">',
 					region: 'west',
 					layout: 'fit',
 					border: 0,
 					margins: '5 0 5 5'
-				}, {
+				},
+                {
 					id: 'title1',
 					html: '<img src="images/fruit_cup_logo_white_text.jpg" width="200" height="175">',
 					region: 'center',
 					layout: 'fit',
 					border: 0,
 					margins: '5 0 5 120'
-				}]
-			}, {
+                }
+                ]*/
+        items: [
+            {
+                id:'horz1',
+                region:'north',
+                /*layout:
+                    {
+                        type:'hbox',
+                        padding: 10
+                    },*/
+                margins: '5 5 5 5',
+                items: [
+                    {
+                        html: innerHTML
+                    }
+                    ]
+            },
+            {
 				id:'horz2',
 				region:'center',
 				layout: {
@@ -67,12 +101,14 @@ Ext.onReady(function() {
 						xtype: 'textfield',
 						fieldLabel: 'Username',
 						allowBlank: false
-					}, {
+					},
+                    {
 						id: 'password',
 						xtype: 'textfield',
 						inputType: 'password',
 						fieldLabel: 'Password'
-					},{
+                    },
+                    {
 						id: 'login_button',
 						xtype: 'button',
 						text: 'Login',
