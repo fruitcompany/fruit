@@ -51,7 +51,11 @@ class studentController
 		$goodToGo = mysql_query($query);
 		$request->id = 1;
 		if($goodToGo)
+		{
+			$row = mysql_fetch_array($goodToGo, MYSQL_ASSOC);
+			$request->id = $row["Student_ID"];
 			return '{"success":true,"students":[' . json_encode($request) . ']}';
+		}
 		else
 			return '{"success":false,"students":[' . json_encode($request) . ']}';
 		return '{"success":false}';	

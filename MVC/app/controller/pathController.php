@@ -24,32 +24,30 @@ class pathController
 				
 			if($qResult != NULL && mysql_num_rows($qResult) > 0)
 			{
+				$semesterArray = array();
 				while($row = mysql_fetch_array($qResult, MYSQL_ASSOC))
 				{
 					$joinQuery = "SELECT Class_Availability.Class_ID, Class_Availability.Course_Name, Class_Availability.Year, Class_Availability.Term, Course_Info.Department, Course_Info.Course_Title, Course_Info.Description, Course_Info.Units, Course_Info.Type
 								  FROM Class_Availability, Course_Info
-								  WHERE Class_Availability.Class_ID = ".$row["Class_ID"]." and Class_Availability.Course_Name = Course_Info.Course_Name";
+								  WHERE Class_Availability.Class_ID = ".$row["Class_ID"]." and Class_Availability.Course_Name = Course_Info.Course_Name
+								  GROUP BY Class_Availability.Year ORDER BY Class_Availability.Year, Class_Availability.Term";
 					$joinResult = mysql_query($joinQuery);
 					if($joinResult != NULL && mysql_num_rows($joinResult) > 0)
 					{
 						$course = mysql_fetch_array($joinResult, MYSQL_ASSOC);
-						$pathClasses["Class_ID"] = $row["Class_ID"];
-						$pathClasses["Course_Name"] = $course["Course_Name"];
-						$pathClasses["Year"] = $course["Year"];
-						$pathClasses["Term"] = $course["Term"];
-						$pathClasses["Department"] = $course["Department"];
-						$pathClasses["Course_Title"] = $course["Course_Title"];
-						$pathClasses["Description"] = $course["Description"];
-						$pathClasses["Units"] = $course["Units"];
-						$pathClasses["Type"] = $course["Type"];
-						array_push($pathResult, $pathClasses);
+						if(!isset($semesterArray[$course["Term"]." ".$course["Year"]]))
+						{
+							$semesterArray[$course["Term"]." ".$course["Year"]] = array("classes" => array());
+						}
+						array_push($semesterArray[$course["Term"]." ".$course["Year"]]["classes"], $course);
 					}
 				}
+				array_push($pathResult, $semesterArray);
 			}
 		}
 		else if($request->s_id)
 		{
-			$query = "SELECT Path_Choice.Path_ID 
+			$query = "SELECT Path_Choice.Path_ID, Path_Rank.Path_Rank 
 					  FROM gpas.Path_Choice, gpas.Path_Rank
 					  WHERE Path_Choice.Student_ID = $request->s_id and Path_Choice.Path_ID = Path_Rank.Path_ID
 					  ORDER BY Path_Rank.Path_Rank ASC";
@@ -63,8 +61,9 @@ class pathController
 					$params = new stdClass();
 					$params->studentRequest = true;
 					$params->id = $row["Path_ID"];
+					$tempArray["Path_Rank"] = $row["Path_Rank"];
 					$tempArray["id"] = $row["Path_ID"];
-					$tempArray["classes"] = $this->readAction($params);
+					$tempArray["semesters"] = $this->readAction($params);
 					array_push($pathResult, $tempArray);
 				}
 				
