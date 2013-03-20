@@ -10,18 +10,18 @@ class pathController
 
 	function __destruct()
 	{
-		
+
 	}
-	
+
     public function readAction($request) {
-		
+
 		$pathResult = array();
 		$pathClasses = array();
 		if(isset($request->id))
 		{
 			$query = "SELECT Class_ID FROM  `Path` WHERE Path_ID = $request->id ORDER BY `Order`";
-			$qResult = mysql_query($query); 
-				
+			$qResult = mysql_query($query);
+
 			if($qResult != NULL && mysql_num_rows($qResult) > 0)
 			{
 				$semesterArray = array();
@@ -43,24 +43,25 @@ class pathController
 						array_push($semesterArray[$course["Term"]." ".$course["Year"]], $course);
 					}
 				}
-				foreach ($semesterArray as $key => $value) 
+				foreach ($semesterArray as $key => $value)
 				{
-					array_push($pathResult, array("id" => $key, "path_id" => $request->id, "classes" => $value));
+					$sem = explode(" ", $key);
+					array_push($pathResult, array("id" => $key, "Term" => $sem[0], "Year" => $sem[1], "path_id" => $request->id, "classes" => $value));
 				}
 				unset($value);
 				unset($key);
-				
+
 			}
 		}
 		else if($request->s_id)
 		{
-			$query = "SELECT Path_Choice.Path_ID, Path_Rank.Path_Rank 
+			$query = "SELECT Path_Choice.Path_ID, Path_Rank.Path_Rank
 					  FROM gpas.Path_Choice, gpas.Path_Rank
 					  WHERE Path_Choice.Student_ID = $request->s_id and Path_Choice.Path_ID = Path_Rank.Path_ID
 					  ORDER BY Path_Rank.Path_Rank ASC";
-					  
-			$qResult = mysql_query($query); 
-				
+
+			$qResult = mysql_query($query);
+
 			if($qResult != NULL && mysql_num_rows($qResult) > 0)
 			{
 				while($row = mysql_fetch_array($qResult, MYSQL_ASSOC))
@@ -73,7 +74,7 @@ class pathController
 					$tempArray["semesters"] = $this->readAction($params);
 					array_push($pathResult, $tempArray);
 				}
-				
+
 			}
 		}
 		if(isset($request->studentRequest))
@@ -85,7 +86,7 @@ class pathController
 			return '{"success":true,"paths":[{"classes":' . json_encode($pathResult) . '}]}';
 		}
     }
- 
+
     public function createAction($request) {
         $query = "insert into Student ( `Student_ID`, `First_Name`, `Last_Name`, `User_Name`, `Password`, `Email` )
 		                    values ( '$request->s_id', '$request->fname', '$request->lname', '$request->username', '$request->password', '$request->email' )";
@@ -95,9 +96,9 @@ class pathController
 			$response = array( 'success'=>true, 'data'=>$request );
 		else
 			$response = array( 'success'=>false, 'data'=>$request );
-		return $response;	
+		return $response;
     }
-	
+
 	public function updateAction($request) {
         if( isset( $request->s_id ) )
 		{
@@ -114,7 +115,7 @@ class pathController
 			return $response;
 		}
     }
-	
+
 	public function deleteAction($request) {
 			$query = "DELETE FROM Student WHERE Student_ID = $request->s_id LIMIT 1";
 			$goodToGo = mysql_query($query);
