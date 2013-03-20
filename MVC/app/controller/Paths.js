@@ -136,12 +136,10 @@ Ext.define('GPAS.controller.Paths', {
 					paths.each(function(path){
 						path.semesters().each(function(sem){
 							sem.classes().sync({
-								callback: function(a,b,c,d){ console.log("CB",a,b,c,d) },
-								success: function(a,b,c,d){ console.log("success",a,b,c,d)},
-								failure: function(a,b,c,d){ console.log("FAIL",a,b,c,d)},
-								scope: this
+								callback: function(a,b,c,d){ console.log("CB",a,b,c,d); },
+								success: function(a,b,c,d){ console.log("success",a,b,c,d); },
+								failure: function(a,b,c,d){ console.log("FAIL",a,b,c,d); }
 							});
-
 						});
 					});
 
