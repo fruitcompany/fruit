@@ -130,41 +130,45 @@ Ext.define('GPAS.controller.Paths', {
 					var paths = SRec.paths();
 					console.log(paths);
 
-					var path = paths.getAt(0);
-					console.log(path);
+					//var path = paths.getAt(0);
+					//console.log(path);
 
-					var semesters = path.semesters();
-					console.log(semesters);
+					paths.each(function(path){
+						path.semesters().each(function(sem){
+							sem.classes().sync({
+								callback: function(a,b,c,d){ console.log("CB",a,b,c,d) },
+								success: function(a,b,c,d){ console.log("success",a,b,c,d)},
+								failure: function(a,b,c,d){ console.log("FAIL",a,b,c,d)},
+								scope: this
+							});
 
-					var sem = semesters.getAt(0);
-					console.log(sem);
-
-					var classes = sem.classes();
-					console.log(classes);
-
-					//classes.add( {
-					//	Class_ID	: 987654321,
-					//	Course_Name	: 'Fake Course',
-					//	Year		: 2008,
-					//	Term		: 'Fall',
-					//	Department	: 'Comp Sci'
-					//});
-
-					console.log("new recs",paths.getNewRecords());
-					console.log("updated recs",paths.getUpdatedRecords());
-
-					console.log("new recs",semesters.getNewRecords());
-					console.log("updated recs",semesters.getUpdatedRecords());
-
-					console.log("new recs",classes.getNewRecords());
-					console.log("updated recs",classes.getUpdatedRecords());
-
-					classes.sync({
-						callback: function(a,b,c,d){ console.log("CB",a,b,c,d) },
-						success: function(a,b,c,d){ console.log("success",a,b,c,d)},
-						failure: function(a,b,c,d){ console.log("FAIL",a,b,c,d)},
-						scope: this
+						});
 					});
+
+					//var semesters = path.semesters();
+					//console.log(semesters);
+
+					//var sem = semesters.getAt(0);
+					//console.log(sem);
+
+					//var classes = sem.classes();
+					//console.log(classes);
+
+					//console.log("new recs",paths.getNewRecords());
+					//console.log("updated recs",paths.getUpdatedRecords());
+					//
+					//console.log("new recs",semesters.getNewRecords());
+					//console.log("updated recs",semesters.getUpdatedRecords());
+					//
+					//console.log("new recs",classes.getNewRecords());
+					//console.log("updated recs",classes.getUpdatedRecords());
+					//
+					//classes.sync({
+					//	callback: function(a,b,c,d){ console.log("CB",a,b,c,d) },
+					//	success: function(a,b,c,d){ console.log("success",a,b,c,d)},
+					//	failure: function(a,b,c,d){ console.log("FAIL",a,b,c,d)},
+					//	scope: this
+					//});
 
 					//path.save({
 					//	callback: function(a,b,c,d){ console.log("CB",a,b,c,d) },
