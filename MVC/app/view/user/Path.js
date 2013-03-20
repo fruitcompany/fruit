@@ -27,11 +27,7 @@ Ext.define('GPAS.view.user.Path' ,{
 		var i = 0,
 			semArray= [],
 			me 		= this,
-			semnms	= me.semesterNames,
-			sem		= semnms.indexOf(me.startingSemester)
-			semcnt	= semnms.length,
-			year	= me.startingYear,
-			semester="";
+			year	= me.startingYear;
 
 		me.DDGroup = 'DDPath-'+me.id;
 
@@ -39,25 +35,26 @@ Ext.define('GPAS.view.user.Path' ,{
 
 	// ------------------------------------------------------------------------------------------------------------
 
-		while(i<me.semesters){
-			semester = semnms[(i+sem)%semcnt];
-			var newStore = Ext.create('GPAS.store.Classes');
-			me.store.each(function(rec){
-				if(rec.get('Year') == year && rec.get('Term') == semester){
-					newStore.add(rec);
-				}
-			});
+
+		me.store.each(function(rec){
+			var term = rec.get('Term'),
+				year = rec.get('Year'),
+				store = rec.classes();
+
+			store.on('add',me.onDrop);
+			store.semester = {Term: term, Year: year};
+
 			semArray.push({
 				xtype	: 'semester',
 				width	: me.semesterWidth,
-				semester	: semester,
+				term	: term,
 				year	: year,
 				dragGroup	: me.DDGroup,
 				dropGroup	: me.DDGroup,
-				itemId	: semester + "_" + year + "_" + me.id,
-				id		: semester + "_" + year+"_selectfield_"+me.id,
-				listTitle	: semester + " " + year,
-				store	: newStore,
+				itemId	: term + "_" + year + "_" + me.id,
+				id		: term + "_" + year+"_selectfield_"+me.id,
+				listTitle	: term + " " + year,
+				store	: store,
 				listeners: {
 					boundList: {
 						itemdblclick: me.onItemDblClick,
@@ -65,9 +62,7 @@ Ext.define('GPAS.view.user.Path' ,{
 					}
 				}
 			});
-			if(semester=="WINTER"){year++;}
-				i++;
-		}
+		});
 		me.items = semArray.concat([{
 			xtype: 'panel',
 			layout: 'fit',
@@ -101,6 +96,83 @@ Ext.define('GPAS.view.user.Path' ,{
 
 
 		this.callParent(arguments);
+	//	var i = 0,
+	//		semArray= [],
+	//		me 		= this,
+	//		semnms	= me.semesterNames,
+	//		sem		= semnms.indexOf(me.startingSemester)
+	//		semcnt	= semnms.length,
+	//		year	= me.startingYear,
+	//		semester="";
+	//
+	//	me.DDGroup = 'DDPath-'+me.id;
+	//
+	//	//me.store = Ext.data.StoreManager.lookup(me.store || 'ext-empty-store');
+	//
+	//// ------------------------------------------------------------------------------------------------------------
+	//
+	//	while(i<me.semesters){
+	//		semester = semnms[(i+sem)%semcnt];
+	//		var newStore = Ext.create('GPAS.store.Classes');
+	//		me.store.each(function(rec){
+	//			if(rec.get('Year') == year && rec.get('Term') == semester){
+	//				newStore.add(rec);
+	//			}
+	//		});
+	//		semArray.push({
+	//			xtype	: 'semester',
+	//			width	: me.semesterWidth,
+	//			semester	: semester,
+	//			year	: year,
+	//			dragGroup	: me.DDGroup,
+	//			dropGroup	: me.DDGroup,
+	//			itemId	: semester + "_" + year + "_" + me.id,
+	//			id		: semester + "_" + year+"_selectfield_"+me.id,
+	//			listTitle	: semester + " " + year,
+	//			store	: newStore,
+	//			listeners: {
+	//				boundList: {
+	//					itemdblclick: me.onItemDblClick,
+	//					scope: me
+	//				}
+	//			}
+	//		});
+	//		if(semester=="WINTER"){year++;}
+	//			i++;
+	//	}
+	//	me.items = semArray.concat([{
+	//		xtype: 'panel',
+	//		layout: 'fit',
+	//		items: [{
+	//			xtype	: 'button',
+	//			text	: 'Add Semester',
+	//			handler : function(butt){
+	//				me.semesters++,
+	//				me.insert(me.semesters-1,{
+	//				xtype: 'panel',
+	//				width: 125,
+	//				height: 200,
+	//				//displayField: 'field1',
+	//				//dragGroup: 'path',
+	//				//dropGroup: 'path',
+	//				name: 'multiselect-'+me.semesters-1,
+	//				id: 'multiselect-field-'+me.semesters-1,
+	//				listTitle: 'Semester '+(me.semesters),
+	//					//store: [], //blank store to begin
+	//				});
+	//			}
+	//		},{
+	//			xtype	: 'button',
+	//			text	: 'Test stuff',
+	//			handler : function(butt){
+	//				console.log(me);
+	//			}
+	//		}]
+	//	}]);
+	//	me.width = me.semesters*me.semesterWidth+2*me.edgeSpace;
+	//
+	//
+	//	this.callParent(arguments);
 	},
 
     loadData: function(data) {
@@ -126,5 +198,17 @@ Ext.define('GPAS.view.user.Path' ,{
 				+'<b>Description: </b><br/><p>'+rec.get('Description')+'</p></p>'
 			}
 		}).show();
-    }
+    },
+
+	onDrop: function(store,rec){
+		console.log(store,rec);
+		var ty = store.semester;
+		console.log(ty);
+
+		rec[0].getSemester(function(sem){
+			rec[0].set('Year',ty.Year);
+			rec[0].set('Term',ty.Term);
+		});
+		console.log(rec[0]);
+	}
 });

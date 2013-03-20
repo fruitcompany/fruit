@@ -16,5 +16,6 @@ Ext.define('GPAS.model.Path', {
             root : 'paths'
         }
     },
+    belongsTo: {model:'GPAS.model.Student', getterName:'Student'},
     hasMany : {model: 'GPAS.model.Semester', name: 'semesters' }
 });

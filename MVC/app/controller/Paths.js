@@ -2,7 +2,7 @@
 Ext.define('GPAS.controller.Paths', {
     extend: 'Ext.app.Controller',
     stores: ['Courses','Classes', 'Student', 'Paths'],
-    models: ['Course','Class','Path','Student'],
+    models: ['Course','Class','Path','Student', 'Semester'],
     views: [
         'user.List',
         'user.Edit',
@@ -133,18 +133,38 @@ Ext.define('GPAS.controller.Paths', {
 					var path = paths.getAt(0);
 					console.log(path);
 
-					var classes = path.classes();
+					var semesters = path.semesters();
+					console.log(semesters);
+
+					var sem = semesters.getAt(0);
+					console.log(sem);
+
+					var classes = sem.classes();
 					console.log(classes);
 
-					classes.add( {
-						Class_ID	: 987654321,
-						Course_Name	: 'Fake Course',
-						Year		: 2008,
-						Term		: 'Fall',
-						Department	: 'Comp Sci'
-					});
+					//classes.add( {
+					//	Class_ID	: 987654321,
+					//	Course_Name	: 'Fake Course',
+					//	Year		: 2008,
+					//	Term		: 'Fall',
+					//	Department	: 'Comp Sci'
+					//});
 
-					console.log(paths);
+					console.log("new recs",paths.getNewRecords());
+					console.log("updated recs",paths.getUpdatedRecords());
+
+					console.log("new recs",semesters.getNewRecords());
+					console.log("updated recs",semesters.getUpdatedRecords());
+
+					console.log("new recs",classes.getNewRecords());
+					console.log("updated recs",classes.getUpdatedRecords());
+
+					classes.sync({
+						callback: function(a,b,c,d){ console.log("CB",a,b,c,d) },
+						success: function(a,b,c,d){ console.log("success",a,b,c,d)},
+						failure: function(a,b,c,d){ console.log("FAIL",a,b,c,d)},
+						scope: this
+					});
 
 					//path.save({
 					//	callback: function(a,b,c,d){ console.log("CB",a,b,c,d) },
@@ -152,6 +172,8 @@ Ext.define('GPAS.controller.Paths', {
 					//	failure: function(a,b,c,d){ console.log("FAIL",a,b,c,d)},
 					//	scope: this
 					//});
+
+
 				}
 			}
         });
@@ -181,37 +203,56 @@ Ext.define('GPAS.controller.Paths', {
 
     loadPath: function(pm, pathData) {
 		var pathPanel = this.getPathPanel(),
-			path, semesters, SY,SS,LS,LY,
-			classes 	= pathData.classes().getRange(),
-			numClasses 	= classes.length;
+			path,
+			sems 	= pathData.semesters(),
+			numSems 	= sems.length;
 
 		//console.log(pathData, classes);
-		if(classes){
-			SY = classes[0].get('Year');
-			SS = classes[0].get('Term');
-			LY = classes[numClasses-1].get('Year');
-			LS = classes[numClasses-1].get('Term');
-
-			semesters = (LY-SY)*4-
-				((SS == 'SPRING') ? 0 :
-				((SS == 'SUMMER') ? 1 :
-				((SS == 'FALL')   ? 2 : 3)))+
-				((LS == 'SPRING') ? 1 :
-				((LS == 'SUMMER') ? 2 :
-				((LS == 'FALL')   ? 3 : 4)));
-
+		if(sems){
 
 			path = Ext.create('GPAS.view.user.Path', {
-				store		 : pathData.classes(),
-				semesters 	 : semesters,
-				startingYear     : SY,
-				startingSemester : SS
+				store		 : sems,
+				semesters 	 : sems.getTotalCount(),
+				startingYear     : sems.getAt(0).get('Year'),
+				startingSemester : sems.getAt(0).get('Term')
 			});
 
 			//path.store.loadRecords(classes);
 
 			pathPanel.insert(pathPanel.items.length-1, path);
 		}
+		//var pathPanel = this.getPathPanel(),
+		//	path, semesters, SY,SS,LS,LY,
+		//	classes 	= pathData.classes().getRange(),
+		//	numClasses 	= classes.length;
+		//
+		////console.log(pathData, classes);
+		//if(classes){
+		//	SY = classes[0].get('Year');
+		//	SS = classes[0].get('Term');
+		//	LY = classes[numClasses-1].get('Year');
+		//	LS = classes[numClasses-1].get('Term');
+		//
+		//	semesters = (LY-SY)*4-
+		//		((SS == 'SPRING') ? 0 :
+		//		((SS == 'SUMMER') ? 1 :
+		//		((SS == 'FALL')   ? 2 : 3)))+
+		//		((LS == 'SPRING') ? 1 :
+		//		((LS == 'SUMMER') ? 2 :
+		//		((LS == 'FALL')   ? 3 : 4)));
+		//
+		//
+		//	path = Ext.create('GPAS.view.user.Path', {
+		//		store		 : pathData.classes(),
+		//		semesters 	 : semesters,
+		//		startingYear     : SY,
+		//		startingSemester : SS
+		//	});
+		//
+		//	//path.store.loadRecords(classes);
+		//
+		//	pathPanel.insert(pathPanel.items.length-1, path);
+		//}
     },
 
     loginUser: function(create, info){
@@ -234,8 +275,6 @@ Ext.define('GPAS.controller.Paths', {
 
 					if(success && id){
 						console.log("id",id);
-
-						console.log(controller.getStudentStore());
 
 						//controller.getStudentStore().load(id, {
 						//	params: { id : id },

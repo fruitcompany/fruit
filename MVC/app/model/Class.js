@@ -1,7 +1,7 @@
 Ext.define('GPAS.model.Class', {
     extend: 'Ext.data.Model',
     fields: [
-		{ name : 'id',	        type : 'string' },
+		{ name : 'id',	        type : 'string', convert: function(val,model){ return model.get('Class_ID');}},
 		{ name : 'Class_ID',    type : 'number' },
 		{ name : 'Course_Name', type : 'string' },
 		{ name : 'Year',	type : 'number' },
@@ -26,5 +26,6 @@ Ext.define('GPAS.model.Class', {
 			type : 'json',
 			root : 'classes'
 		}
-    }
+    },
+	belongsTo: {model:'GPAS.model.Semester', getterName:'Semester'}
 });
