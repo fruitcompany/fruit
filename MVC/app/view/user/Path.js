@@ -200,14 +200,46 @@ Ext.define('GPAS.view.user.Path' ,{
 		}).show();
     },
 
-	onDrop: function(store,rec){
-		console.log(store,rec);
+	onDrop: function(store,recs){
+		console.log(store,recs);
 		var ty = store.semester;
 		console.log(ty);
 
-		rec[0].set('Year',ty.Year);
-		rec[0].set('Term',ty.Term);
-		
-		console.log(rec[0]);
+		Ext.each(recs,function(rec){
+			Ext.Ajax.request({
+				url: 'data/checkClass.pl',
+				method: 'POST',
+				params: {
+					name : rec.get('Course_Name'),
+					year : ty.Year,
+					term : ty.Term
+				},
+
+				callback: function(options, success, response){
+					var text = response.responseText,
+						id = Number(text);
+
+					if(success && id){
+						console.log("new class id",id);
+
+						rec.set('Year',ty.Year);
+						rec.set('Term',ty.Term);
+						rec.set('Class_ID', id);
+						rec.set('id', id);
+
+
+					} else {
+						alert("Failed to find Class in Availability");
+						console.log("new class id",id);
+						rec.set('Year',ty.Year);
+						rec.set('Term',ty.Term);
+						rec.set('Class_ID', id);
+						rec.set('id', id);
+					}
+					// process server response here
+					console.log(text);
+				}
+			});
+		});
 	}
 });
