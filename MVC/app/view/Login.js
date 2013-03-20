@@ -1,39 +1,37 @@
-Ext.define('GPAS.view.Login' ,{
+var innerHTML = ([
+    '<div id="container">',
+      '<div id="masthead">',
+          '<img alt="" height="135" src="images/fruit_cup_logo_white_text.jpg" width="180" />',
+          '<p>IT Support (555) 555-5555</p>',
+      '</div>',
+      '<div id="navigation">',
+          '<ul>',
+              '<li><a href="index.html">Login</a></li>',
+              '<li><a href="../account_manager/index.html">Schedule</a></li>',
+              '<li><a href="faq/default.html">Help</a></li>',
+          '</ul>',
+      '</div>',
+    '</div>'
+]);
+
+Ext.define('GPAS.view.Login', {
     extend: 'Ext.container.Viewport',
     alias : 'widget.login',
     layout: {
-	type: 'border',
+	//type: 'border',
 	//padding: 5
     },		
-    items: [{
-	id:'horz1',
-	region:'north',
-	layout: {
-	    type:'hbox',
-	},
-	margins: '0 0 5 0',
-	items: [{
-		id: 'icon',
-		html: '<img src="images/fruit_cup_logo_white_text.jpg" width="100">',
-		region: 'west',
-		border: 0,
-	},{
-		xtype:'tbspacer',
-		flex:1
-	},{
-		id: 'title1',
-		html: '<img src="images/4.gif" width="210" height="100">',
-		region: 'center',
-		border: 0,
-		margins: '0 80 0 0'
-	},{
-		xtype:'tbspacer',
-		flex:1
-	},{
-		html: '<a href="HELP.html">Help</a>',
-		region: 'east'
-	}]
-    }, {
+    items: [
+        {
+	        id:'horz1',
+	        region:'north',
+	        //margins: '5 5 5 5',
+	        items:[
+                {
+                    html: innerHTML
+                }]
+        },
+    {
 	id:'horz2',
 	region:'center',
 	layout: {
