@@ -1,0 +1,152 @@
+[20-Mar-2013 00:44:20] model student
+[20-Mar-2013 00:44:20] type read
+[20-Mar-2013 00:44:20] id 100000001
+[20-Mar-2013 01:20:49] model student
+[20-Mar-2013 01:20:49] type read
+[20-Mar-2013 01:20:49] id 100000001
+[20-Mar-2013 01:21:24] model class
+[20-Mar-2013 01:21:24] type update
+[20-Mar-2013 01:35:40] model class
+[20-Mar-2013 01:35:40] type update
+[20-Mar-2013 01:35:40] model class
+[20-Mar-2013 01:35:40] type delete
+[20-Mar-2013 01:59:21] model class
+[20-Mar-2013 01:59:21] type delete
+[20-Mar-2013 01:59:52] model class
+[20-Mar-2013 01:59:52] type delete
+[20-Mar-2013 02:00:38] model student
+[20-Mar-2013 02:00:38] type read
+[20-Mar-2013 02:00:38] id 100000001
+[20-Mar-2013 02:01:03] model student
+[20-Mar-2013 02:01:03] type read
+[20-Mar-2013 02:01:03] id 100000001
+[20-Mar-2013 02:01:18] model class
+[20-Mar-2013 02:01:18] type update
+[20-Mar-2013 02:15:19] model class
+[20-Mar-2013 02:15:19] type delete
+[20-Mar-2013 02:15:54] model student
+[20-Mar-2013 02:15:54] type read
+[20-Mar-2013 02:15:54] id 100000001
+[20-Mar-2013 02:16:01] model class
+[20-Mar-2013 02:16:01] type update
+[20-Mar-2013 02:20:49] model student
+[20-Mar-2013 02:20:49] type read
+[20-Mar-2013 02:20:49] id 100000001
+[20-Mar-2013 02:20:55] model class
+[20-Mar-2013 02:20:55] type update
+[20-Mar-2013 02:20:55] PHP Notice:  Undefined variable: conn in /home/gpas/public_html/brandyn_thornton/fruit/MVC/app/controller/classController.php on line 74
+[20-Mar-2013 02:20:55] PHP Notice:  Trying to get property of non-object in /home/gpas/public_html/brandyn_thornton/fruit/MVC/app/controller/classController.php on line 74
+[20-Mar-2013 02:23:01] model student
+[20-Mar-2013 02:23:01] type read
+[20-Mar-2013 02:23:01] id 100000001
+[20-Mar-2013 02:23:06] model class
+[20-Mar-2013 02:23:06] type update
+[20-Mar-2013 02:23:06] PHP Notice:  Undefined variable: conn in /home/gpas/public_html/brandyn_thornton/fruit/MVC/app/controller/classController.php on line 8
+[20-Mar-2013 02:23:06] PHP Fatal error:  Cannot access empty property in /home/gpas/public_html/brandyn_thornton/fruit/MVC/app/controller/classController.php on line 8
+[20-Mar-2013 02:29:10] model student
+[20-Mar-2013 02:29:10] type read
+[20-Mar-2013 02:29:10] id 100000001
+[20-Mar-2013 02:29:17] model class
+[20-Mar-2013 02:29:17] type update
+[20-Mar-2013 02:29:17] PHP Notice:  Undefined variable: conn in /home/gpas/public_html/brandyn_thornton/fruit/MVC/app/controller/classController.php on line 14
+[20-Mar-2013 02:29:17] PHP Warning:  mysql_select_db() expects parameter 2 to be resource, null given in /home/gpas/public_html/brandyn_thornton/fruit/MVC/app/controller/classController.php on line 14
+[20-Mar-2013 02:30:38] model student
+[20-Mar-2013 02:30:38] type read
+[20-Mar-2013 02:30:38] id 100000001
+[20-Mar-2013 02:30:45] model class
+[20-Mar-2013 02:30:45] type update
+[20-Mar-2013 02:30:45] PHP Notice:  Undefined variable: conn in /home/gpas/public_html/brandyn_thornton/fruit/MVC/app/controller/classController.php on line 95
+[20-Mar-2013 02:30:45] PHP Notice:  Trying to get property of non-object in /home/gpas/public_html/brandyn_thornton/fruit/MVC/app/controller/classController.php on line 95
+[20-Mar-2013 02:32:09] model student
+[20-Mar-2013 02:32:09] type read
+[20-Mar-2013 02:32:09] id 100000001
+[20-Mar-2013 02:32:15] model class
+[20-Mar-2013 02:32:15] type update
+[20-Mar-2013 02:32:15] PHP Notice:  Undefined variable: g_link in /home/gpas/public_html/brandyn_thornton/fruit/MVC/app/controller/classController.php on line 95
+[20-Mar-2013 02:32:15] PHP Notice:  Trying to get property of non-object in /home/gpas/public_html/brandyn_thornton/fruit/MVC/app/controller/classController.php on line 95
+[20-Mar-2013 02:34:34] model student
+[20-Mar-2013 02:34:34] type read
+[20-Mar-2013 02:34:34] id 100000001
+[20-Mar-2013 02:34:38] model class
+[20-Mar-2013 02:34:38] type update
+[20-Mar-2013 02:34:38] PHP Notice:  Trying to get property of non-object in /home/gpas/public_html/brandyn_thornton/fruit/MVC/app/controller/classController.php on line 97
+[20-Mar-2013 02:40:28] model student
+[20-Mar-2013 02:40:28] type read
+[20-Mar-2013 02:40:28] id 100000001
+[20-Mar-2013 02:40:33] model class
+[20-Mar-2013 02:40:33] type update
+[20-Mar-2013 02:40:33] PHP Notice:  Trying to get property of non-object in /home/gpas/public_html/brandyn_thornton/fruit/MVC/app/controller/classController.php on line 97
+[20-Mar-2013 02:43:34] model student
+[20-Mar-2013 02:43:34] type read
+[20-Mar-2013 02:43:34] id 100000001
+[20-Mar-2013 02:43:37] model class
+[20-Mar-2013 02:43:37] type update
+[20-Mar-2013 02:43:37] PHP Notice:  Trying to get property of non-object in /home/gpas/public_html/brandyn_thornton/fruit/MVC/app/controller/classController.php on line 97
+[20-Mar-2013 02:44:53] model student
+[20-Mar-2013 02:44:53] type read
+[20-Mar-2013 02:44:53] id 100000001
+[20-Mar-2013 02:44:59] model class
+[20-Mar-2013 02:44:59] type update
+[20-Mar-2013 02:44:59] PHP Notice:  Trying to get property of non-object in /home/gpas/public_html/brandyn_thornton/fruit/MVC/app/controller/classController.php on line 97
+[20-Mar-2013 02:47:35] model student
+[20-Mar-2013 02:47:35] type read
+[20-Mar-2013 02:47:35] id 100000001
+[20-Mar-2013 02:47:44] model class
+[20-Mar-2013 02:47:44] type update
+[20-Mar-2013 02:47:44] PHP Notice:  Undefined variable: g_link in /home/gpas/public_html/brandyn_thornton/fruit/MVC/app/controller/classController.php on line 83
+[20-Mar-2013 02:48:20] model student
+[20-Mar-2013 02:48:20] type read
+[20-Mar-2013 02:48:20] id 100000001
+[20-Mar-2013 02:48:24] model class
+[20-Mar-2013 02:48:24] type update
+[20-Mar-2013 02:49:00] model class
+[20-Mar-2013 02:49:00] type delete
+[20-Mar-2013 02:52:25] model student
+[20-Mar-2013 02:52:25] type read
+[20-Mar-2013 02:52:25] id 100000001
+[20-Mar-2013 02:52:32] model class
+[20-Mar-2013 02:52:32] type update
+[20-Mar-2013 02:58:51] model student
+[20-Mar-2013 02:58:51] type read
+[20-Mar-2013 02:58:51] id 100000001
+[20-Mar-2013 02:59:00] model class
+[20-Mar-2013 02:59:00] type update
+[20-Mar-2013 03:00:07] model student
+[20-Mar-2013 03:00:07] type read
+[20-Mar-2013 03:00:07] id 100000001
+[20-Mar-2013 03:00:19] model class
+[20-Mar-2013 03:00:19] type update
+[20-Mar-2013 03:03:34] model student
+[20-Mar-2013 03:03:34] type read
+[20-Mar-2013 03:03:34] id 100000001
+[20-Mar-2013 03:03:46] model class
+[20-Mar-2013 03:03:46] type update
+[20-Mar-2013 03:07:13] model student
+[20-Mar-2013 03:07:13] type read
+[20-Mar-2013 03:07:13] id 100000001
+[20-Mar-2013 03:07:20] model class
+[20-Mar-2013 03:07:20] type update
+[20-Mar-2013 03:08:42] model student
+[20-Mar-2013 03:08:42] type read
+[20-Mar-2013 03:08:42] id 100000001
+[20-Mar-2013 03:08:47] model class
+[20-Mar-2013 03:08:47] type update
+[20-Mar-2013 03:11:30] model student
+[20-Mar-2013 03:11:30] type read
+[20-Mar-2013 03:11:30] id 100000001
+[20-Mar-2013 03:11:41] model class
+[20-Mar-2013 03:11:41] type update
+[20-Mar-2013 03:14:03] model student
+[20-Mar-2013 03:14:03] type read
+[20-Mar-2013 03:14:03] id 100000001
+[20-Mar-2013 03:14:08] model class
+[20-Mar-2013 03:14:08] type update
+[20-Mar-2013 03:14:08] PHP Parse error:  syntax error, unexpected T_ENCAPSED_AND_WHITESPACE, expecting T_STRING or T_VARIABLE or T_NUM_STRING in /home/gpas/public_html/brandyn_thornton/fruit/MVC/app/controller/classController.php on line 68
+[20-Mar-2013 03:16:58] model student
+[20-Mar-2013 03:16:58] type read
+[20-Mar-2013 03:16:58] id 100000001
+[20-Mar-2013 03:17:05] model class
+[20-Mar-2013 03:17:05] type update
+[20-Mar-2013 03:17:31] model student
+[20-Mar-2013 03:17:31] type read
+[20-Mar-2013 03:17:31] id 100000001
