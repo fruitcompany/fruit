@@ -35,6 +35,7 @@ class pathController
 					if($joinResult != NULL && mysql_num_rows($joinResult) > 0)
 					{
 						$course = mysql_fetch_array($joinResult, MYSQL_ASSOC);
+						$course["path_id"] = $request->id;
 						if(!isset($semesterArray[$course["Term"]." ".$course["Year"]]))
 						{
 							$semesterArray[$course["Term"]." ".$course["Year"]] = array();
@@ -44,7 +45,7 @@ class pathController
 				}
 				foreach ($semesterArray as $key => $value) 
 				{
-					array_push($pathResult, array("id" => $key, "classes" => $value));
+					array_push($pathResult, array("id" => $key, "path_id" => $request->id, "classes" => $value));
 				}
 				unset($value);
 				unset($key);

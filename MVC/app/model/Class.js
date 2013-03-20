@@ -1,6 +1,7 @@
 Ext.define('GPAS.model.Class', {
     extend: 'Ext.data.Model',
     fields: [
+    	{ name : 'path_id', 	type : 'string' },
 		{ name : 'id',	        type : 'string' },
 		{ name : 'Class_ID',    type : 'number' },
 		{ name : 'Course_Name', type : 'string' },
