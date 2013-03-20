@@ -28,5 +28,5 @@ Ext.define('GPAS.model.Class', {
 			root : 'classes'
 		}
     },
-	belongsTo: {model:'GPAS.model.Semester', getterName:'Semester'}
+	//belongsTo: {model:'GPAS.model.Semester', getterName:'Semester'}
 });

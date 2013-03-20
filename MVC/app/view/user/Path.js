@@ -205,10 +205,9 @@ Ext.define('GPAS.view.user.Path' ,{
 		var ty = store.semester;
 		console.log(ty);
 
-		rec[0].getSemester(function(sem){
-			rec[0].set('Year',ty.Year);
-			rec[0].set('Term',ty.Term);
-		});
+		rec[0].set('Year',ty.Year);
+		rec[0].set('Term',ty.Term);
+		
 		console.log(rec[0]);
 	}
 });
