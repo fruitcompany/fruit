@@ -217,7 +217,6 @@ Ext.define('GPAS.view.user.Path' ,{
 
 				callback: function(options, success, response){
 					var text = response.responseText,
-						log = controller.getLog(),
 						id = Number(text);
 
 					if(success && id){
@@ -231,6 +230,11 @@ Ext.define('GPAS.view.user.Path' ,{
 
 					} else {
 						alert("Failed to find Class in Availability");
+						console.log("new class id",id);
+						rec.set('Year',ty.Year);
+						rec.set('Term',ty.Term);
+						rec.set('Class_ID', id);
+						rec.set('id', id);
 					}
 					// process server response here
 					console.log(text);
