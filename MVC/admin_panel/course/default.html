@@ -1,0 +1,344 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html dir="ltr" xmlns="http://www.w3.org/1999/xhtml">
+
+<!-- #BeginTemplate "../master.dwt" -->
+
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<!-- #BeginEditable "doctitle" -->
+<title>Course</title>
+<style type="text/css">
+
+.auto-style1 {
+	margin-top: 0px;
+}
+</style>
+
+<script type="text/javascript">
+function fill()
+{
+	str = "Course_Name";
+	if (window.XMLHttpRequest)
+	{// code for IE7+, Firefox, Chrome, Opera, Safari
+   		xmlhttp=new XMLHttpRequest();
+   	}
+ 	else
+   	{// code for IE6, IE5
+   		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+   	}
+ 	xmlhttp.onreadystatechange=function()
+   	{
+		if (xmlhttp.readyState==4 && xmlhttp.status==200)
+		{
+	    	document.getElementById("courseSelect").innerHTML=xmlhttp.responseText;
+	    }
+   	}
+	xmlhttp.open("GET","../database.php?q="+str,true);
+	xmlhttp.send();
+}
+
+
+</script>
+<!-- #EndEditable -->
+<link href="../styles/style2.css" media="screen" rel="stylesheet" title="CSS" type="text/css" />
+</head>
+
+<body>
+
+<!-- Begin Container -->
+<div id="container">
+	<!-- Begin Masthead -->
+	<div id="masthead">
+		<img alt="" height="66" src="../images/logo.gif" width="150" />
+		<p>IT Support (555) 555-5555</p>
+	</div>
+	<!-- End Masthead -->
+	<!-- Begin Navigation -->
+	<div id="navigation">
+		<ul>
+			<li><a href="../default.html">Login</a></li>
+			<li><a href="../student/default.html">Student</a></li>
+			<li><a href="default.html">Course</a></li>
+		</ul>
+	</div>
+	<!-- End Navigation -->
+	<!-- Begin Page Content -->
+	<div id="page_content">
+		<!-- Begin Left Column -->
+		<div id="column_l">
+			<!-- #BeginEditable "content" -->
+			<h2>Course data</h2>
+			<p>This panel allows you to modify the class database.&nbsp; The 
+			following are the allowed tasks:</p>
+			<ul>
+				<li>Add new class</li>
+				<li>Modify existing class</li>
+				<li>Delete class</li>
+			</ul>
+			<h4>Add New Course</h4>
+			<form method="post" action="" id="addClass">
+			
+				<table style="width: 100%" bgcolor="#F2F2F2">
+					<tr>
+						<td>Department:</td>
+						<td>
+						<select name="deptSelect" id="deptSelect">
+						<option value="American Indian Studies">American Indian Studies</option>
+						<option value="Anthropology">Anthropology</option>
+						<option value="Arabic">Arabic</option>
+						<option value="Armenian">Armenian</option>
+						<option value="Art">Art</option>
+						<option value="Asian American Studies">Asian American Studies</option>
+						<option value="Astronomy">Astronomy</option>
+						<option value="Biology">Biology</option>
+						<option value="Camera and Television Arts">Camera and Television Arts</option>
+						<option value="Central American Studies">Central American Studies</option>
+						<option value="Chemistry">Chemistry</option>
+						<option value="Chicano Studies ">Chicano Studies</option>
+						<option value="Chinese">Chinese</option>
+						<option value="Classics">Classics</option>
+						<option value="Communication Studies">Communication Studies</option>
+						<option value="Computer Science">Computer Science</option>
+						<option value="Economics">Economics</option>
+						<option value="English">English</option>
+						<option value="Foreign Literature ">Foreign Literature</option>
+						<option value="French">French</option>
+						<option value="Geography">Geography</option>
+						<option value="Geology">Geology</option>
+						<option value="German">German</option>
+						<option value="Hebrew">Hebrew</option>
+						<option value="History">History</option>
+						<option value="Humanities">Humanities</option>
+						<option value="Italian">Italian</option>
+						<option value="Japanese">Japanese</option>
+						<option value="Judaism Studies">Judaism Studies</option>
+						<option value="Kinesiology">Kinesiology</option>
+						<option value="Korean">Korean</option>
+						<option value="Mathematics">Mathematics</option>
+						<option value="Music">Music</option>
+						<option value="Pan African Studies">Pan African Studies</option>
+						<option value="Persian">Persian</option>
+						<option value="Philosophy">Philosophy</option>
+						<option value="Physics">Physics</option>
+						<option value="Political Science">Political Science</option>
+						<option value="Religious Studies ">Religious Studies</option>
+						<option value="Russian">Russian</option>
+						<option value="Sociology">Sociology</option>
+						<option value="Spanish">Spanish</option>
+						<option value="Theatre">Theatre</option>
+						</select></td>
+					</tr>
+					<tr>
+						<td>Simple Course Name (Comp 100):</td>
+						<td><input name="Text1" type="text" />&nbsp;</td>
+					</tr>
+					<tr>
+						<td>Course Title (Introduction to Computer Science):</td>
+						<td><input name="Text2" type="text" />&nbsp;</td>
+					</tr>
+					<tr>
+						<td>Type:</td>
+						<td><select name="typeSelect" id="typeSelect">
+						<option value="Lab">Lab</option>
+						<option value="Lecture">Lecture</option>
+						<option value="Seminar">Seminar</option>
+						</select>&nbsp;</td>
+					</tr>
+					<tr>
+						<td>Units:</td>
+						<td><select name="unitSelect" id="unitSelect">
+						<option value="1">1</option>
+						<option value="2">2</option>
+						<option value="3">3</option>
+						<option value="4">4</option>
+						<option value="5">5</option>
+						<option value="6">6</option>
+						<option value="7">7</option>
+						<option value="8">8</option>
+						<option value="9">9</option>
+						</select>&nbsp;</td>
+					</tr>
+					<tr>
+						<td>Description:</td>
+						<td><textarea cols="70" name="TextArea1" rows="3"></textarea>&nbsp;</td>
+					</tr>
+					<tr>
+						<td><input name="Reset1" type="reset" value="Reset" />&nbsp;</td>
+						<td>
+						<input name="Submit1" type="submit" value="Add Class" />&nbsp;</td>
+					</tr>
+				</table>
+			
+			</form>
+			<h4>Modify Existing Class</h4>
+			<p>Leave "New" course information the same if you don't want to 
+			modify that data.</p>
+			<form method="post" action="">
+			
+				<table id="retrieveClass" style="width: 100%" bgcolor="#F0F0F0">
+					<tr>
+						<td>Simple Course Name:</td>
+						<td>
+							<select name="courseSelect" id="courseSelect" onmouseover="fill()">
+							<option value="asdf">asdf</option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td>&nbsp;</td>
+						<td>
+						<input name="Submit2" type="submit" value="Retrieve Class" />&nbsp;</td>
+					</tr>
+				</table>
+			
+			</form>
+			
+			<form method="post" action="" id="modifyClass">
+			
+				<table style="width: 100%" bgcolor="#F2F2F2">
+					<tr>
+						<td>Course:</td>
+						<td>
+							<div id="CourseName" class="auto-style1"></div>
+						</td>
+					</tr>
+					<tr>
+						<td>New Deparment:</td>
+						<td><select name="newDeptSelect" id="newDeptSelect">
+						<option value="American Indian Studies">American Indian Studies</option>
+						<option value="Anthropology">Anthropology</option>
+						<option value="Arabic">Arabic</option>
+						<option value="Armenian">Armenian</option>
+						<option value="Art">Art</option>
+						<option value="Asian American Studies">Asian American Studies</option>
+						<option value="Astronomy">Astronomy</option>
+						<option value="Biology">Biology</option>
+						<option value="Camera and Television Arts">Camera and Television Arts</option>
+						<option value="Central American Studies">Central American Studies</option>
+						<option value="Chemistry">Chemistry</option>
+						<option value="Chicano Studies ">Chicano Studies</option>
+						<option value="Chinese">Chinese</option>
+						<option value="Classics">Classics</option>
+						<option value="Communication Studies">Communication Studies</option>
+						<option value="Computer Science">Computer Science</option>
+						<option value="Economics">Economics</option>
+						<option value="English">English</option>
+						<option value="Foreign Literature ">Foreign Literature</option>
+						<option value="French">French</option>
+						<option value="Geography">Geography</option>
+						<option value="Geology">Geology</option>
+						<option value="German">German</option>
+						<option value="Hebrew">Hebrew</option>
+						<option value="History">History</option>
+						<option value="Humanities">Humanities</option>
+						<option value="Italian">Italian</option>
+						<option value="Japanese">Japanese</option>
+						<option value="Judaism Studies">Judaism Studies</option>
+						<option value="Kinesiology">Kinesiology</option>
+						<option value="Korean">Korean</option>
+						<option value="Mathematics">Mathematics</option>
+						<option value="Music">Music</option>
+						<option value="Pan African Studies">Pan African Studies</option>
+						<option value="Persian">Persian</option>
+						<option value="Philosophy">Philosophy</option>
+						<option value="Physics">Physics</option>
+						<option value="Political Science">Political Science</option>
+						<option value="Religious Studies ">Religious Studies</option>
+						<option value="Russian">Russian</option>
+						<option value="Sociology">Sociology</option>
+						<option value="Spanish">Spanish</option>
+						<option value="Theatre">Theatre</option>
+						</select>&nbsp;</td>
+					</tr>
+					<tr>
+						<td>New Simple Course Name:</td>
+						<td><input name="Text3" type="text" />&nbsp;</td>
+					</tr>
+					<tr>
+						<td>New Course Title:</td>
+						<td><input name="Text4" type="text" />&nbsp;</td>
+					</tr>
+					<tr>
+						<td>New Type:</td>
+						<td><select name="newTypeSelect" id="newTypeSelect">
+						<option value="Lab">Lab</option>
+						<option value="Lecture">Lecture</option>
+						<option value="Seminar">Seminar</option>
+						</select></td>
+					</tr>
+					<tr>
+						<td>New Unit:</td>
+						<td><select name="newUnitSelect" id="newUnitSelect">
+						<option value="1">1</option>
+						<option value="2">2</option>
+						<option value="3">3</option>
+						<option value="4">4</option>
+						<option value="5">5</option>
+						<option value="6">6</option>
+						<option value="7">7</option>
+						<option value="8">8</option>
+						<option value="9">9</option>
+						</select>&nbsp;</td>
+					</tr>
+					<tr>
+						<td>New Description:</td>
+						<td><textarea cols="70" name="TextArea2" rows="3"></textarea>&nbsp;</td>
+					</tr>
+					<tr>
+						<td>&nbsp;</td>
+						<td>
+						<input name="Submit3" type="submit" value="Modify Course" />&nbsp;</td>
+					</tr>
+				</table>
+			
+			</form>
+			<h4>Delete Course</h4>
+			<form method="post" action="">
+			
+				<table style="width: 100%" bgcolor="#F0F0F0">
+					<tr>
+						<td>Course Name:</td>
+						<td>
+						<select name="delCourseSelect" id="delCourseSelect" onclick="fill()">
+						<option></option>
+						</select></td>
+					</tr>
+					<tr>
+						<td>&nbsp;</td>
+						<td>
+						<input name="Submit4" type="submit" value="Delete Course" />&nbsp;</td>
+					</tr>
+				</table>
+			
+			</form>
+			<p></p>
+			<!-- #EndEditable --></div>
+		<!-- End Left Column --></div>
+	<!-- End Page Content -->
+	<!-- Begin Footer -->
+	<div id="footer">
+	<!--
+		<p><a href="default.html">Home</a> | <a href="about/default.html">About</a> 
+		| <a href="calendar/default.html">Calendar</a> |
+		<a href="contact/default.html">Contact</a> |
+		<a href="employees/default.html">Employees</a> |
+		<a href="employment/default.html">Employment</a> |
+		<a href="faq/default.html">FAQ</a> |
+		<a href="information_links/default.html">Information Links</a> |
+		<a href="news/default.html">News</a> |
+		<a href="photo_gallery/default.html">Photo Gallery</a> |
+		<a href="press/default.html">Press</a> | <a href="products/default.html">
+		Products</a> | <a href="promotions/default.html">Promotions</a> |
+		<a href="services/default.html">Services</a> |
+		<a href="site_map/default.html">Site Map</a></p>
+		<p>Copyright &copy; 0000 Company Name. All Rights Reserved.</p>
+		
+	</div>-->
+	<!-- End Footer --></div>
+<!-- End Container --></div>
+
+</body>
+
+<!-- #EndTemplate -->
+
+</html>

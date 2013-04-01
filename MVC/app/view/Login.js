@@ -9,6 +9,7 @@ var innerHTML = ([
               '<li><a href="index.html">Login</a></li>',
               '<li><a href="../account_manager/index.html">Schedule</a></li>',
               '<li><a href="faq/default.html">Help</a></li>',
+              '<li><a href="admin_panel/default.html">Admin</a></li>',
           '</ul>',
       '</div>',
     '</div>'
