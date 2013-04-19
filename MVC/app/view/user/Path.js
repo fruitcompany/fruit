@@ -4,7 +4,7 @@ Ext.define('GPAS.view.user.Path' ,{
 
     semesters	: 20,
 
-    semesterWidth	: 125,
+    semesterWidth	: 150,
 
     semesterNames	: ["FALL","WINTER","SPRING","SUMMER"],
 

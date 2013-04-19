@@ -325,25 +325,76 @@ Ext.define('GPAS.controller.Paths', {
     },
 
     addNewPath: function(major, year, sem) {
-		pathPanel = this.getPathPanel();
+		var pathPanel = this.getPathPanel();
+		var user = this.getStudentStore().getAt(0);
 
 		pathPanel.setLoading(true);
 		Ext.defer(function(){
-			Ext.ModelManager.getModel('GPAS.model.Path').load(1,{
-				success:function(path){
-					console.log("SUCCESS!!",path);
+			//This needs to query the available classes and set up new path
 
-					pathPanel.on('add',function(){
-						pathPanel.setLoading(false);
-					},{single:true});
-					pathPanel.insert(pathPanel.items.length-1, Ext.create('GPAS.view.user.Path', {
-						store		 : path.classes(),
-						semesters 	 : 15,
-						startingYear     : year,
-						startingSemester : sem
-					}));
+			//var path = Ext.create('GPAS.model.Path', {
+			//	Major: major,
+			//	Year: year,
+			//	Semester: sem,
+			//	ID: user.get('Student_ID')
+			//});
+
+
+			Ext.Ajax.request({
+				url: 'app/rest.php?_m=path&_verb=create&content=crap',
+				params: {
+					Major: major,
+					Year: year,
+					Semester: sem,
+					ID: user.get('Student_ID')
+				},
+				reader : {
+					type : 'json'
+
+				},
+				writer : {
+					type : 'json',
+					encode : true
+				},
+				success: function(response,a,b,c){
+					var rtext = Ext.decode(response.responseText);
+					console.log(response,a,b,c,rtext);
+					Ext.ModelManager.getModel('GPAS.model.Path').load(rtext.path_id,{
+						success:function(path){
+							console.log("SUCCESS!!",path);
+
+							pathPanel.on('add',function(){
+								pathPanel.setLoading(false);
+							},{single:true});
+							pathPanel.insert(pathPanel.items.length-1, Ext.create('GPAS.view.user.Path', {
+								store		 : path.semesters(),
+								semesters 	 : path.semesters().getTotalCount(),
+								startingYear     : year,
+								startingSemester : sem
+							}));
+						}
+					});
 				}
 			});
+
+			//path.save({
+			//	success:function(path){
+			//		console.log("SUCCESS!!",path);
+			//
+			//		pathPanel.on('add',function(){
+			//			pathPanel.setLoading(false);
+			//		},{single:true});
+			//		pathPanel.insert(pathPanel.items.length-1, Ext.create('GPAS.view.user.Path', {
+			//			store		 : path.classes(),
+			//			semesters 	 : 15,
+			//			startingYear     : year,
+			//			startingSemester : sem
+			//		}));
+			//	}
+			//});
+
+
+
 		},20);
     },
 

@@ -83,23 +83,69 @@ class pathController
 		}
 		else
 		{
-			return '{"success":true,"paths":[{"classes":' . json_encode($pathResult) . '}]}';
+			return '{"success":true,"paths":[{"semesters":' . json_encode($pathResult) . '}]}';
 		}
     }
 
     public function createAction($request) {
-        $query = "insert into Student ( `Student_ID`, `First_Name`, `Last_Name`, `User_Name`, `Password`, `Email` )
-		                    values ( '$request->s_id', '$request->fname', '$request->lname', '$request->username', '$request->password', '$request->email' )";
+		//print_r($request);
+        $query = "Select * From Default_Path Where `Major`='$request->Major' Order by `Order` ASC";
 		$goodToGo = mysql_query($query);
-		$request->id = 1;
-		if($goodToGo)
-			$response = array( 'success'=>true, 'data'=>$request );
+		$major = $request->Major;
+		$year = intval($request->Year);
+		$id = $request->ID;
+		$sems = array();
+		$row = mysql_fetch_array(mysql_query("Select MAX(Path_ID) from `Path`"));
+		$path_id = $row[0]+1;
+
+
+		if($request->Semester == "FALL")
+		{
+			$sems[0] = "SPRING";
+			$sems[1] = "FALL";
+			$currSem = 0;
+		}
 		else
-			$response = array( 'success'=>false, 'data'=>$request );
-		return $response;
+		{
+			$sems[0] = "FALL";
+			$sems[1] = "SPRING";
+			$currSem = 1;
+		}
+
+
+
+		while($row = mysql_fetch_assoc($goodToGo)){
+			$semcount = $row['Semester']%2;
+			if($sems[$semcount]=="SPRING" && intval($row['Semester'])>$currSem){
+				$year++;
+				$currSem = intval($row['Semester']);
+			}
+
+			$course = $row['Course_Name'];
+			$order = $row['Order'];
+
+			//find the class by semester and year
+			mysql_query("INSERT INTO `Path`
+						VALUES ($path_id,
+								(SELECT Class_ID FROM `Class_Availability`
+									WHERE `Year`=$year AND `Term`='$sems[$semcount]' AND `Course_Name`='$course'),
+								0,
+								$order)") or die(mysql_error());
+
+		}
+
+		//set user id to have the path just created
+		mysql_query("INSERT INTO `Path_Choice` VALUES ($path_id,$id)") or die(mysql_error());
+		//set Path rank
+		$r = mysql_fetch_array(mysql_query("SELECT IFNULL(MAX(`Path_Rank`)+1,1) FROM `Path_Rank` WHERE `Path_ID`=$path_id"));
+		mysql_query("INSERT INTO `Path_Rank` VALUES ($path_id,$r[0])") or die(mysql_error());
+
+
+		return '{"success":true,"path_id":'.$path_id.'}';
+
     }
 
-	public function updateAction($request) {
+	public function updateAction($request){
         if( isset( $request->s_id ) )
 		{
 			$query = "UPDATE  Student SET First_Name = '$request->fname', Last_Name = '$request->lname', User_Name = '$request->username', Password = '$request->password', Email = '$request->email' WHERE Student_ID = $request->s_id";

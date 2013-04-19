@@ -1,36 +1,3 @@
-<<<<<<< HEAD
-<?php
-require_once 'logger/error_log.php'; //enables printing log messages to logger/error_log.txt
-class classController
-{
-	function __construct()
-	{
-		$conn = mysql_connect("localhost:3306", "gpas", "r3dh0tSvr*") or die(mysql_error());
-		mysql_select_db("gpas", $conn ) or die(mysql_error());
-	}
-
-	function __destruct()
-	{
-		
-	}
-	
-    public function readAction($request) {
-		return '{"success":true}';
-    }
- 
-    public function createAction($request) {
-        return '{"success":true}';
-    }
-	
-	public function updateAction($request) {
-        return '{"success":true}';
-    }
-	
-	public function deleteAction($request) {
-		return '{"success":true}';
-    }
-}
-=======
 <?php
 require_once 'logger/error_log.php'; //enables printing log messages to logger/error_log.txt
 class classController
@@ -43,17 +10,17 @@ class classController
 
 	function __destruct()
 	{
-		
+
 	}
-	
+
     public function readAction($request) {
 		return '{"success":true}';
     }
- 
+
     public function createAction($request) {
         return '{"success":true}';
     }
-	
+
 	public function updateAction($request) {
 		$ids = array();
 		if(is_array($request))
@@ -65,7 +32,7 @@ class classController
 					$ids["oldID"][] = $value->id;
 					$query = "SELECT Class_ID FROM  Class_Availability WHERE Course_Name = '$value->Course_Name' and Year = $value->Year and Term = '$value->Term'";
 					$qResult = mysql_query($query);
-		
+
 					if($qResult != NULL && mysql_num_rows($qResult) == 1)
 					{
 						$row = mysql_fetch_array($qResult, MYSQL_ASSOC);
@@ -93,7 +60,7 @@ class classController
 				$ids["oldID"][] = $request->id;
 				$query = "SELECT Class_ID FROM  Class_Availability WHERE Course_Name = '$request->Course_Name' and Year = $request->Year and Term = '$request->Term'";
 				$qResult = mysql_query($query);
-	
+
 				if($qResult != NULL && mysql_num_rows($qResult) == 1)
 				{
 					$row = mysql_fetch_array($qResult, MYSQL_ASSOC);
@@ -117,10 +84,9 @@ class classController
 		}
         return '{"success":true, "ids":' . json_encode($ids) . '}';
     }
-	
+
 	public function deleteAction($request) {
 		return '{"success":true}';
     }
 }
->>>>>>> 4f70124dace1f01aa3edbc2c6eb7f12ee55d9d01
 ?>
