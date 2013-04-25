@@ -1,15 +1,15 @@
 var innerHTML = ([
     '<div id="container">',
       '<div id="masthead">',
-          '<img alt="" height="135" src="images/fruit_cup_logo_white_text.jpg" width="180" />',
+          '<img alt="" height="152" src="images/fruit_cup_logo_white_text.jpg" width="180" />',
           '<p>IT Support (555) 555-5555</p>',
       '</div>',
       '<div id="navigation">',
           '<ul>',
               '<li><a href="index.html">Login</a></li>',
-              '<li><a href="../account_manager/index.html">Schedule</a></li>',
+              //'<li><a href="../account_manager/index.html">Schedule</a></li>',
               '<li><a href="faq/default.html">Help</a></li>',
-              '<li><a href="admin_panel/default.html">Admin</a></li>',
+              //'<li><a href="admin_panel/default.html">Admin</a></li>',
           '</ul>',
       '</div>',
     '</div>'
@@ -26,7 +26,9 @@ Ext.define('GPAS.view.Login', {
         {
 	        id:'horz1',
 	        region:'north',
+	        height: 180,
 	        //margins: '5 5 5 5',
+	        
 	        items:[
                 {
                     html: innerHTML
@@ -37,12 +39,11 @@ Ext.define('GPAS.view.Login', {
 	region:'center',
 	layout: {
 	    type: 'hbox',
-	    padding:'5',
 	    pack:'center',
 	    align:'middle'
 	},
 	
-	margins: '5 0 0 0',
+	//margins: '5 0 0 0',
 	items: [{
 	    id: 'login',
 	    xtype: 'panel',
