@@ -1,3 +1,20 @@
+var innerHTML = ([
+    '<div id="container">',
+      '<div id="masthead">',
+          '<img alt="" height="152" src="images/fruit_cup_logo_white_text.jpg" width="180" />',
+          '<p>IT Support (555) 555-5555</p>',
+      '</div>',
+      '<div id="navigation">',
+          '<ul>',
+              '<li><a href="index.html">Login</a></li>',
+              '<li><a href="../account_manager/index.html">Schedule</a></li>',
+              '<li><a href="faq/default.html">Help</a></li>',
+              '<li><a href="admin_panel/default.html">Admin</a></li>',
+          '</ul>',
+      '</div>',
+    '</div>'
+]);
+
 Ext.define('GPAS.view.PathManager' ,{
     extend: 'Ext.container.Viewport',
     alias : 'widget.pathman',
@@ -13,7 +30,7 @@ Ext.define('GPAS.view.PathManager' ,{
         xtype:'panel',
         height: 180,
         region: 'north',
-        html: '<img src="images/header.png" width="100%">'
+        html: innerHTML
     },{
         xtype:'panel',
         width: 100,
