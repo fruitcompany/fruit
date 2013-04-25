@@ -207,14 +207,15 @@ Ext.define('GPAS.controller.Paths', {
 		var pathPanel = this.getPathPanel(),
 			path,
 			sems 	= pathData.semesters(),
-			numSems 	= sems.length;
+			numSems 	= sems.getCount();
 
 		//console.log(pathData, classes);
 		if(sems){
+			console.log(sems,numSems);
 
 			path = Ext.create('GPAS.view.user.Path', {
 				store		 : sems,
-				semesters 	 : sems.getTotalCount(),
+				semesters 	 : numSems,
 				startingYear     : sems.getAt(0).get('Year'),
 				startingSemester : sems.getAt(0).get('Term')
 			});

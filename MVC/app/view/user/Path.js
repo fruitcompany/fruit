@@ -6,14 +6,15 @@ Ext.define('GPAS.view.user.Path' ,{
 
     semesterWidth	: 150,
 
-    semesterNames	: ["FALL","WINTER","SPRING","SUMMER"],
+    //semesterNames	: ["FALL","WINTER","SPRING","SUMMER"],
+    semesterNames	: ["FALL","SPRING"],
 
     startingYear	: 2008,
     startingSemester: "FALL",
 
     border		: 0,
 
-    edgeSpace		: 0,
+    edgeSpace		: 50,
 
     layout: {
 	    type:'hbox',
@@ -62,6 +63,8 @@ Ext.define('GPAS.view.user.Path' ,{
 					}
 				}
 			});
+			me.lastTerm = term;
+			me.lastYear = year;
 		});
 		me.items = semArray.concat([{
 			xtype: 'panel',
@@ -70,19 +73,38 @@ Ext.define('GPAS.view.user.Path' ,{
 				xtype	: 'button',
 				text	: 'Add Semester',
 				handler : function(butt){
-					me.semesters++,
+					me.semesters++;
+					if (me.lastTerm == 'FALL') {
+					    me.lastTerm = 'SPRING';
+					    me.lastYear++;
+					} else {
+					    me.lastTerm = 'FALL';
+					}
 					me.insert(me.semesters-1,{
-					xtype: 'panel',
-					width: 125,
-					height: 200,
-					//displayField: 'field1',
-					//dragGroup: 'path',
-					//dropGroup: 'path',
-					name: 'multiselect-'+me.semesters-1,
-					id: 'multiselect-field-'+me.semesters-1,
-					listTitle: 'Semester '+(me.semesters),
-						//store: [], //blank store to begin
+					    xtype: 'semester',
+					    width: me.semesterWidth,
+					    term	: me.lastTerm,
+					    year	: me.lastYear,
+					    dragGroup	: me.DDGroup,
+					    dropGroup	: me.DDGroup,
+					    itemId	: me.lastTerm + "_" + me.lastYear + "_" + me.id,
+					    id		: me.lastTerm + "_" + me.lastYear+"_selectfield_"+me.id,
+					    listTitle	: me.lastTerm + " " + me.lastYear,
+					    store	: Ext.create('Ext.data.Store', {
+						model	: 'GPAS.model.Class',
+						semester : { Term : me.lastTerm, Year : me.lastYear },
+						listeners: {
+						    add: me.onDrop
+						}
+					    }),
+					    listeners: {
+						    boundList: {
+							    itemdblclick: me.onItemDblClick,
+							    scope: me
+						    }
+					    }
 					});
+					me.width += me.semesterWidth;
 				}
 			},{
 				xtype	: 'button',
@@ -93,86 +115,9 @@ Ext.define('GPAS.view.user.Path' ,{
 			}]
 		}]);
 		me.width = me.semesters*me.semesterWidth+2*me.edgeSpace;
-
+		console.log("new Path object",this);
 
 		this.callParent(arguments);
-	//	var i = 0,
-	//		semArray= [],
-	//		me 		= this,
-	//		semnms	= me.semesterNames,
-	//		sem		= semnms.indexOf(me.startingSemester)
-	//		semcnt	= semnms.length,
-	//		year	= me.startingYear,
-	//		semester="";
-	//
-	//	me.DDGroup = 'DDPath-'+me.id;
-	//
-	//	//me.store = Ext.data.StoreManager.lookup(me.store || 'ext-empty-store');
-	//
-	//// ------------------------------------------------------------------------------------------------------------
-	//
-	//	while(i<me.semesters){
-	//		semester = semnms[(i+sem)%semcnt];
-	//		var newStore = Ext.create('GPAS.store.Classes');
-	//		me.store.each(function(rec){
-	//			if(rec.get('Year') == year && rec.get('Term') == semester){
-	//				newStore.add(rec);
-	//			}
-	//		});
-	//		semArray.push({
-	//			xtype	: 'semester',
-	//			width	: me.semesterWidth,
-	//			semester	: semester,
-	//			year	: year,
-	//			dragGroup	: me.DDGroup,
-	//			dropGroup	: me.DDGroup,
-	//			itemId	: semester + "_" + year + "_" + me.id,
-	//			id		: semester + "_" + year+"_selectfield_"+me.id,
-	//			listTitle	: semester + " " + year,
-	//			store	: newStore,
-	//			listeners: {
-	//				boundList: {
-	//					itemdblclick: me.onItemDblClick,
-	//					scope: me
-	//				}
-	//			}
-	//		});
-	//		if(semester=="WINTER"){year++;}
-	//			i++;
-	//	}
-	//	me.items = semArray.concat([{
-	//		xtype: 'panel',
-	//		layout: 'fit',
-	//		items: [{
-	//			xtype	: 'button',
-	//			text	: 'Add Semester',
-	//			handler : function(butt){
-	//				me.semesters++,
-	//				me.insert(me.semesters-1,{
-	//				xtype: 'panel',
-	//				width: 125,
-	//				height: 200,
-	//				//displayField: 'field1',
-	//				//dragGroup: 'path',
-	//				//dropGroup: 'path',
-	//				name: 'multiselect-'+me.semesters-1,
-	//				id: 'multiselect-field-'+me.semesters-1,
-	//				listTitle: 'Semester '+(me.semesters),
-	//					//store: [], //blank store to begin
-	//				});
-	//			}
-	//		},{
-	//			xtype	: 'button',
-	//			text	: 'Test stuff',
-	//			handler : function(butt){
-	//				console.log(me);
-	//			}
-	//		}]
-	//	}]);
-	//	me.width = me.semesters*me.semesterWidth+2*me.edgeSpace;
-	//
-	//
-	//	this.callParent(arguments);
 	},
 
     loadData: function(data) {
