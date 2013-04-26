@@ -58,17 +58,22 @@ Ext.define('GPAS.view.user.Path' ,{
 				width	: me.semesterWidth,
 				term	: term,
 				year	: year,
-				dragGroup	: me.DDGroup,
-				dropGroup	: me.DDGroup,
+
 				itemId	: term + "_" + year + "_" + me.id,
 				id		: term + "_" + year+"_selectfield_"+me.id,
-				listTitle	: term + " " + year,
+				//listTitle	: term + " " + year,
+				title	: term + " " + year,
 				store	: store,
-				listeners: {
-					boundList: {
-						itemdblclick: me.onItemDblClick,
-						scope: me
+				viewConfig: {
+					plugins: {
+						ptype: 'gridviewdragdrop',
+						dragGroup	: me.DDGroup,
+						dropGroup	: me.DDGroup,
 					}
+				},
+				listeners: {
+					itemdblclick: me.onItemDblClick,
+					itemcontextmenu: me.onRightClick,
 				}
 			});
 			me.lastTerm = term;
@@ -109,24 +114,24 @@ Ext.define('GPAS.view.user.Path' ,{
 					    width: me.semesterWidth,
 					    term	: me.lastTerm,
 					    year	: me.lastYear,
-					    dragGroup	: me.DDGroup,
-					    dropGroup	: me.DDGroup,
 					    itemId	: me.lastTerm + "_" + me.lastYear + "_" + me.id,
 					    id		: me.lastTerm + "_" + me.lastYear+"_selectfield_"+me.id,
-					    listTitle	: me.lastTerm + " " + me.lastYear,
+					    title	: me.lastTerm + " " + me.lastYear,
 					    store	: Ext.create('Ext.data.Store', {
-						model	: 'GPAS.model.Class',
-						semester : { Term : me.lastTerm, Year : me.lastYear },
-						listeners: {
-						    add: me.onDrop
-						}
+							model	: 'GPAS.model.Class',
+							semester : { Term : me.lastTerm, Year : me.lastYear },
 					    }),
-					    listeners: {
-						    boundList: {
-							    itemdblclick: me.onItemDblClick,
-							    scope: me
-						    }
-					    }
+					    viewConfig: {
+							plugins: {
+								ptype: 'gridviewdragdrop',
+								dragGroup	: me.DDGroup,
+								dropGroup	: me.DDGroup,
+							}
+						},
+						listeners: {
+							itemdblclick: me.onItemDblClick,
+							itemcontextmenu: me.onRightClick,
+						}
 					});
 					//me.width += me.semesterWidth;
 				}
@@ -144,6 +149,8 @@ Ext.define('GPAS.view.user.Path' ,{
 
 		this.callParent(arguments);
 	},
+
+
 
     loadData: function(data) {
 		Ext.each(data, function(rec) {
@@ -211,5 +218,27 @@ Ext.define('GPAS.view.user.Path' ,{
 				}
 			});
 		});
-	}
+	},
+	onRightClick: function(table, record, item, index, e, eOpts){
+		var me = this;
+		console.log("Right Click",table,record,item,index,e);
+		e.stopEvent();
+		Ext.create('Ext.menu.Menu',{
+			items: [{
+				text: 'Delete',
+				icon: '../extjs-4.0.7/examples/shared/icons/fam/delete.gif',
+				handler: function(a,b){
+					//Delete Rec (Class)
+					me.getStore().remove(record);
+
+				}
+			},{
+				text: 'Edit'
+			}]
+		}).showAt(e.getXY());
+	},
+
+	//onDelete: function(rec,item,i){
+	//	console.log(rec,item,i);
+	//}
 });

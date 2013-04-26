@@ -29,15 +29,15 @@ class classController
 			{
 		        if(isset($value->Course_Name, $value->Year, $value->Term))
 				{
-					$ids["oldID"][] = $value->id;
+					$ids["oldID"] = $value->O_Class_ID;
 					$query = "SELECT Class_ID FROM  Class_Availability WHERE Course_Name = '$value->Course_Name' and Year = $value->Year and Term = '$value->Term'";
 					$qResult = mysql_query($query);
 
 					if($qResult != NULL && mysql_num_rows($qResult) == 1)
 					{
 						$row = mysql_fetch_array($qResult, MYSQL_ASSOC);
-						$ids["newID"][] = $row["Class_ID"];
-						$query = "UPDATE Path SET Class_ID = ".$row["Class_ID"]." WHERE Class_ID = $value->id and Path_ID = $value->path_id";
+						$ids["newID"] = $row["Class_ID"];
+						$query = "UPDATE Path SET Class_ID = ".$row["Class_ID"]." WHERE Class_ID = $value->O_Class_ID and Path_ID = $value->path_id";
 						$Result = mysql_query($query);
 					}
 					else
@@ -45,7 +45,7 @@ class classController
 						$query = "INSERT INTO Class_Availability (Class_ID, Course_Name, Year, Term) VALUES (NULL, '$value->Course_Name', $value->Year, '$value->Term')";
 						$qResult = mysql_query($query);
 						$insertID = mysql_insert_id();
-						$ids["newID"][] = $insertID;
+						$ids["newID"] = $insertID;
 						$query = "UPDATE Path SET Class_ID = $insertID WHERE Class_ID = $value->id and Path_ID = $value->path_id";
 						$Result = mysql_query($query);
 					}
@@ -56,28 +56,28 @@ class classController
 		else
 		{
 			if(isset($request->Course_Name, $request->Year, $request->Term))
-			{
-				$ids["oldID"][] = $request->id;
-				$query = "SELECT Class_ID FROM  Class_Availability WHERE Course_Name = '$request->Course_Name' and Year = $request->Year and Term = '$request->Term'";
-				$qResult = mysql_query($query);
-
-				if($qResult != NULL && mysql_num_rows($qResult) == 1)
 				{
-					$row = mysql_fetch_array($qResult, MYSQL_ASSOC);
-					$ids["newID"][] = $row["Class_ID"];
-					$query = "UPDATE Path SET Class_ID = ".$row["Class_ID"]." WHERE Class_ID = $request->id and Path_ID = $request->path_id";
-					$Result = mysql_query($query);
-				}
-				else
-				{
-					$query = "INSERT INTO Class_Availability (Class_ID, Course_Name, Year, Term) VALUES (NULL, '$request->Course_Name', $request->Year, '$request->Term')";
+					$ids["oldID"] = $request->O_Class_ID;
+					$query = "SELECT Class_ID FROM  Class_Availability WHERE Course_Name = '$request->Course_Name' and Year = $request->Year and Term = '$request->Term'";
 					$qResult = mysql_query($query);
-					$insertID = mysql_insert_id();
-					$ids["newID"][] = $insertID;
-					$query = "UPDATE Path SET Class_ID = $insertID WHERE Class_ID = $request->id and Path_ID = $request->path_id";
-					$Result = mysql_query($query);
+
+					if($qResult != NULL && mysql_num_rows($qResult) == 1)
+					{
+						$row = mysql_fetch_array($qResult, MYSQL_ASSOC);
+						$ids["newID"] = $row["Class_ID"];
+						$query = "UPDATE Path SET Class_ID = ".$row["Class_ID"]." WHERE Class_ID = $request->O_Class_ID and Path_ID = $request->path_id";
+						$Result = mysql_query($query);
+					}
+					else
+					{
+						$query = "INSERT INTO Class_Availability (Class_ID, Course_Name, Year, Term) VALUES (NULL, '$request->Course_Name', $request->Year, '$request->Term')";
+						$qResult = mysql_query($query);
+						$insertID = mysql_insert_id();
+						$ids["newID"] = $insertID;
+						$query = "UPDATE Path SET Class_ID = $insertID WHERE Class_ID = $request->id and Path_ID = $request->path_id";
+						$Result = mysql_query($query);
+					}
 				}
-			}
 			else {
 				return '{"success":false, "msg":invalid request, "request":'.json_encode($request).'}';
 			}

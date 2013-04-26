@@ -4,6 +4,7 @@ Ext.define('GPAS.model.Class', {
 		{ name : 'id',	        type : 'string', convert: function(val,model){ return model.get('Class_ID');}},
 		{ name : 'path_id', 	type : 'string' },
 		{ name : 'Class_ID',    type : 'number' },
+		{ name : 'O_Class_ID',  type : 'number', mapping:'Class_ID' },
 		{ name : 'Course_Name', type : 'string' },
 		{ name : 'Year',	type : 'number' },
 		{ name : 'Term',        type : 'string' },
