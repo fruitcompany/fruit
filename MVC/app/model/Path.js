@@ -14,7 +14,12 @@ Ext.define('GPAS.model.Path', {
         reader : {
             type : 'json',
             root : 'paths'
-        }
+        },
+        writer: new Ext.data.writer.Json( {
+            type: 'json',
+            writeAllFields: true,
+            root: 'path'
+        })
     },
     belongsTo: {model:'GPAS.model.Student', getterName:'Student'},
     hasMany : {model: 'GPAS.model.Semester', name: 'semesters' }
