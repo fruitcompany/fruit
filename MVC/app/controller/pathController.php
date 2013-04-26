@@ -17,6 +17,8 @@ class pathController
 
 		$pathResult = array();
 		$pathClasses = array();
+		$pathRank = -1;
+		$pathId = -1;
 		if(isset($request->id))
 		{
 			$query = "SELECT Class_ID FROM  `Path` WHERE Path_ID = $request->id ORDER BY `Order`";
@@ -52,6 +54,10 @@ class pathController
 				unset($key);
 
 			}
+			
+			$r = mysql_fetch_array(mysql_query("SELECT Path_Rank FROM `Path_Rank` WHERE `Path_ID`=$request->id"));
+			$pathRank = $r[0];
+			$pathId = $request->id;
 		}
 		else if($request->s_id)
 		{
@@ -83,7 +89,7 @@ class pathController
 		}
 		else
 		{
-			return '{"success":true,"paths":[{"semesters":' . json_encode($pathResult) . '}]}';
+			return '{"success":true,"paths":[{"id":'.$pathId.', "Path_Rank":'.$pathRank.', "semesters":' . json_encode($pathResult) . '}]}';
 		}
     }
 
@@ -137,7 +143,7 @@ class pathController
 		//set user id to have the path just created
 		mysql_query("INSERT INTO `Path_Choice` VALUES ($path_id,$id)") or die(mysql_error());
 		//set Path rank
-		$r = mysql_fetch_array(mysql_query("SELECT IFNULL(MAX(`Path_Rank`)+1,1) FROM `Path_Rank` WHERE `Path_ID`=$path_id"));
+		$r = mysql_fetch_array(mysql_query("SELECT COUNT(*) FROM `Path_Choice` WHERE `Student_ID`=$id"));
 		mysql_query("INSERT INTO `Path_Rank` VALUES ($path_id,$r[0])") or die(mysql_error());
 
 
@@ -146,20 +152,7 @@ class pathController
     }
 
 	public function updateAction($request){
-        if( isset( $request->s_id ) )
-		{
-			$query = "UPDATE  Student SET First_Name = '$request->fname', Last_Name = '$request->lname', User_Name = '$request->username', Password = '$request->password', Email = '$request->email' WHERE Student_ID = $request->s_id";
-			$goodToGo = mysql_query($query);
-			if($goodToGo)
-			{
-				$response = array( 'success'=>true, 'data'=>$request );
-			}
-			else
-			{
-				$response = array( 'success'=>false, 'data'=>$request );
-			}
-			return $response;
-		}
+        return '{"success":true}';
     }
 
 	public function deleteAction($request) {

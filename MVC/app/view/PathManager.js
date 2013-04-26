@@ -31,21 +31,24 @@ Ext.define('GPAS.view.PathManager' ,{
         height: 180,
         region: 'north',
         html: innerHTML
-    },{
-        xtype:'panel',
-        width: 100,
-        region: 'west',
-        html: 'This is where info on paths will go',
-        items:[{
-            xtype:'button',
-            text:'edit',
-            action:'edit_path'
-        },{
-            xtype:'button',
-            text:'Save',
-            action:'save_path'
-        }]
-    },{
+    }
+    
+    //,{
+    //    xtype:'panel',
+    //    width: 100,
+    //    region: 'west',
+    //    html: 'This is where info on paths will go',
+    //    items:[{
+    //        xtype:'button',
+    //        text:'edit',
+    //        action:'edit_path'
+    //    },{
+    //        xtype:'button',
+    //        text:'Save',
+    //        action:'save_path'
+    //    }]
+    //}
+    ,{
         xtype: 'panel',
         region: 'center',
         autoScroll:true,

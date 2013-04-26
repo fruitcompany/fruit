@@ -110,6 +110,12 @@ Ext.define('GPAS.controller.Paths', {
 					addWin = Ext.create('GPAS.view.NewPath').show();
 				}
             },
+            'viewport > panel[region=center] > path > panel > button[action=remove_path]': {
+                click: function(a){
+                	console.log('remove_path');
+					console.log(a.path);
+				}
+            },
             'viewport > panel[region=center] > path > store': {
                 load: this.onPathStoreLoad,
                 datachange: function(){
@@ -193,6 +199,10 @@ Ext.define('GPAS.controller.Paths', {
 
 		Ext.getCmp('create_button').setDisabled(!valid);
 	},
+	
+	updatePaths: function(){
+		
+	},
 
     buildPathManager: function(user){
 		var pm = Ext.create('GPAS.view.PathManager'),
@@ -208,7 +218,7 @@ Ext.define('GPAS.controller.Paths', {
 			path,
 			sems 	= pathData.semesters(),
 			numSems 	= sems.getCount();
-
+		console.log(pm,pathData);
 		//console.log(pathData, classes);
 		if(sems){
 			console.log(sems,numSems);
@@ -217,7 +227,8 @@ Ext.define('GPAS.controller.Paths', {
 				store		 : sems,
 				semesters 	 : numSems,
 				startingYear     : sems.getAt(0).get('Year'),
-				startingSemester : sems.getAt(0).get('Term')
+				startingSemester : sems.getAt(0).get('Term'),
+				pathRank : pathData.get('Path_Rank')
 			});
 
 			//path.store.loadRecords(classes);
@@ -371,7 +382,8 @@ Ext.define('GPAS.controller.Paths', {
 								store		 : path.semesters(),
 								semesters 	 : path.semesters().getTotalCount(),
 								startingYear     : year,
-								startingSemester : sem
+								startingSemester : sem,
+								pathRank : path.get('Path_Rank')
 							}));
 						}
 					});

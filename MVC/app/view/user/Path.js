@@ -11,6 +11,8 @@ Ext.define('GPAS.view.user.Path' ,{
 
     startingYear	: 2008,
     startingSemester: "FALL",
+    
+    pathRank : 0,
 
     border		: 0,
 
@@ -26,6 +28,7 @@ Ext.define('GPAS.view.user.Path' ,{
 
     initComponent: function(){
 		var i = 0,
+			pathUnits = 0,
 			semArray= [],
 			me 		= this,
 			year	= me.startingYear;
@@ -41,7 +44,12 @@ Ext.define('GPAS.view.user.Path' ,{
 			var term = rec.get('Term'),
 				year = rec.get('Year'),
 				store = rec.classes();
-
+				store.each(function(a){
+					pathUnits = pathUnits + parseInt(a.get('Units'));
+				});
+				console.log(rec);
+				
+				//pathUnits = pathUnits + parseInt(rec.get('Units'));
 			store.on('add',me.onDrop);
 			store.semester = {Term: term, Year: year};
 
@@ -66,6 +74,22 @@ Ext.define('GPAS.view.user.Path' ,{
 			me.lastTerm = term;
 			me.lastYear = year;
 		});
+		
+		semArray.splice(0,0,[{
+			xtype: 'panel',
+			layout: 'fit',
+			items: [{
+				xtype	: 'label',
+				html	: '<p>Units: ' + pathUnits + '<BR/>' + 'Rank: ' + me.pathRank + '<BR/>Est. Graduation:<BR/>' + me.lastTerm + ' ' + 
+			me.lastYear + '</p>'
+			},{
+				xtype: 'button',
+				text: 'X',
+				action: 'remove_path',
+				path: me
+			}]
+		}]);
+		
 		me.items = semArray.concat([{
 			xtype: 'panel',
 			layout: 'fit',
@@ -104,17 +128,18 @@ Ext.define('GPAS.view.user.Path' ,{
 						    }
 					    }
 					});
-					me.width += me.semesterWidth;
+					//me.width += me.semesterWidth;
 				}
 			},{
 				xtype	: 'button',
 				text	: 'Test stuff',
 				handler : function(butt){
 					console.log(me);
+					
 				}
 			}]
 		}]);
-		me.width = me.semesters*me.semesterWidth+2*me.edgeSpace;
+		me.width = me.semesters*me.semesterWidth+3*me.edgeSpace;
 		console.log("new Path object",this);
 
 		this.callParent(arguments);
