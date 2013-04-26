@@ -399,7 +399,9 @@ Ext.define('GPAS.controller.Paths', {
 					Ext.ModelManager.getModel('GPAS.model.Path').load(rtext.path_id,{
 						success:function(path){
 							console.log("SUCCESS!!",path);
-
+							
+							user.paths().add(path);
+							
 							pathPanel.on('add',function(){
 								pathPanel.setLoading(false);
 							},{single:true});
