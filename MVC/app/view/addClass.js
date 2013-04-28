@@ -78,6 +78,7 @@ Ext.define('GPAS.view.addClass' ,{
             height: '100%',
 			frame: true,
             tpl: new Ext.XTemplate(
+                '<p><b>{Course_Title}</b><br/></p>',
                 '<p><b>Term: </b>{Term} &nbsp;&nbsp;&nbsp;&nbsp;<b>Year: </b>{Year}<br/>',
                 '<b>Department: </b>{Department}&nbsp;&nbsp;&nbsp;&nbsp;<b>Type: </b>{Type}&nbsp;&nbsp;&nbsp;&nbsp;<b>Units: </b>{Units}<br/>',
                 '<b>Description: </b><br/><p>{Description}</p></p>'

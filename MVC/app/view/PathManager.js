@@ -52,7 +52,13 @@ Ext.define('GPAS.view.PathManager' ,{
         xtype: 'panel',
         region: 'center',
         autoScroll:true,
-        tbar: [
+        tbar: [{
+                xtype: 'button',
+                text: "Add Path",
+                //iconCls: 'add-icon',
+                //scale: 'large',
+                action:'add_path'
+            },
             {
                 xtype: 'button',
                 text: 'Save Paths',
@@ -67,13 +73,6 @@ Ext.define('GPAS.view.PathManager' ,{
         layout:{
             type: 'auto',
             padding: 18
-        },
-        items: {
-            xtype: 'button',
-            text: "Add Path",
-            //iconCls: 'add-icon',
-            //scale: 'large',
-            action:'add_path'
         }
     }]
 });
