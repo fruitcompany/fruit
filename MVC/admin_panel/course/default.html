@@ -15,9 +15,9 @@
 </style>
 
 <script type="text/javascript">
-function fill()
+function fill(id)
 {
-	str = "Course_Name";
+	str = "SELECT * FROM Course_Info";
 	if (window.XMLHttpRequest)
 	{// code for IE7+, Firefox, Chrome, Opera, Safari
    		xmlhttp=new XMLHttpRequest();
@@ -30,11 +30,70 @@ function fill()
    	{
 		if (xmlhttp.readyState==4 && xmlhttp.status==200)
 		{
-	    	document.getElementById("courseSelect").innerHTML=xmlhttp.responseText;
+	    	document.getElementById(id).innerHTML=xmlhttp.responseText;
 	    }
    	}
-	xmlhttp.open("GET","../database.php?q="+str,true);
+	xmlhttp.open("GET","../database.php?t=2&q="+str,true);
 	xmlhttp.send();
+}
+
+function autoComplete()
+{
+	//var a = document.getElementById("modifyDeptSelect").value;
+	//var b = document.getElementById("modifyCourseName").innerHTML;
+	//var c = document.getElementById("modifyCourseTitle").innerHTML;
+	//var d = document.getElementById("modifyTypeSelect").value;
+	//var e = document.getElementById("modifyUnitSelect").value;
+	//var f = document.getElementById("modifyDescription").innerHTML;
+
+	var name = document.getElementById("courseSelect").value;
+	if (window.XMLHttpRequest)
+	{// code for IE7+, Firefox, Chrome, Opera, Safari
+   		xmlhttp=new XMLHttpRequest();
+   	}
+ 	else
+   	{// code for IE6, IE5
+   		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+   	}
+ 	xmlhttp.onreadystatechange=function()
+   	{
+		if (xmlhttp.readyState==4 && xmlhttp.status==200)
+		{
+	    	document.getElementById("modifyClass").innerHTML=xmlhttp.responseText;
+	    }
+   	}
+	//xmlhttp.open("GET","majorList.php?a="+a+"&b="+b+"c="+c+"&d="+d+"e="+e+"&f="+f,true);
+	xmlhttp.open("GET","majorList.php?q="+name,true);
+	xmlhttp.send();
+}
+
+function majorSelect()
+{
+	if (window.XMLHttpRequest)
+	{// code for IE7+, Firefox, Chrome, Opera, Safari
+   		xmlhttp=new XMLHttpRequest();
+   	}
+ 	else
+   	{// code for IE6, IE5
+   		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+   	}
+ 	xmlhttp.onreadystatechange=function()
+   	{
+		if (xmlhttp.readyState==4 && xmlhttp.status==200)
+		{
+		    	document.getElementById("majorSelect1").innerHTML=xmlhttp.responseText;
+			document.getElementById("majorSelect2").innerHTML=xmlhttp.responseText;
+		}
+   	}
+	//xmlhttp.open("GET","majorList.php?a="+a+"&b="+b+"c="+c+"&d="+d+"e="+e+"&f="+f,true);
+	xmlhttp.open("GET","majorList.php?q="+name,true);
+	xmlhttp.send();
+}
+
+function startOff()
+{
+	fill('courseSelect');
+	fill('delCourseSelect');
 }
 
 
@@ -43,7 +102,7 @@ function fill()
 <link href="../styles/style2.css" media="screen" rel="stylesheet" title="CSS" type="text/css" />
 </head>
 
-<body>
+<body onload="startOff()">
 
 <!-- Begin Container -->
 <div id="container">
@@ -76,69 +135,73 @@ function fill()
 				<li>Delete class</li>
 			</ul>
 			<h4>Add New Course</h4>
-			<form method="post" action="" id="addClass">
+			<form method="post" action="addClass.php" id="addClass">
 			
 				<table style="width: 100%" bgcolor="#F2F2F2">
 					<tr>
 						<td>Department:</td>
 						<td>
-						<select name="deptSelect" id="deptSelect">
-						<option value="American Indian Studies">American Indian Studies</option>
-						<option value="Anthropology">Anthropology</option>
-						<option value="Arabic">Arabic</option>
-						<option value="Armenian">Armenian</option>
-						<option value="Art">Art</option>
-						<option value="Asian American Studies">Asian American Studies</option>
-						<option value="Astronomy">Astronomy</option>
-						<option value="Biology">Biology</option>
-						<option value="Camera and Television Arts">Camera and Television Arts</option>
-						<option value="Central American Studies">Central American Studies</option>
-						<option value="Chemistry">Chemistry</option>
-						<option value="Chicano Studies ">Chicano Studies</option>
-						<option value="Chinese">Chinese</option>
-						<option value="Classics">Classics</option>
-						<option value="Communication Studies">Communication Studies</option>
-						<option value="Computer Science">Computer Science</option>
-						<option value="Economics">Economics</option>
-						<option value="English">English</option>
-						<option value="Foreign Literature ">Foreign Literature</option>
-						<option value="French">French</option>
-						<option value="Geography">Geography</option>
-						<option value="Geology">Geology</option>
-						<option value="German">German</option>
-						<option value="Hebrew">Hebrew</option>
-						<option value="History">History</option>
-						<option value="Humanities">Humanities</option>
-						<option value="Italian">Italian</option>
-						<option value="Japanese">Japanese</option>
-						<option value="Judaism Studies">Judaism Studies</option>
-						<option value="Kinesiology">Kinesiology</option>
-						<option value="Korean">Korean</option>
-						<option value="Mathematics">Mathematics</option>
-						<option value="Music">Music</option>
-						<option value="Pan African Studies">Pan African Studies</option>
-						<option value="Persian">Persian</option>
-						<option value="Philosophy">Philosophy</option>
-						<option value="Physics">Physics</option>
-						<option value="Political Science">Political Science</option>
-						<option value="Religious Studies ">Religious Studies</option>
-						<option value="Russian">Russian</option>
-						<option value="Sociology">Sociology</option>
-						<option value="Spanish">Spanish</option>
-						<option value="Theatre">Theatre</option>
-						</select></td>
+							<div id="majorSelect1">
+								<select id="deptSelect" name="addDept">
+								<option value="American Indian Studies">American Indian Studies</option>
+								<option value="Anthropology">Anthropology</option>
+								<option value="Arabic">Arabic</option>
+								<option value="Armenian">Armenian</option>
+								<option value="Art">Art</option>
+								<option value="Asian American Studies">Asian American Studies</option>
+								<option value="Astronomy">Astronomy</option>
+								<option value="Biology">Biology</option>
+								<option value="Camera and Television Arts">Camera and Television Arts</option>
+								<option value="Central American Studies">Central American Studies</option>
+								<option value="Chemistry">Chemistry</option>
+								<option value="Chicano Studies ">Chicano Studies</option>
+								<option value="Chinese">Chinese</option>
+								<option value="Classics">Classics</option>
+								<option value="Communication Studies">Communication Studies</option>
+								<option value="Computer Science">Computer Science</option>
+								<option value="Economics">Economics</option>
+								<option value="English">English</option>
+								<option value="Foreign Literature ">Foreign Literature</option>
+								<option value="French">French</option>
+								<option value="Geography">Geography</option>
+								<option value="Geology">Geology</option>
+								<option value="German">German</option>
+								<option value="Hebrew">Hebrew</option>
+								<option value="History">History</option>
+								<option value="Humanities">Humanities</option>
+								<option value="Italian">Italian</option>
+								<option value="Japanese">Japanese</option>
+								<option value="Judaism Studies">Judaism Studies</option>
+								<option value="Kinesiology">Kinesiology</option>
+								<option value="Korean">Korean</option>
+								<option value="Mathematics">Mathematics</option>
+								<option value="Music">Music</option>
+								<option value="Pan African Studies">Pan African Studies</option>
+								<option value="Persian">Persian</option>
+								<option value="Philosophy">Philosophy</option>
+								<option value="Physics">Physics</option>
+								<option value="Political Science">Political Science</option>
+								<option value="Religious Studies ">Religious Studies</option>
+								<option value="Russian">Russian</option>
+								<option value="Sociology">Sociology</option>
+								<option value="Spanish">Spanish</option>
+								<option value="Theatre">Theatre</option>
+								</select>
+							</div>
+						</td>
 					</tr>
 					<tr>
 						<td>Simple Course Name (Comp 100):</td>
-						<td><input name="Text1" type="text" />&nbsp;</td>
+						<td>
+						<input id='addSimpleName' name="addSimpleName" type="text" /></td>
 					</tr>
 					<tr>
 						<td>Course Title (Introduction to Computer Science):</td>
-						<td><input name="Text2" type="text" />&nbsp;</td>
+						<td><input name="addCourseTitle" type="text" />&nbsp;</td>
 					</tr>
 					<tr>
 						<td>Type:</td>
-						<td><select name="typeSelect" id="typeSelect">
+						<td><select name="addType" id="typeSelect">
 						<option value="Lab">Lab</option>
 						<option value="Lecture">Lecture</option>
 						<option value="Seminar">Seminar</option>
@@ -146,7 +209,7 @@ function fill()
 					</tr>
 					<tr>
 						<td>Units:</td>
-						<td><select name="unitSelect" id="unitSelect">
+						<td><select name="addUnit" id="unitSelect">
 						<option value="1">1</option>
 						<option value="2">2</option>
 						<option value="3">3</option>
@@ -160,7 +223,7 @@ function fill()
 					</tr>
 					<tr>
 						<td>Description:</td>
-						<td><textarea cols="70" name="TextArea1" rows="3"></textarea>&nbsp;</td>
+						<td><textarea cols="70" name="addDescription" rows="3"></textarea>&nbsp;</td>
 					</tr>
 					<tr>
 						<td><input name="Reset1" type="reset" value="Reset" />&nbsp;</td>
@@ -179,96 +242,95 @@ function fill()
 					<tr>
 						<td>Simple Course Name:</td>
 						<td>
-							<select name="courseSelect" id="courseSelect" onmouseover="fill()">
-							<option value="asdf">asdf</option>
+							<select name="courseSelect" id="courseSelect">
+							<option></option>
 							</select>
 						</td>
 					</tr>
 					<tr>
 						<td>&nbsp;</td>
 						<td>
-						<input name="Submit2" type="submit" value="Retrieve Class" />&nbsp;</td>
+						<input type="button" value="Retrieve Class" onclick=autoComplete() /></td>
 					</tr>
 				</table>
 			
 			</form>
 			
-			<form method="post" action="" id="modifyClass">
+			<form method="post" action="modifyClass.php" id="modifyClass">
 			
 				<table style="width: 100%" bgcolor="#F2F2F2">
 					<tr>
-						<td>Course:</td>
+						<td>Deparment:</td>
 						<td>
-							<div id="CourseName" class="auto-style1"></div>
+							<div id="majorSelect2">
+								<select id="modifyDeptSelect" name="modDepartment">
+								<option value="American Indian Studies">American Indian Studies</option>
+								<option value="Anthropology">Anthropology</option>
+								<option value="Arabic">Arabic</option>
+								<option value="Armenian">Armenian</option>
+								<option value="Art">Art</option>
+								<option value="Asian American Studies">Asian American Studies</option>
+								<option value="Astronomy">Astronomy</option>
+								<option value="Biology">Biology</option>
+								<option value="Camera and Television Arts">Camera and Television Arts</option>
+								<option value="Central American Studies">Central American Studies</option>
+								<option value="Chemistry">Chemistry</option>
+								<option value="Chicano Studies ">Chicano Studies</option>
+								<option value="Chinese">Chinese</option>
+								<option value="Classics">Classics</option>
+								<option value="Communication Studies">Communication Studies</option>
+								<option value="Computer Science">Computer Science</option>
+								<option value="Economics">Economics</option>
+								<option value="English">English</option>
+								<option value="Foreign Literature ">Foreign Literature</option>
+								<option value="French">French</option>
+								<option value="Geography">Geography</option>
+								<option value="Geology">Geology</option>
+								<option value="German">German</option>
+								<option value="Hebrew">Hebrew</option>
+								<option value="History">History</option>
+								<option value="Humanities">Humanities</option>
+								<option value="Italian">Italian</option>
+								<option value="Japanese">Japanese</option>
+								<option value="Judaism Studies">Judaism Studies</option>
+								<option value="Kinesiology">Kinesiology</option>
+								<option value="Korean">Korean</option>
+								<option value="Mathematics">Mathematics</option>
+								<option value="Music">Music</option>
+								<option value="Pan African Studies">Pan African Studies</option>
+								<option value="Persian">Persian</option>
+								<option value="Philosophy">Philosophy</option>
+								<option value="Physics">Physics</option>
+								<option value="Political Science">Political Science</option>
+								<option value="Religious Studies ">Religious Studies</option>
+								<option value="Russian">Russian</option>
+								<option value="Sociology">Sociology</option>
+								<option value="Spanish">Spanish</option>
+								<option value="Theatre">Theatre</option>
+								</select>
+							</div>
 						</td>
 					</tr>
 					<tr>
-						<td>New Deparment:</td>
-						<td><select name="newDeptSelect" id="newDeptSelect">
-						<option value="American Indian Studies">American Indian Studies</option>
-						<option value="Anthropology">Anthropology</option>
-						<option value="Arabic">Arabic</option>
-						<option value="Armenian">Armenian</option>
-						<option value="Art">Art</option>
-						<option value="Asian American Studies">Asian American Studies</option>
-						<option value="Astronomy">Astronomy</option>
-						<option value="Biology">Biology</option>
-						<option value="Camera and Television Arts">Camera and Television Arts</option>
-						<option value="Central American Studies">Central American Studies</option>
-						<option value="Chemistry">Chemistry</option>
-						<option value="Chicano Studies ">Chicano Studies</option>
-						<option value="Chinese">Chinese</option>
-						<option value="Classics">Classics</option>
-						<option value="Communication Studies">Communication Studies</option>
-						<option value="Computer Science">Computer Science</option>
-						<option value="Economics">Economics</option>
-						<option value="English">English</option>
-						<option value="Foreign Literature ">Foreign Literature</option>
-						<option value="French">French</option>
-						<option value="Geography">Geography</option>
-						<option value="Geology">Geology</option>
-						<option value="German">German</option>
-						<option value="Hebrew">Hebrew</option>
-						<option value="History">History</option>
-						<option value="Humanities">Humanities</option>
-						<option value="Italian">Italian</option>
-						<option value="Japanese">Japanese</option>
-						<option value="Judaism Studies">Judaism Studies</option>
-						<option value="Kinesiology">Kinesiology</option>
-						<option value="Korean">Korean</option>
-						<option value="Mathematics">Mathematics</option>
-						<option value="Music">Music</option>
-						<option value="Pan African Studies">Pan African Studies</option>
-						<option value="Persian">Persian</option>
-						<option value="Philosophy">Philosophy</option>
-						<option value="Physics">Physics</option>
-						<option value="Political Science">Political Science</option>
-						<option value="Religious Studies ">Religious Studies</option>
-						<option value="Russian">Russian</option>
-						<option value="Sociology">Sociology</option>
-						<option value="Spanish">Spanish</option>
-						<option value="Theatre">Theatre</option>
-						</select>&nbsp;</td>
+						<td style="height: 29px">Simple Course Name:</td>
+						<td style="height: 29px">
+						<input id="modifyCourseName" name="modSimpleName" type="text" disabled="disabled" /></td>
 					</tr>
 					<tr>
-						<td>New Simple Course Name:</td>
-						<td><input name="Text3" type="text" />&nbsp;</td>
+						<td>Course Title:</td>
+						<td><input id="modifyCourseTitle" name="modCourse" type="text" />&nbsp;</td>
 					</tr>
 					<tr>
-						<td>New Course Title:</td>
-						<td><input name="Text4" type="text" />&nbsp;</td>
-					</tr>
-					<tr>
-						<td>New Type:</td>
-						<td><select name="newTypeSelect" id="newTypeSelect">
+						<td>Type:</td>
+						<td><select id="modifyTypeSelect" name="modType">
 						<option value="Lab">Lab</option>
 						<option value="Lecture">Lecture</option>
 						<option value="Seminar">Seminar</option>
 						</select></td>
 					</tr>
 					<tr>
-						<td>New Unit:</td>
-						<td><select name="newUnitSelect" id="newUnitSelect">
+						<td>Unit:</td>
+						<td><select id="modifyUnitSelect" name="modUnit">
 						<option value="1">1</option>
 						<option value="2">2</option>
 						<option value="3">3</option>
@@ -281,32 +343,33 @@ function fill()
 						</select>&nbsp;</td>
 					</tr>
 					<tr>
-						<td>New Description:</td>
-						<td><textarea cols="70" name="TextArea2" rows="3"></textarea>&nbsp;</td>
+						<td>Description:</td>
+						<td><textarea cols="70" id="modifyDescription" rows="3" name="modDescription" ></textarea>&nbsp;</td>
 					</tr>
 					<tr>
 						<td>&nbsp;</td>
 						<td>
-						<input name="Submit3" type="submit" value="Modify Course" />&nbsp;</td>
+						<input type="submit" value="Modify Course" onclick="modify()"/></td>
 					</tr>
 				</table>
 			
 			</form>
+
 			<h4>Delete Course</h4>
-			<form method="post" action="">
+			<form method="post" action="delCourse.php">
 			
 				<table style="width: 100%" bgcolor="#F0F0F0">
 					<tr>
 						<td>Course Name:</td>
 						<td>
-						<select name="delCourseSelect" id="delCourseSelect" onclick="fill()">
+						<select name="delCourseSelect" id="delCourseSelect">
 						<option></option>
 						</select></td>
 					</tr>
 					<tr>
 						<td>&nbsp;</td>
 						<td>
-						<input name="Submit4" type="submit" value="Delete Course" />&nbsp;</td>
+						<input type="submit" value="Delete Course"/></td>
 					</tr>
 				</table>
 			

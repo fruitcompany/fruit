@@ -36,16 +36,17 @@
 		<div id="column_l">
 			<!-- #BeginEditable "content" -->
 			<h2>Student Data</h2>
-			<p>This panel allows you to modify the student data table.&nbsp; For 
-			privacy purposes, you may only delete students from the database.&nbsp; 
+			<p>This panel allows you to delete students from the database.&nbsp; 
+			Please submit a request through the CASE system if student data 
+			requires other modification.&nbsp; 
 			Deletion cannot be undone.</p>
 			<h4>Delete student</h4>
-			<form method="post" action="">
+			<form method="post" action="delStudent.php">
 			
 				<table style="width: 100%">
 					<tr>
 						<td>Student ID:</td>
-						<td><input name="Text1" type="text" />&nbsp;</td>
+						<td><input name="delStudentID" type="text" /></td>
 					</tr>
 					<tr>
 						<td><input name="Reset1" type="reset" value="Reset" />&nbsp;</td>

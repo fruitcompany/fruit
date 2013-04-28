@@ -8,22 +8,27 @@
 
 <body>
 <?php
-	$q=$_GET["q"];
-	
+	$sql=$_GET["q"];
+	$type=$_GET["t"];
+
 	$con=mysqli_connect("localhost","gpas","r3dh0tSvr*","gpas");
 	
 	if (mysqli_connect_errno($con))
 	{
 		echo "Failed to connect to MySQL: " . mysqli_connect_error();
 	}
-	
-	//$sql="SELECT ".$q." FROM Course_Info";
-	$sql="SELECT * FROM Students";
-	$result = mysqli_query($con,"SELECT * FROM Student");
-	echo "listen";
-	while($row = mysqli_fetch_array($result))
+
+	if (($type == 1) || ($type == 3) || ($type == 4))
 	{
-		echo "<option value=".$row['First_Name'].">".$row['Last_Name']."</option>";
+		mysqli_query($con,$sql);
+	}
+	else
+	{
+		$result = mysqli_query($con,$sql);
+		while($row = mysqli_fetch_array($result))
+		{
+			echo "<option value='".$row[Course_Name]."'>".$row[Course_Name]."</option>";
+		}
 	}
 
 	mysqli_close($con);
