@@ -114,7 +114,24 @@ Ext.define('GPAS.controller.Paths', {
             'viewport > panel[region=center] > path > panel > button[action=remove_path]': {
                 click: function(a){
                 	console.log('remove_path');
-					console.log(a.path);
+					
+					console.log(a);
+					var SStore = this.getStudentStore();
+					
+					var SRec = SStore.getAt(0);
+					
+
+					var paths = SRec.paths();
+					
+					paths.remove(a.path.pathRec);
+					paths.save();
+					a.path.destroy();
+					count = 1;
+					paths.each(function(path){
+						console.log(path);
+						path.set('Path_Rank', count);
+						count++;
+					});
 				}
             },
             'viewport > panel[region=center] > path > store': {
@@ -190,6 +207,7 @@ Ext.define('GPAS.controller.Paths', {
 			//path.store.loadRecords(classes);
 
 			pathPanel.add(path);
+			pathPanel.setLoading(false);
 		}
 		//var pathPanel = this.getPathPanel(),
 		//	path, semesters, SY,SS,LS,LY,
@@ -433,6 +451,27 @@ Ext.define('GPAS.controller.Paths', {
 	},
 
 	cancelPathUpdate: function(){
-		//reset page
+		var controller = this;
+		var SStore = this.getStudentStore();
+		var SRec = SStore.getAt(0);
+		var pathPanel = this.getPathPanel();
+		pathPanel.setLoading(true);
+		pathPanel.removeAll();
+		console.log('Cancel Edits');
+
+		Ext.ModelManager.getModel('GPAS.model.Student').load(SRec.get('Student_ID'),{
+			success: function(user){
+				console.log("loaded user", user);
+				var pm = Ext.ComponentQuery.query('viewport')[0];
+				user.paths().each(function(path){
+		    		controller.loadPath(pm, path);
+				});
+				pathPanel.setLoading(false);
+			},
+			failure: function(){
+				pathPanel.setLoading(false);
+			}
+		});
+		
 	}
 });
