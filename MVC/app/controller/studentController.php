@@ -62,16 +62,82 @@ class studentController
     }
 	
 	public function updateAction($request) {
-        if( isset( $request->Student_ID ) )
+		//erase all path data for the student
+		if(!empty($request->student->paths))
 		{
-			$query = "UPDATE  Student SET First_Name = '$request->First_Name', Last_Name = '$request->Last_Name', User_Name = '$request->User_Name', Password = '$request->Password', Email = '$request->Email' WHERE Student_ID = $request->Student_ID";
+			$count = 1;
+			$s_id = $request->student->data->Student_ID;
+			$query = "SELECT `Path_ID` FROM Path_Choice WHERE `Student_ID` = ".$s_id;
 			$goodToGo = mysql_query($query);
-			$request->id = $request->Student_ID;
-			if($goodToGo)
-				return '{"success":true,"students":[' . json_encode($request) . ']}';
-			else
-				return '{"success":false,"students":[' . json_encode($request) . ']}';
-			return '{"success":false}';	
+			if($goodToGo === FALSE) {
+				echo("goodToGo");
+			    die(mysql_error());
+			}
+			while($row = mysql_fetch_array($goodToGo, MYSQL_ASSOC))
+		  	{
+		  		$pathDeleteQuery = "DELETE FROM Path WHERE `Path_ID` = ".$row['Path_ID'];
+		  		$goodToGo2 = mysql_query($pathDeleteQuery);
+				if($goodToGo2 === FALSE) {
+					echo("goodToGo2");
+			    	die(mysql_error());
+				}
+		  		$pathRankQuery = "DELETE FROM Path_Rank WHERE `Path_ID` = ".$row['Path_ID'];
+		  		$goodToGo3 = mysql_query($pathRankQuery);
+		  		if($goodToGo3 === FALSE) {
+		  			echo("goodToGo3");
+			    	die(mysql_error());
+				}
+			}
+			$query4 = "DELETE FROM Path_Choice WHERE `Student_ID` = ".$s_id;
+			$goodToGo4 = mysql_query($query4);
+			if($goodToGo4 === FALSE) {
+				echo("goodToGo4");
+		    	die(mysql_error());
+			}
+			
+			//insert new path data for the student
+			foreach ($request->student->paths as $value)
+			{
+				$path_rank = $value->data->Path_Rank;
+				$path_id = $value->data->id;
+				$createPathQuery = "INSERT INTO Path_Choice (`Path_ID`, `Student_ID`) VALUES (".$path_id.", ".$s_id.")";
+				$goodToGo5 = mysql_query($createPathQuery);
+				if($goodToGo5 === FALSE) {
+					echo("goodToGo5");
+			    	die(mysql_error());
+				}
+				$createPathQuery = "INSERT INTO Path_Rank (`Path_ID`, `Path_Rank`) VALUES (".$path_id.", ".$path_rank.")";
+				$goodToGo6 = mysql_query($createPathQuery);
+				if($goodToGo6 === FALSE) {
+					echo("goodToGo6");
+			    	die(mysql_error());
+				}
+				
+				foreach ($value->semesters as $value2)
+				{
+					foreach ($value2->classes as $value3)
+					{
+						$c_id = $value3->data->Class_ID;
+						$insertPathQuery = "INSERT INTO Path (`Path_ID`, `Class_ID`, `Semester`, `Order`) VALUES (".$path_id.", ".$c_id.", 0, ".$count.")";
+						$goodToGo7 = mysql_query($insertPathQuery);
+						if($goodToGo7 === FALSE) {
+							echo("goodToGo7");
+					    	die(mysql_error());
+						}
+						$count++;
+					}
+					unset($value3);
+				}
+				unset($value2);
+				$count = 1;
+			}
+			unset($value);
+
+			return '{"success":true}';
+		}
+		else
+		{	
+			return '{"success":false}';
 		}
     }
 	
