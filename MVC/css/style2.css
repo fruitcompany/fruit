@@ -13,7 +13,8 @@ body {
 	position: relative;
 }
 #masthead {
-	text-align: right;
+	/*text-align: right;*/
+	height: 150px;
 	width: 100%;
 	background-color: #c5d5e5;
 }
@@ -50,11 +51,11 @@ body {
 	padding-bottom: 5px;
 }
 /* Styles for Masthead */
-#masthead img {
+/*#masthead img {
 	float: left;
 	margin: 0;
 	padding: 0;
-}
+}*/
 #masthead p {
 	font-size: small;
 	text-align: right;

@@ -1,8 +1,9 @@
 var innerHTML = ([
     '<div id="container">',
       '<div id="masthead">',
-          '<img alt="" height="152" src="images/fruit_cup_logo_white_text.jpg" width="180" />',
-          '<p>IT Support (555) 555-5555</p>',
+          '<div id="fruitcup"><img alt="" height="75" src="images/fruit_cup_transparent.png" width="87" /></div>',
+          '<div id="support"><p>IT Support (555) 555-5555</p></div>',
+          '<div id="gpas"><img alt="" height="150" src="images/finalGPASLogo.png" width="400" /></div>',
       '</div>',
       '<div id="navigation">',
           '<ul>',
