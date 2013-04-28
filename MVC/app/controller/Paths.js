@@ -10,7 +10,8 @@ Ext.define('GPAS.controller.Paths', {
         'user.Semester',
         'Login',
 		'PathManager',
-		'NewPath'
+		'NewPath',
+		'addClass'
     ],
     refs: [{
 		selector: 'viewport > panel[region=center]',
@@ -122,92 +123,21 @@ Ext.define('GPAS.controller.Paths', {
                     console.log("data Changed");
                 }
             },
-			'viewport > panel > button[action=save_path]': {
-				click: function(){
-					console.log("save path");
-					var path = this.getPathPanel().down('path');
-
-					var SStore = this.getStudentStore();
-					console.log(SStore);
-
-					var SRec = SStore.getAt(0);
-					console.log(SRec);
-
-					var paths = SRec.paths();
-					console.log(paths);
-
-					var str = "{ student : { data : " + JSON.stringify(SRec.data) + ", paths : [";
-
-					paths.each(function(path){
-						str += "{ data : " + JSON.stringify(path.data) + ", semesters: [";
-						path.semesters().each(function(sem){
-							str += "{ data : " + JSON.stringify(sem.data) + ", classes: [";
-							sem.classes().each(function(cl){
-								str += "{ data : " + JSON.stringify(cl.data) + " }, ";
-							});
-							str += " ] },";
-						});
-						str += " ] },";
-					});
-					str += " ] } }";
-					console.log(Ext.JSON.decode(str),str);
-					Ext.Ajax.request({
-						url: 'app/rest.php?_m=student&_verb=update',
-						//params: {
-						//	Student : Ext.JSON.decode(str)
-						//},
-						jsonData: Ext.JSON.decode(str),
-						reader : {
-							type : 'json'
-
-						},
-						writer : {
-							type : 'json',
-							encode : true
-						},
-						success: function(response,a,b,c){
-							var rtext = Ext.decode(response.responseText);
-							console.log(response,a,b,c,rtext);
-						},
-						failure: function(response,a,b,c){
-							var rtext = Ext.decode(response.responseText);
-							console.log(response,a,b,c,rtext);
-						}
-					});
-
-					//var semesters = path.semesters();
-					//console.log(semesters);
-
-					//var sem = semesters.getAt(0);
-					//console.log(sem);
-
-					//var classes = sem.classes();
-					//console.log(classes);
-
-					//console.log("new recs",paths.getNewRecords());
-					//console.log("updated recs",paths.getUpdatedRecords());
-					//
-					//console.log("new recs",semesters.getNewRecords());
-					//console.log("updated recs",semesters.getUpdatedRecords());
-					//
-					//console.log("new recs",classes.getNewRecords());
-					//console.log("updated recs",classes.getUpdatedRecords());
-					//
-					//classes.sync({
-					//	callback: function(a,b,c,d){ console.log("CB",a,b,c,d) },
-					//	success: function(a,b,c,d){ console.log("success",a,b,c,d)},
-					//	failure: function(a,b,c,d){ console.log("FAIL",a,b,c,d)},
-					//	scope: this
-					//});
-
-					//path.save({
-					//	callback: function(a,b,c,d){ console.log("CB",a,b,c,d) },
-					//	success: function(a,b,c,d){ console.log("success",a,b,c,d)},
-					//	failure: function(a,b,c,d){ console.log("FAIL",a,b,c,d)},
-					//	scope: this
-					//});
-
-
+			'viewport > panel[region=center] > toolbar > button': {
+				click: function(butt){
+					var me = this;
+					console.log(butt,butt.action);
+					switch(butt.action){
+						case "save_path":
+							me.pathSave();
+							break;
+						case "cancel":
+							me.cancelPathUpdate();
+							break;
+						default:
+							console.log('wtf button did you press??!?!?!?!');
+							break;
+					}
 				}
 			}
         });
@@ -225,9 +155,9 @@ Ext.define('GPAS.controller.Paths', {
 
 		Ext.getCmp('create_button').setDisabled(!valid);
 	},
-	
+
 	updatePaths: function(){
-		
+
 	},
 
     buildPathManager: function(user){
@@ -443,5 +373,62 @@ Ext.define('GPAS.controller.Paths', {
     },
     onPathStoreLoad: function(store, recs, suc, op) {
     	console.log(store);
-    }
+    },
+
+	pathSave: function(){
+		console.log("save path");
+		//var path = this.getPathPanel().down('path');
+
+		var SStore = this.getStudentStore();
+		console.log(SStore);
+
+		var SRec = SStore.getAt(0);
+		console.log(SRec);
+
+		var paths = SRec.paths();
+		console.log(paths);
+
+		var str = "{ student : { data : " + JSON.stringify(SRec.data) + ", paths : [";
+
+		paths.each(function(path){
+			str += "{ data : " + JSON.stringify(path.data) + ", semesters: [";
+			path.semesters().each(function(sem){
+				str += "{ data : " + JSON.stringify(sem.data) + ", classes: [";
+				sem.classes().each(function(cl){
+					str += "{ data : " + JSON.stringify(cl.data) + " }, ";
+				});
+				str += " ] },";
+			});
+			str += " ] },";
+		});
+		str += " ] } }";
+		console.log(Ext.JSON.decode(str),str);
+		Ext.Ajax.request({
+			url: 'app/rest.php?_m=student&_verb=update',
+			//params: {
+			//	Student : Ext.JSON.decode(str)
+			//},
+			jsonData: Ext.JSON.decode(str),
+			reader : {
+				type : 'json'
+
+			},
+			writer : {
+				type : 'json',
+				encode : true
+			},
+			success: function(response,a,b,c){
+				var rtext = Ext.decode(response.responseText);
+				console.log(response,a,b,c,rtext);
+			},
+			failure: function(response,a,b,c){
+				var rtext = Ext.decode(response.responseText);
+				console.log(response,a,b,c,rtext);
+			}
+		});
+	},
+
+	cancelPathUpdate: function(){
+		//reset page
+	}
 });

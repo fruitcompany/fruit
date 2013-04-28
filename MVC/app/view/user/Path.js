@@ -11,7 +11,7 @@ Ext.define('GPAS.view.user.Path' ,{
 
     startingYear	: 2008,
     startingSemester: "FALL",
-    
+
     pathRank : 0,
 
     border		: 0,
@@ -48,7 +48,7 @@ Ext.define('GPAS.view.user.Path' ,{
 					pathUnits = pathUnits + parseInt(a.get('Units'));
 				});
 				console.log(rec);
-				
+
 				//pathUnits = pathUnits + parseInt(rec.get('Units'));
 			store.on('add',me.onDrop);
 			store.semester = {Term: term, Year: year};
@@ -74,18 +74,19 @@ Ext.define('GPAS.view.user.Path' ,{
 				listeners: {
 					itemdblclick: me.onItemDblClick,
 					itemcontextmenu: me.onRightClick,
+					containercontextmenu: me.addClassClick
 				}
 			});
 			me.lastTerm = term;
 			me.lastYear = year;
 		});
-		
+
 		semArray.splice(0,0,[{
 			xtype: 'panel',
 			layout: 'fit',
 			items: [{
 				xtype	: 'label',
-				html	: '<p>Units: ' + pathUnits + '<BR/>' + 'Rank: ' + me.pathRank + '<BR/>Est. Graduation:<BR/>' + me.lastTerm + ' ' + 
+				html	: '<p>Units: ' + pathUnits + '<BR/>' + 'Rank: ' + me.pathRank + '<BR/>Est. Graduation:<BR/>' + me.lastTerm + ' ' +
 			me.lastYear + '</p>'
 			},{
 				xtype: 'button',
@@ -94,7 +95,7 @@ Ext.define('GPAS.view.user.Path' ,{
 				path: me
 			}]
 		}]);
-		
+
 		me.items = semArray.concat([{
 			xtype: 'panel',
 			layout: 'fit',
@@ -131,6 +132,7 @@ Ext.define('GPAS.view.user.Path' ,{
 						listeners: {
 							itemdblclick: me.onItemDblClick,
 							itemcontextmenu: me.onRightClick,
+							containercontextmenu: me.addClassClick
 						}
 					});
 					//me.width += me.semesterWidth;
@@ -140,7 +142,7 @@ Ext.define('GPAS.view.user.Path' ,{
 				text	: 'Test stuff',
 				handler : function(butt){
 					console.log(me);
-					
+
 				}
 			}]
 		}]);
@@ -238,7 +240,22 @@ Ext.define('GPAS.view.user.Path' ,{
 		}).showAt(e.getXY());
 	},
 
-	//onDelete: function(rec,item,i){
-	//	console.log(rec,item,i);
-	//}
+	addClassClick : function(semObj,e){
+		console.log(semObj,semObj.getStore().semester.Year,semObj.getStore().semester.Term);
+		e.stopEvent();
+		Ext.create('Ext.menu.Menu',{
+			items: [{
+				text: 'Add Class',
+				icon: '../extjs-4.0.7/examples/shared/icons/fam/add.gif',
+				handler: function(a,b){
+					win = Ext.create('GPAS.view.addClass', {
+						Year: semObj.getStore().semester.Year,
+						Term: semObj.getStore().semester.Term,
+						semStore: semObj.getStore()
+					}).show();
+					console.log(win);
+				}
+			}]
+		}).showAt(e.getXY());
+	}
 });

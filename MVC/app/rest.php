@@ -34,6 +34,11 @@ if (class_exists($controller_name)) {
 				$params->id = $_GET['id'];
 				$result = $controller->$action_name($params);
 			}
+			else if(isset($_GET['year'])&&isset($_GET['term'])){
+				$params->year = $_GET['year'];
+				$params->term = $_GET['term'];
+				$result = $controller->$action_name($params);
+			}
 			else
 			{
 				$result = $controller->$action_name(new stdClass());

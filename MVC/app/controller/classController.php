@@ -14,7 +14,27 @@ class classController
 	}
 
     public function readAction($request) {
-		return '{"success":true}';
+		if(isset($request->year, $request->term))
+		{
+			$year = $request->year;
+			$term = $request->term;
+			$courses = array();
+
+			$query = "SELECT ca.Class_ID, ca.Year, ca.Term, ci.*
+						FROM Class_Availability AS ca, Course_Info AS ci
+						WHERE Year = '$year' AND Term = '$term'
+						AND ca.Course_Name = ci.Course_Name
+						AND (ci.Department = 'GE' OR ci.Department = 'Computer Science')";
+			$qResult = mysql_query($query);
+			while($course = mysql_fetch_assoc($qResult)){
+				array_push($courses, $course);
+			}
+
+			return '{"success":true, "classes" : '.json_encode($courses).'}';
+		}
+		else {
+			return '{"success":false, "msg":invalid request, "request":'.json_encode($request).'}';
+		}
     }
 
     public function createAction($request) {

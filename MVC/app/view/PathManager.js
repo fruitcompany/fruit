@@ -32,7 +32,7 @@ Ext.define('GPAS.view.PathManager' ,{
         region: 'north',
         html: innerHTML
     }
-    
+    //
     //,{
     //    xtype:'panel',
     //    width: 100,
@@ -52,6 +52,18 @@ Ext.define('GPAS.view.PathManager' ,{
         xtype: 'panel',
         region: 'center',
         autoScroll:true,
+        tbar: [
+            {
+                xtype: 'button',
+                text: 'Save Paths',
+                action: "save_path"
+            },
+            {
+                xtype: 'button',
+                text: 'Cancel Edit',
+                action: "cancel"
+            }
+        ],
         layout:{
             type: 'auto',
             padding: 18
