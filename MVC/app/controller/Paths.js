@@ -4,14 +4,14 @@ Ext.define('GPAS.controller.Paths', {
     stores: ['Courses','Classes', 'Student', 'Paths'],
     models: ['Course','Class','Path','Student', 'Semester'],
     views: [
-        'user.List',
-        'user.Edit',
         'user.Path',
         'user.Semester',
         'Login',
 		'PathManager',
 		'NewPath',
-		'addClass'
+		'addClass',
+		'InfoBox'
+
     ],
     refs: [{
 		selector: 'viewport > panel[region=center]',

@@ -5,25 +5,28 @@ Ext.define('GPAS.view.user.Path' ,{
     semesters	: 20,
 
     semesterWidth	: 150,
+	semesterHeight  : 200,
 
     //semesterNames	: ["FALL","WINTER","SPRING","SUMMER"],
     semesterNames	: ["FALL","SPRING"],
 
     startingYear	: 2008,
     startingSemester: "FALL",
+	pathUnits: 0,
 
     pathRank : 0,
 
     border		: 0,
 
-    edgeSpace		: 50,
+    edgeSpace		: 500,
 
     layout: {
 	    type:'hbox',
-	    pack: 'center'
+	    //pack: 'center',
     },
 
     store: 'Classes',
+	infoBox: undefined,
 
 
     initComponent: function(){
@@ -45,12 +48,12 @@ Ext.define('GPAS.view.user.Path' ,{
 				year = rec.get('Year'),
 				store = rec.classes();
 				store.each(function(a){
-					pathUnits = pathUnits + parseInt(a.get('Units'));
+					me.pathUnits += parseInt(a.get('Units'));
 				});
 				console.log(rec);
 
 				//pathUnits = pathUnits + parseInt(rec.get('Units'));
-			store.on('add',me.onDrop);
+			store.on('add',function(a,b){ me.onDrop(me,a,b) } );
 			store.semester = {Term: term, Year: year};
 
 			semArray.push({
@@ -73,30 +76,16 @@ Ext.define('GPAS.view.user.Path' ,{
 				},
 				listeners: {
 					itemdblclick: me.onItemDblClick,
-					itemcontextmenu: me.onRightClick,
-					containercontextmenu: me.addClassClick
+					itemcontextmenu: function(a,b,c,d,e){ me.onRightClick(me,a,b,c,d,e); },
+					containercontextmenu: function(a,b){ me.addClassClick(me,a,b) },
+
 				}
 			});
 			me.lastTerm = term;
 			me.lastYear = year;
 		});
 
-		semArray.splice(0,0,[{
-			xtype: 'panel',
-			layout: 'fit',
-			items: [{
-				xtype	: 'label',
-				html	: '<p>Units: ' + pathUnits + '<BR/>' + 'Rank: ' + me.pathRank + '<BR/>Est. Graduation:<BR/>' + me.lastTerm + ' ' +
-			me.lastYear + '</p>'
-			},{
-				xtype: 'button',
-				text: 'X',
-				action: 'remove_path',
-				path: me
-			}]
-		}]);
-
-		me.items = semArray.concat([{
+		var contents = semArray.concat([{
 			xtype: 'panel',
 			layout: 'fit',
 			items: [{
@@ -110,7 +99,7 @@ Ext.define('GPAS.view.user.Path' ,{
 					} else {
 					    me.lastTerm = 'FALL';
 					}
-					me.insert(me.semesters-1,{
+					butt.up('panel').up('panel').insert(me.semesters-1,{
 					    xtype: 'semester',
 					    width: me.semesterWidth,
 					    term	: me.lastTerm,
@@ -131,22 +120,64 @@ Ext.define('GPAS.view.user.Path' ,{
 						},
 						listeners: {
 							itemdblclick: me.onItemDblClick,
-							itemcontextmenu: me.onRightClick,
-							containercontextmenu: me.addClassClick
+							itemcontextmenu: function(a,b,c,d,e){ me.onRightClick(me,a,b,c,d,e); },
+							containercontextmenu: function(a,b){ me.addClassClick(me,a,b) },
 						}
 					});
+					//me.setWidth(me.width+me.semesterWidth);
+					//me.down('panel').down('panel').setWidth(me.width+me.semesterWidth);
+					me.infoBox.updateInfo({units: me.pathUnits, rank : me.pathRank,
+						lastTerm: me.lastTerm, lastYear: me.lastYear});
 					//me.width += me.semesterWidth;
-				}
-			},{
-				xtype	: 'button',
-				text	: 'Test stuff',
-				handler : function(butt){
-					console.log(me);
-
 				}
 			}]
 		}]);
-		me.width = me.semesters*me.semesterWidth+3*me.edgeSpace;
+
+		//semArray.splice(0,0,[{
+		//	xtype: 'panel',
+		//	layout: 'fit',
+		//	items: [{
+		//		xtype	: 'label',
+		//		html	: '<p>Units: ' + pathUnits + '<BR/>' + 'Rank: ' + me.pathRank + '<BR/>Est. Graduation:<BR/>' + me.lastTerm + ' ' +
+		//	me.lastYear + '</p>'
+		//	},{
+		//		xtype: 'button',
+		//		text: 'X',
+		//		action: 'remove_path',
+		//		path: me
+		//	}]
+		//}]);
+		me.infoBox = ib = Ext.create('GPAS.view.InfoBox', {
+			path: me,
+			height: me.semesterHeight
+		});
+		ib.updateInfo({units: me.pathUnits, rank : me.pathRank,
+					lastTerm: me.lastTerm, lastYear: me.lastYear});
+
+		me.items = [ib, {
+			xtype: 'panel',
+			layout: 'auto',
+			//height: me.semesterHeight,
+			border: 0,
+			autoScroll: true,
+			//defaults:{autoHeight: true},
+			flex: 1,
+			items: {
+				xtype: 'panel',
+				width: me.semesters*me.semesterWidth+3*me.edgeSpace,
+				border: 0,
+				height: me.semesterHeight,
+
+				layout: {
+					type: 'hbox',
+					align: 'stretch'
+				},
+				//defaults: {flex: 1},
+				autoScroll: true,
+				items: contents
+			}
+		}]
+		//me.width = me.semesters*me.semesterWidth+3*me.edgeSpace;
 		console.log("new Path object",this);
 
 		this.callParent(arguments);
@@ -179,10 +210,11 @@ Ext.define('GPAS.view.user.Path' ,{
 		}).show();
     },
 
-	onDrop: function(store,recs){
+	onDrop: function(p,store,recs){
 		console.log(store,recs);
-		var ty = store.semester;
-		console.log(ty);
+		var ty = store.semester,
+			me = p;
+		console.log(ty, p);
 
 		Ext.each(recs,function(rec){
 			Ext.Ajax.request({
@@ -215,14 +247,15 @@ Ext.define('GPAS.view.user.Path' ,{
 						rec.set('Class_ID', id);
 						rec.set('id', id);
 					}
-					// process server response here
-					console.log(text);
+					me.infoBox.updateInfo({units: me.pathUnits, rank : me.pathRank,
+					lastTerm: me.lastTerm, lastYear: me.lastYear});
 				}
 			});
 		});
 	},
-	onRightClick: function(table, record, item, index, e, eOpts){
+	onRightClick: function(p,table, record, item, index, e, eOpts){
 		var me = this;
+
 		console.log("Right Click",table,record,item,index,e);
 		e.stopEvent();
 		Ext.create('Ext.menu.Menu',{
@@ -231,7 +264,10 @@ Ext.define('GPAS.view.user.Path' ,{
 				icon: '../extjs-4.0.7/examples/shared/icons/fam/delete.gif',
 				handler: function(a,b){
 					//Delete Rec (Class)
-					me.getStore().remove(record);
+					table.getStore().remove(record);
+					p.pathUnits -= record.get('Units');
+					p.infoBox.updateInfo({units: p.pathUnits, rank : p.pathRank,
+					lastTerm: p.lastTerm, lastYear: p.lastYear});
 
 				}
 			},{
@@ -240,7 +276,7 @@ Ext.define('GPAS.view.user.Path' ,{
 		}).showAt(e.getXY());
 	},
 
-	addClassClick : function(semObj,e){
+	addClassClick : function(p,semObj,e){
 		console.log(semObj,semObj.getStore().semester.Year,semObj.getStore().semester.Term);
 		e.stopEvent();
 		Ext.create('Ext.menu.Menu',{
@@ -251,7 +287,8 @@ Ext.define('GPAS.view.user.Path' ,{
 					win = Ext.create('GPAS.view.addClass', {
 						Year: semObj.getStore().semester.Year,
 						Term: semObj.getStore().semester.Term,
-						semStore: semObj.getStore()
+						semStore: semObj.getStore(),
+						path: p
 					}).show();
 					console.log(win);
 				}

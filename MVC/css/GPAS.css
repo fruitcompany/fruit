@@ -3,5 +3,9 @@
 	background-repeat: no-repeat;
 }
 .gray-bg {
-	background-image: #EFEFEF;
+	background: #EFEFEF;
+}
+.delete-img {
+	background-image: url(../images/Delete.png) !important;
+	background-repeat: no-repeat;
 }

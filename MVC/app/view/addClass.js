@@ -100,10 +100,11 @@ Ext.define('GPAS.view.addClass' ,{
             text: 'Submit',
             handler: function(button){
                 var comb = Ext.getCmp('selClassComb'),
-                    win = comb.up('toolbar').up('window');
-                console.log(comb.findRecordByDisplay(comb.getValue()));
-                win.semStore.add(comb.findRecordByDisplay(comb.getValue()));
-                win.close()
+                    win = comb.up('toolbar').up('window'),
+                    rec = comb.findRecordByDisplay(comb.getValue());
+                win.semStore.add(rec);
+                win.path.pathUnits += rec.get('Units');
+                win.close();
             }
         }
     ]
