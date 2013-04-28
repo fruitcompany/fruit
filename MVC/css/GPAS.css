@@ -9,3 +9,17 @@
 	background-image: url(../images/Delete.png) !important;
 	background-repeat: no-repeat;
 }
+#fruitcup {
+	float: left;
+	width:200px;
+}
+#gpas {
+	margin-left: auto;
+	margin-right: auto;
+	width:50%;
+	text-align: center;
+}
+#support {
+	float: right;
+	width:200px;
+}

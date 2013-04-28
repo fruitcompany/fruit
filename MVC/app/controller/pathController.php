@@ -156,17 +156,7 @@ class pathController
     }
 
 	public function deleteAction($request) {
-			$query = "DELETE FROM Student WHERE Student_ID = $request->s_id LIMIT 1";
-			$goodToGo = mysql_query($query);
-			if($goodToGo)
-			{
-				$response = array( 'success'=>true, 'data'=>$request );
-			}
-			else
-			{
-				$response = array( 'success'=>false, 'data'=>$request );
-			}
-			return $response;
+		return '{"success":true}';
     }
 }
 ?>
