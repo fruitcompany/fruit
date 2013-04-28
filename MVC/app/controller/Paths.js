@@ -111,27 +111,46 @@ Ext.define('GPAS.controller.Paths', {
 					addWin = Ext.create('GPAS.view.NewPath').show();
 				}
             },
-            'viewport > panel[region=center] > path > panel > button[action=remove_path]': {
-                click: function(a){
-                	console.log('remove_path');
-					
-					console.log(a);
-					var SStore = this.getStudentStore();
-					
-					var SRec = SStore.getAt(0);
-					
+            'viewport > panel[region=center] > path > panel > panel > button': {
+                click: function(button){
 
-					var paths = SRec.paths();
-					
-					paths.remove(a.path.pathRec);
-					paths.save();
-					a.path.destroy();
-					count = 1;
-					paths.each(function(path){
-						console.log(path);
-						path.set('Path_Rank', count);
-						count++;
-					});
+					switch (button.action) {
+						case 'remove_path':
+							console.log('remove_path');
+
+							console.log(button);
+							var SStore = this.getStudentStore();
+
+							var SRec = SStore.getAt(0);
+
+							var paths = SRec.paths();
+
+							paths.remove(button.path.pathRec);
+							paths.save();
+							button.path.destroy();
+							count = 1;
+							paths.each(function(path){
+								console.log(path);
+								path.set('Path_Rank', count);
+								path.infoBox.updateInfo({rank: count});
+								count++;
+
+							});
+
+							break;
+						case 'move_path_up':
+							console.log('move_path_up');
+
+
+							break;
+						case 'move_path_down':
+							console.log('move_path_down');
+							break;
+						default:
+							console.log('wtf button did you press??!?!?!?!');
+							break;
+					}
+
 				}
             },
             'viewport > panel[region=center] > path > store': {
@@ -472,6 +491,6 @@ Ext.define('GPAS.controller.Paths', {
 				pathPanel.setLoading(false);
 			}
 		});
-		
+
 	}
 });
