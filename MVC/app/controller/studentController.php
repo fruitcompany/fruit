@@ -153,14 +153,13 @@ class studentController
 
 	public function getunamesAction($request) {
 			$query = "SELECT User_Name, Student_ID FROM Student";
-			$result = mysqli_query($query);
-			echo "Hey We made it";
+			$result = mysql_query($query);
 			$r = array();
 			if($result){
 				while ($row = mysql_fetch_object($result)) {
-					array_push($r,array($row->User_Name,$row->Student_ID));
+					array_push($r,array('User_Name' => $row->User_Name, 'Student_ID' => $row->Student_ID));
 				}
-				return '{"success":true,"students":' . json_encode($result) . '}';
+				return '{"success":true,"students":' . json_encode($r) . '}';
 			}
 			else
 				return '{"success":false,"students":[' . json_encode($request) . ']}';

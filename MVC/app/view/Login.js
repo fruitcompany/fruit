@@ -122,11 +122,11 @@ Ext.define('GPAS.view.Login', {
 		xtype: 'textfield',
 		fieldLabel: 'Username',
 		checkChangeBuffer: 1000,
-		store: 'Users',
+		store: Ext.data.StoreManager.lookup('Users'),
 		//allowBlank: false,
 		validator: function(val){
 		    var valid, me = this;
-		    if(me.store.find('User_Name',val)==-1){
+		    if(Ext.data.StoreManager.lookup('Users').find('User_Name',val)==-1){
 				return false;
 			} else {
 				return true;
@@ -188,7 +188,7 @@ Ext.define('GPAS.view.Login', {
 		//allowBlank: false,
 		validator: function(val){
 		    var valid, me = this;
-		    if(me.store.find('User_Name',val)==-1){
+		    if(Ext.data.StoreManager.lookup('Users').find('User_Name',val)==-1){
 				return false;
 			} else {
 				return true;
