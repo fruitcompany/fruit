@@ -14,6 +14,13 @@ Ext.define('GPAS.view.InfoBox' ,{
 		console.log("updating with", data);
 	},
 
+	updateRank: function(data){
+		data.units = this.path.pathUnits;
+		data.lastTerm = this.path.lastTerm;
+		data.lastYear = this.path.lastYear;
+		this.updateInfo(data);
+	},
+
 
     initComponent: function(){
 		var me = this;
