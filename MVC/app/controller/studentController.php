@@ -11,9 +11,9 @@ class studentController
 
 	function __destruct()
 	{
-		
+
 	}
-	
+
     public function readAction($request) {
 		if(isset($request->id))
 		{
@@ -23,9 +23,9 @@ class studentController
 		{
 			$query = "SELECT * FROM  `Student`";
 		}
-        
-		$qResult = mysql_query($query); 
-		$listResult = array();		
+
+		$qResult = mysql_query($query);
+		$listResult = array();
 
 	  	while($row = mysql_fetch_array($qResult, MYSQL_ASSOC))
 	  	{
@@ -41,10 +41,10 @@ class studentController
 			$listResult["Password"] = $row["Password"];
 			$listResult["Email"] = $row["Email"];
 			$listResult["paths"] = $pathControl->readAction($params);
-	  	}			
+	  	}
 	  	return '{"success":true,"students":[' . json_encode($listResult) . ']}';//array( 'success'=>true, 'data'=>$listResult );
     }
- 
+
     public function createAction($request) {
         $query = "insert into Student ( `Student_ID`, `First_Name`, `Last_Name`, `User_Name`, `Password`, `Email` )
 		                    values ( '$request->Student_ID', '$request->First_Name', '$request->Last_Name', '$request->User_Name', '$request->Password', '$request->Email' )";
@@ -58,9 +58,9 @@ class studentController
 		}
 		else
 			return '{"success":false,"students":[' . json_encode($request) . ']}';
-		return '{"success":false}';	
+		return '{"success":false}';
     }
-	
+
 	public function updateAction($request) {
 		//erase all path data for the student
 		if(!empty($request->student->paths))
@@ -94,7 +94,7 @@ class studentController
 				echo("goodToGo4");
 		    	die(mysql_error());
 			}
-			
+
 			//insert new path data for the student
 			foreach ($request->student->paths as $value)
 			{
@@ -112,7 +112,7 @@ class studentController
 					echo("goodToGo6");
 			    	die(mysql_error());
 				}
-				
+
 				foreach ($value->semesters as $value2)
 				{
 					foreach ($value2->classes as $value3)
@@ -136,11 +136,11 @@ class studentController
 			return '{"success":true}';
 		}
 		else
-		{	
+		{
 			return '{"success":false}';
 		}
     }
-	
+
 	public function deleteAction($request) {
 			$query = "DELETE FROM Student WHERE Student_ID = $request->Student_ID LIMIT 1";
 			$goodToGo = mysql_query($query);
@@ -148,7 +148,23 @@ class studentController
 				return '{"success":true,"students":[' . json_encode($request) . ']}';
 			else
 				return '{"success":false,"students":[' . json_encode($request) . ']}';
-			return '{"success":false}';	
+			return '{"success":false}';
+    }
+
+	public function getunamesAction($request) {
+			$query = "SELECT User_Name, Student_ID FROM Student";
+			$result = mysqli_query($query);
+			echo "Hey We made it";
+			$r = array();
+			if($result){
+				while ($row = mysql_fetch_object($result)) {
+					array_push($r,array($row->User_Name,$row->Student_ID));
+				}
+				return '{"success":true,"students":' . json_encode($result) . '}';
+			}
+			else
+				return '{"success":false,"students":[' . json_encode($request) . ']}';
+			return '{"success":false}';
     }
 }
 ?>

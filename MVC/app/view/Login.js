@@ -22,14 +22,14 @@ Ext.define('GPAS.view.Login', {
     layout: {
 	//type: 'border',
 	//padding: 5
-    },		
+    },
     items: [
         {
 	        id:'horz1',
 	        region:'north',
 	        height: 180,
 	        //margins: '5 5 5 5',
-	        
+
 	        items:[
                 {
                     html: innerHTML
@@ -43,7 +43,7 @@ Ext.define('GPAS.view.Login', {
 	    pack:'center',
 	    align:'middle'
 	},
-	
+
 	//margins: '5 0 0 0',
 	items: [{
 	    id: 'login',
@@ -99,7 +99,7 @@ Ext.define('GPAS.view.Login', {
 	    border: 0,
 	    margins: '5 25 5 25'
 	}, {
-	    id: 'createAccount',			
+	    id: 'createAccount',
 	    layout: {
 		type:'auto',
 		pack: 'center',
@@ -117,60 +117,41 @@ Ext.define('GPAS.view.Login', {
 		style: {
 		    'font-size': '20px'
 		}
-	    }, {
+	}, {
 		id: 'createuName',
 		xtype: 'textfield',
 		fieldLabel: 'Username',
 		checkChangeBuffer: 1000,
+		store: 'Users',
 		//allowBlank: false,
-		//validator: function(val){
-		//    var valid, me = this;
-		//    Ext.Ajax.request({
-		//	url: 'data/checkUser.pl',
-		//	method: 'POST',
-		//	params: {
-		//	    uname : val,
-		//	    s_id : ''
-		//	},
-		//	
-		//	callback: function(options, success, response){
-		//	    var text = response.responseText;
-		//	    
-		//	    if(success && Number(text)){
-		//		valid = false;
-		//		console.log('not valid');
-		//		me.markInvalid("Username is already in use.");
-		//	    } else {
-		//		valid = true;
-		//		console.log("valid");
-		//		me.clearInvalid();
-		//	    }
-		//	    
-		//	    // process server response here
-		//	    console.log(text);
-		//	}
-		//    });
-		//}
-	    }, {
+		validator: function(val){
+		    var valid, me = this;
+		    if(me.store.find('User_Name',val)==-1){
+				return false;
+			} else {
+				return true;
+			}
+		}
+	}, {
 		id: 'createfName',
 		xtype: 'textfield',
 		fieldLabel: 'First Name',
 		checkChangeBuffer: 1000,
 		allowBlank: false
-	    }, {
+	}, {
 		id: 'createlName',
 		xtype: 'textfield',
 		fieldLabel: 'Last Name',
 		checkChangeBuffer: 1000,
 		allowBlank: false
-	    }, {
+	}, {
 		id: 'createPassword',
 		xtype: 'textfield',
 		inputType: 'password',
 		fieldLabel: 'Password',
 		checkChangeBuffer: 1000,
 		allowBlank: false
-	    }, {
+	}, {
 		id: 'createRetypePassword',
 		xtype: 'textfield',
 		inputType: 'password',
@@ -180,14 +161,14 @@ Ext.define('GPAS.view.Login', {
 		validator:function(val){
 		    return Ext.getCmp('createPassword').getValue() == val ? true : "Passwords do not match";
 		}
-	    }, {
+	}, {
 		id: 'createEmail',
 		xtype: 'textfield',
 		inputType: 'email',
 		fieldLabel: 'Email',
 		checkChangeBuffer: 1000,
 		allowBlank: false
-	    }, {
+    }, {
 		id: 'createRetypeEmail',
 		xtype: 'textfield',
 		inputType: 'email',
@@ -197,17 +178,23 @@ Ext.define('GPAS.view.Login', {
 		validator:function(val){
 		    return Ext.getCmp('createEmail').getValue() == val ? true : "Email addresses do not match";
 		}
-	    }, {
+	}, {
 		id: 'createStudentID',
 		xtype: 'textfield',
 		inputType: 'number',
 		fieldLabel: 'Student ID',
 		checkChangeBuffer: 1000,
+		store: 'Users',
 		//allowBlank: false,
-		//validator: function(val){
-		//    
-		//}
-	    }, {
+		validator: function(val){
+		    var valid, me = this;
+		    if(me.store.find('User_Name',val)==-1){
+				return false;
+			} else {
+				return true;
+			}
+		}
+	}, {
 		id: 'create_button',
 		xtype: 'button',
 		disabled: true,
@@ -225,7 +212,7 @@ Ext.define('GPAS.view.Login', {
 		    if(uName.isValid() && fName.isValid() && lName.isValid() && pName.isValid() &&
 		       rpName.isValid() && eName.isValid() && reName.isValid() && sName.isValid()){
 			console.log('Creating User...',fName,pName,rpName,eName,reName,sName);
-		    
+
 			button.fireEvent('login', true, {
 			    'User_Name'  : uName.getValue(),
 			    'First_Name' : fName.getValue(),
@@ -241,11 +228,11 @@ Ext.define('GPAS.view.Login', {
     }],
     login: function(create,info){
 	create = create || false;
-	
+
 	if (create) {
-	    
+
 	} else {
-	    
+
 	}
     }
 });

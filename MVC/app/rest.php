@@ -79,6 +79,12 @@ if (class_exists($controller_name)) {
 			$params = json_decode( $put );
 			$result = $controller->$action_name($params);
 		break;
+
+		case 'getunames':
+			$put = file_get_contents("php://input", 'r' );
+			$params = json_decode( $put );
+			$result = $controller->$action_name($params);
+		break;
 	}
 	header('Cache-Control: no-cache, must-revalidate');
 	header("content-type:application/json");

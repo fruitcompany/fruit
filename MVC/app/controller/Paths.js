@@ -1,7 +1,7 @@
 //the Users controller will make sure that the User model is included on the page and available to our app
 Ext.define('GPAS.controller.Paths', {
     extend: 'Ext.app.Controller',
-    stores: ['Courses','Classes', 'Student', 'Paths'],
+    stores: ['Courses','Classes', 'Student', 'Paths', 'Users'],
     models: ['Course','Class','Path','Student', 'Semester'],
     views: [
         'user.Path',
@@ -45,50 +45,50 @@ Ext.define('GPAS.controller.Paths', {
                 change: function(textfield, newV, oldV){
 					var me = this;
 
-					if(textfield.getId()=='createuName'){
-						Ext.Ajax.request({
-							url: 'data/checkUser.pl',
-							method: 'POST',
-							params: {
-								uname : textfield.getValue(),
-								s_id : ''
-							},
-							callback: function(options, success, response){
-								var text = response.responseText;
-
-								if(success && Number(text)){
-									console.log('not valid');
-									textfield.markInvalid("Username is already in use.");
-								} else {
-									console.log("valid");
-									textfield.clearInvalid();
-								}
-								me.setCreateButton(textfield);
-							}
-						});
-					} else if (textfield.getId() =='createStudentID') {
-						Ext.Ajax.request({
-							url: 'data/checkUser.pl',
-							method: 'POST',
-							params: {
-								uname : '',
-								s_id : textfield.getValue()
-							},
-							callback: function(options, success, response){
-								var text = response.responseText;
-								if(success && Number(text)){
-									console.log('not valid');
-									textfield.markInvalid("Student ID is already in use.");
-								} else {
-									console.log("valid");
-									textfield.clearInvalid();
-								}
-								me.setCreateButton(textfield);
-							}
-						});
-					} else {
-						me.setCreateButton(textfield)
-					}
+					//if(textfield.getId()=='createuName'){
+					//	Ext.Ajax.request({
+					//		url: 'data/checkUser.pl',
+					//		method: 'POST',
+					//		params: {
+					//			uname : textfield.getValue(),
+					//			s_id : ''
+					//		},
+					//		callback: function(options, success, response){
+					//			var text = response.responseText;
+					//
+					//			if(success && Number(text)){
+					//				console.log('not valid');
+					//				textfield.markInvalid("Username is already in use.");
+					//			} else {
+					//				console.log("valid");
+					//				textfield.clearInvalid();
+					//			}
+					//			me.setCreateButton(textfield);
+					//		}
+					//	});
+					//} else if (textfield.getId() =='createStudentID') {
+					//	Ext.Ajax.request({
+					//		url: 'data/checkUser.pl',
+					//		method: 'POST',
+					//		params: {
+					//			uname : '',
+					//			s_id : textfield.getValue()
+					//		},
+					//		callback: function(options, success, response){
+					//			var text = response.responseText;
+					//			if(success && Number(text)){
+					//				console.log('not valid');
+					//				textfield.markInvalid("Student ID is already in use.");
+					//			} else {
+					//				console.log("valid");
+					//				textfield.clearInvalid();
+					//			}
+					//			me.setCreateButton(textfield);
+					//		}
+					//	});
+					//} else {
+					//	me.setCreateButton(textfield)
+					//}
 				},
 				validitychange: function(textfield, isValid, op){
 					console.log("Validity change", textfield, isValid, op);
@@ -117,24 +117,22 @@ Ext.define('GPAS.controller.Paths', {
 					switch (button.action) {
 						case 'remove_path':
 							console.log('remove_path');
-
 							console.log(button);
 							var SStore = this.getStudentStore();
-
 							var SRec = SStore.getAt(0);
-
 							var paths = SRec.paths();
+							var pathPanel = this.getPathPanel();
 
 							paths.remove(button.path.pathRec);
 							paths.save();
 							button.path.destroy();
 							count = 1;
-							paths.each(function(path){
+							//paths.each(function(path){
+							Ext.each(pathPanel.items.items,function(path){
 								console.log(path);
-								path.set('Path_Rank', count);
+								path.pathRec.set('Path_Rank', count);
 								path.infoBox.updateInfo({rank: count});
 								count++;
-
 							});
 
 							break;
