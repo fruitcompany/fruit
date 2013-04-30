@@ -15,7 +15,7 @@
 </style>
 
 <script type="text/javascript">
-function fill(id)
+function fill()
 {
 	str = "SELECT * FROM Course_Info";
 	if (window.XMLHttpRequest)
@@ -30,8 +30,9 @@ function fill(id)
    	{
 		if (xmlhttp.readyState==4 && xmlhttp.status==200)
 		{
-	    	document.getElementById(id).innerHTML=xmlhttp.responseText;
-	    }
+			document.getElementById('courseSelect').innerHTML=xmlhttp.responseText;
+			document.getElementById('delCourseSelect').innerHTML=xmlhttp.responseText;
+		}
    	}
 	xmlhttp.open("GET","../database.php?t=2&q="+str,true);
 	xmlhttp.send();
@@ -90,19 +91,13 @@ function majorSelect()
 	xmlhttp.send();
 }
 
-function startOff()
-{
-	fill('courseSelect');
-	fill('delCourseSelect');
-}
-
 
 </script>
 <!-- #EndEditable -->
 <link href="../styles/style2.css" media="screen" rel="stylesheet" title="CSS" type="text/css" />
 </head>
 
-<body onload="startOff()">
+<body onload="fill()">
 
 <!-- Begin Container -->
 <div id="container">
@@ -318,7 +313,7 @@ function startOff()
 					</tr>
 					<tr>
 						<td>Course Title:</td>
-						<td><input id="modifyCourseTitle" name="modCourse" type="text" />&nbsp;</td>
+						<td><input size="50" id="modifyCourseTitle" name="modCourse" type="text" /></td>
 					</tr>
 					<tr>
 						<td>Type:</td>
@@ -344,7 +339,7 @@ function startOff()
 					</tr>
 					<tr>
 						<td>Description:</td>
-						<td><textarea cols="70" id="modifyDescription" rows="3" name="modDescription" ></textarea>&nbsp;</td>
+						<td><textarea cols="70" id="modifyDescription" rows="3" name="modDescription" ></textarea></td>
 					</tr>
 					<tr>
 						<td>&nbsp;</td>
