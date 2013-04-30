@@ -53,7 +53,7 @@ Ext.define('GPAS.view.user.Path' ,{
 				console.log(rec);
 
 				//pathUnits = pathUnits + parseInt(rec.get('Units'));
-			store.on('add',function(a,b){ me.onDrop(me,a,b) } );
+			//store.on('add',function(a,b){ me.onDrop(me,a,b) } );
 			store.semester = {Term: term, Year: year};
 
 			semArray.push({
@@ -72,6 +72,17 @@ Ext.define('GPAS.view.user.Path' ,{
 						ptype: 'gridviewdragdrop',
 						dragGroup	: me.DDGroup,
 						dropGroup	: me.DDGroup,
+					},
+					listeners: {
+						beforedrop: function (node, data, overModel, dropPosition, dropFunction, eOpts) {
+							var term = overModel.get('Term'),
+								year = overModel.get('Year');
+							console.log(node, data, overModel, dropPosition, dropFunction, eOpts);
+							me.onDrop(me,term,year,data.records,dropFunction)
+							//var recs = data.records;
+
+							return false;
+						}
 					}
 				},
 				listeners: {
@@ -212,11 +223,14 @@ Ext.define('GPAS.view.user.Path' ,{
 		}).show();
     },
 
-	onDrop: function(p,store,recs){
-		console.log(store,recs);
-		var ty = store.semester,
-			me = p;
-		console.log(ty, p);
+	onDrop: function(p,term,year,recs,df){
+		console.log(recs);
+		//var ty = store.semester,
+		var me = p;
+		console.log(term,year, p);
+
+		console.log(recs);
+		console.log(term,year);
 
 		Ext.each(recs,function(rec){
 			Ext.Ajax.request({
@@ -224,19 +238,20 @@ Ext.define('GPAS.view.user.Path' ,{
 				method: 'POST',
 				params: {
 					name : rec.get('Course_Name'),
-					year : ty.Year,
-					term : ty.Term
+					year : year,
+					term : term
 				},
 
 				callback: function(options, success, response){
 					var text = response.responseText,
 						id = Number(text);
 
+
 					if(success && id){
 						console.log("new class id",id);
 
-						rec.set('Year',ty.Year);
-						rec.set('Term',ty.Term);
+						rec.set('Year',year);
+						rec.set('Term',term);
 						rec.set('Class_ID', id);
 						rec.set('id', id);
 
@@ -244,11 +259,13 @@ Ext.define('GPAS.view.user.Path' ,{
 					} else {
 						alert("Failed to find Class in Availability");
 						console.log("new class id",id);
-						rec.set('Year',ty.Year);
-						rec.set('Term',ty.Term);
+						rec.set('Available',false);
+						rec.set('Year',year);
+						rec.set('Term',term);
 						rec.set('Class_ID', id);
 						rec.set('id', id);
 					}
+					df();
 					//me.infoBox.updateInfo({units: me.pathUnits, rank : me.pathRank,
 					//lastTerm: me.lastTerm, lastYear: me.lastYear});
 					me.infoBox.updateInfo();

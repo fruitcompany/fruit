@@ -17,6 +17,14 @@
 	background-image: url(../images/arrow-down.png) !important;
 	background-repeat: no-repeat;
 }
+.class-not-available {
+	background-color: #FF8888 !important;
+}
+.x-grid-row-selected .class-not-available{
+    background-color: #FF625F !important;
+    border-color: #BFB8B8;
+    border-style: dotted;
+}
 #fruitcup {
 	float: left;
 	width:200px;

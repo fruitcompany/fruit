@@ -14,7 +14,17 @@ Ext.define('GPAS.view.user.Semester' ,{
 		{
 			text: "Class",
 			dataIndex: "Course_Name",
-			flex: 1
+			flex: 1,
+			renderer: function(value, meta, rec) {
+                if (!rec.get('Available')) {
+                    meta.tdCls = 'class-not-available';
+					var tooltipString = "This course may not be offered this semester.";
+					meta.tdAttr = 'data-qtip="' + tooltipString + '"';
+					console.log("HAHAHAHAHAHA",rec);
+				}
+				console.log(rec);
+				return value;
+            }
 		}
 	],
 

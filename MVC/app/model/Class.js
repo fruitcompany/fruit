@@ -12,7 +12,8 @@ Ext.define('GPAS.model.Class', {
 		{ name : 'Course_Title',type : 'string' },
 		{ name : 'Description', type : 'string' },
 		{ name : 'Units', 	type : 'number' },
-		{ name : 'Type', 	type : 'string' }
+		{ name : 'Type', 	type : 'string' },
+		{ name : 'Available', 	type : 'boolean', defaultValue: true }
     ],
 
     idProperty: 'id',
