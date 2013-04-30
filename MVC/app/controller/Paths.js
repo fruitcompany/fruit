@@ -258,9 +258,11 @@ Ext.define('GPAS.controller.Paths', {
 					switch(butt.action){
 						case "save_path":
 							me.pathSave();
+							alert("All your paths have been saved!");
 							break;
 						case "cancel":
 							me.cancelPathUpdate();
+
 							break;
 						default:
 							console.log('wtf button did you press??!?!?!?!');
@@ -566,7 +568,7 @@ Ext.define('GPAS.controller.Paths', {
 		var SStore = this.getStudentStore();
 		var SRec = SStore.getAt(0);
 		var pathPanel = this.getPathPanel();
-		pathPanel.setLoading(true);
+		pathPanel.setLoading("Restoring to most recent save.");
 		pathPanel.removeAll();
 		console.log('Cancel Edits');
 
