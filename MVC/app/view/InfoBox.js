@@ -9,17 +9,23 @@ Ext.define('GPAS.view.InfoBox' ,{
 	width: 160,
 	path: '',
 
-	updateInfo: function(data){
+	updateInfo: function(){
+		var data = {
+			units 	 : this.path.pathUnits,
+			lastTerm : this.path.lastTerm,
+			lastYear : this.path.lastYear,
+			rank 	 : this.path.pathRec.get('Path_Rank')
+		}
 		this.down('panel').update(data);
 		console.log("updating with", data);
 	},
 
-	updateRank: function(data){
-		data.units = this.path.pathUnits;
-		data.lastTerm = this.path.lastTerm;
-		data.lastYear = this.path.lastYear;
-		this.updateInfo(data);
-	},
+	//updateRank: function(data){
+	//	data.units = this.path.pathUnits;
+	//	data.lastTerm = this.path.lastTerm;
+	//	data.lastYear = this.path.lastYear;
+	//	this.updateInfo(data);
+	//},
 
 
     initComponent: function(){

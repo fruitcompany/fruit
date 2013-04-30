@@ -126,8 +126,9 @@ Ext.define('GPAS.view.user.Path' ,{
 					});
 					//me.setWidth(me.width+me.semesterWidth);
 					//me.down('panel').down('panel').setWidth(me.width+me.semesterWidth);
-					me.infoBox.updateInfo({units: me.pathUnits, rank : me.pathRank,
-						lastTerm: me.lastTerm, lastYear: me.lastYear});
+					//me.infoBox.updateInfo({units: me.pathUnits, rank : me.pathRank,
+					//	lastTerm: me.lastTerm, lastYear: me.lastYear});
+					me.infoBox.updateInfo();
 					//me.width += me.semesterWidth;
 				}
 			}]
@@ -151,8 +152,9 @@ Ext.define('GPAS.view.user.Path' ,{
 			path: me,
 			height: me.semesterHeight
 		});
-		ib.updateInfo({units: me.pathUnits, rank : me.pathRank,
-					lastTerm: me.lastTerm, lastYear: me.lastYear});
+		//ib.updateInfo({units: me.pathUnits, rank : me.pathRank,
+		//			lastTerm: me.lastTerm, lastYear: me.lastYear});
+		ib.updateInfo();
 
 		me.items = [ib, {
 			xtype: 'panel',
@@ -247,8 +249,9 @@ Ext.define('GPAS.view.user.Path' ,{
 						rec.set('Class_ID', id);
 						rec.set('id', id);
 					}
-					me.infoBox.updateInfo({units: me.pathUnits, rank : me.pathRank,
-					lastTerm: me.lastTerm, lastYear: me.lastYear});
+					//me.infoBox.updateInfo({units: me.pathUnits, rank : me.pathRank,
+					//lastTerm: me.lastTerm, lastYear: me.lastYear});
+					me.infoBox.updateInfo();
 				}
 			});
 		});
@@ -266,9 +269,9 @@ Ext.define('GPAS.view.user.Path' ,{
 					//Delete Rec (Class)
 					table.getStore().remove(record);
 					p.pathUnits -= record.get('Units');
-					p.infoBox.updateInfo({units: p.pathUnits, rank : p.pathRank,
-					lastTerm: p.lastTerm, lastYear: p.lastYear});
-
+					//p.infoBox.updateInfo({units: p.pathUnits, rank : p.pathRank,
+					//lastTerm: p.lastTerm, lastYear: p.lastYear});
+					p.infoBox.updateInfo();
 				}
 			},{
 				text: 'Edit'

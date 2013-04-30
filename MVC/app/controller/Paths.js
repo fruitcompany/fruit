@@ -131,28 +131,29 @@ Ext.define('GPAS.controller.Paths', {
 							Ext.each(pathPanel.items.items,function(path){
 								console.log(path);
 								path.pathRec.set('Path_Rank', count);
-								path.infoBox.updateRank({rank: count});
+								//path.infoBox.updateRank({rank: count});
+								path.infoBox.updateInfo();
 								count++;
 							});
 
 							break;
 						case 'move_path_up':
-							
+
 							console.log('move_path_up');
 							var SStore = this.getStudentStore();
 
 							var SRec = SStore.getAt(0);
 
 							var paths = SRec.paths();
-							
+
 							if(button.path.pathRec.get('Path_Rank') == 1)
 								break;
-							
+
 							console.log(button.path.pathRec.get('Path_Rank'), 'not equals 1');
 							var oldRank = parseInt(button.path.pathRec.get('Path_Rank'));
-							
+
 							var newRank = oldRank - 1;
-							
+
 							paths.each(function(path){
 								var currentPathRank = parseInt(path.get('Path_Rank'));
 								if(oldRank == currentPathRank)
@@ -161,7 +162,7 @@ Ext.define('GPAS.controller.Paths', {
 									console.log(oldRank, ' equals ', currentPathRank);
 									console.log(path);
 								}
-								
+
 								if(newRank == currentPathRank)
 								{
 									path.set('Path_Rank', oldRank);
@@ -169,7 +170,7 @@ Ext.define('GPAS.controller.Paths', {
 									console.log(path);
 								}
 							});
-							
+
 							var pathPanel = this.getPathPanel();
 							console.log(pathPanel);
 							var temp;
@@ -179,28 +180,30 @@ Ext.define('GPAS.controller.Paths', {
 							pathPanel.items.items[newRank - 1] = firstItem;
 							pathPanel.items.items[oldRank - 1] = temp;
 							pathPanel.doLayout();
-							pathPanel.items.items[newRank - 1].infoBox.updateRank({rank: newRank});
-							pathPanel.items.items[oldRank - 1].infoBox.updateRank({rank: oldRank});
-							
+							//pathPanel.items.items[newRank - 1].infoBox.updateRank({rank: newRank});
+							//pathPanel.items.items[oldRank - 1].infoBox.updateRank({rank: oldRank});
+							pathPanel.items.items[newRank - 1].infoBox.updateInfo();
+							pathPanel.items.items[oldRank - 1].infoBox.updateInfo();
+
 
 							break;
 						case 'move_path_down':
-							
+
 							console.log('move_path_down');
 							var SStore = this.getStudentStore();
 
 							var SRec = SStore.getAt(0);
 
 							var paths = SRec.paths();
-							
+
 							if(button.path.pathRec.get('Path_Rank') == paths.getCount())
 								break;
-							
+
 							console.log(button.path.pathRec.get('Path_Rank'), 'not equals ', paths.getCount());
 							var oldRank = parseInt(button.path.pathRec.get('Path_Rank'));
-							
+
 							var newRank = oldRank + 1;
-							
+
 							paths.each(function(path){
 								var currentPathRank = parseInt(path.get('Path_Rank'));
 								if(oldRank == currentPathRank)
@@ -209,16 +212,16 @@ Ext.define('GPAS.controller.Paths', {
 									console.log(oldRank, ' equals ', currentPathRank);
 									console.log(path);
 								}
-								
+
 								if(newRank == currentPathRank)
 								{
 									path.set('Path_Rank', oldRank);
 									console.log(newRank, ' equals ', currentPathRank);
 									console.log(path);
 								}
-									
+
 							});
-							
+
 							var pathPanel = this.getPathPanel();
 							console.log(pathPanel);
 							var temp;
@@ -228,9 +231,12 @@ Ext.define('GPAS.controller.Paths', {
 							pathPanel.items.items[newRank - 1] = firstItem;
 							pathPanel.items.items[oldRank - 1] = temp;
 							pathPanel.doLayout();
-							pathPanel.items.items[newRank - 1].infoBox.updateRank({rank: newRank});
-							pathPanel.items.items[oldRank - 1].infoBox.updateRank({rank: oldRank});
-							
+							//pathPanel.items.items[newRank - 1].infoBox.updateRank({rank: newRank});
+							//pathPanel.items.items[oldRank - 1].infoBox.updateRank({rank: oldRank});
+							pathPanel.items.items[oldRank - 1].infoBox.updateInfo();
+							pathPanel.items.items[newRank - 1].infoBox.updateInfo();
+
+
 							break;
 						default:
 							console.log('wtf button did you press??!?!?!?!');
