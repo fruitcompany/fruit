@@ -63,7 +63,7 @@
 		</tr>
 		<tr>
 			<td>Course Title:</td>
-			<td><input id='modifyCourseTitle' type='text' name='modCourse' value='".$row['Course_Title']."' /></td>
+			<td><input size='50' id='modifyCourseTitle' type='text' name='modCourse' value='".$row['Course_Title']."' /></td>
 		</tr>
 		<tr>
 			<td>Type:</td>
@@ -114,7 +114,7 @@
 		</tr>
 		<tr>
 			<td>Description:</td>
-			<td><textarea cols='70' id='modifyDescription' rows='3' name='modDescription'>asdf</textarea></td>
+			<td><textarea cols='70' id='modifyDescription' rows='3' name='modDescription'>".$row['Description']."</textarea></td>
 		</tr>
 		<tr>
 			<td>&nbsp;</td>

@@ -9,17 +9,7 @@
 <title>Login</title>
 
 <script type="text/javascript">
-function validate()
-{
-}
 
-function setCookie(c_name,value,exdays)
-{
-	var exdate=new Date();
-	exdate.setDate(exdate.getDate() + exdays);
-	var c_value=escape(value) + ((exdays==null) ? "" : "; expires="+exdate.toUTCString());
-	document.cookie=c_name + "=" + c_value;
-}
 
 </script>
 
@@ -52,26 +42,25 @@ function setCookie(c_name,value,exdays)
 		<div id="column_l">
 			<!-- #BeginEditable "content" -->
 			<h1>Administration Panel</h1>
-			<form method="post" action="" id="credential">
+			<form method="post" action="validate.php" id="credential">
 			<table style="width: 100%">
 				<tr>
 					<td>Username:</td>
 					<td>
-					<form method="post">
-						<input name="Text1" type="text" /></form>&nbsp;</td>
+						<input name="username" type="text" /></td>
 				</tr>
 				<tr>
 					<td>Password:</td>
-					<td><input name="Password1" type="password" />&nbsp;</td>
+					<td><input name="password" type="password" /></td>
 				</tr>
 				<tr>
 					<td><input name="Reset1" type="reset" value="Reset" />&nbsp;</td>
 					<td>
-					<input name="Submit1" type="submit" value="Login" onclick="validate()" /></td>
+					<input name="Submit1" type="submit" value="Login" /></td>
 				</tr>
 			</table>
 			</form>
-			<p></p>
+			<div id="status"></div>
 			<!-- #EndEditable --></div>
 		<!-- End Left Column --></div>
 	<!-- End Page Content -->
