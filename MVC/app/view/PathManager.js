@@ -2,7 +2,7 @@ var innerHTML = ([
     '<div id="container">',
       '<div id="masthead">',
           '<div id="fruitcup"><img alt="" height="75" src="images/fruit_cup_transparent.png" width="87" /></div>',
-          '<div id="support"><p>IT Support (555) 555-5555</p></div>',
+          '<div id="support"><p>IT Support (555) 677-1400</p></div>',
           '<div id="gpas"><img alt="" height="150" src="images/finalGPASLogo.png" width="400" /></div>',
       '</div>',
       '<div id="navigation">',
