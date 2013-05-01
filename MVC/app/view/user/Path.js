@@ -61,10 +61,8 @@ Ext.define('GPAS.view.user.Path' ,{
 				width	: me.semesterWidth,
 				term	: term,
 				year	: year,
-
 				itemId	: term + "_" + year + "_" + me.id,
 				id		: term + "_" + year+"_selectfield_"+me.id,
-				//listTitle	: term + " " + year,
 				title	: term + " " + year,
 				store	: store,
 				viewConfig: {
@@ -75,13 +73,13 @@ Ext.define('GPAS.view.user.Path' ,{
 					},
 					listeners: {
 						beforedrop: function (node, data, overModel, dropPosition, dropFunction, eOpts) {
-							var term = overModel.get('Term'),
-								year = overModel.get('Year');
-							console.log(node, data, overModel, dropPosition, dropFunction, eOpts);
-							me.onDrop(me,term,year,data.records,dropFunction)
-							//var recs = data.records;
-
-							return false;
+							console.log(this, node, data, overModel, dropPosition, dropFunction, eOpts);
+							var term = this.panel.term,
+								year = this.panel.year;
+							if(term != data.records[0].get('Term') || year != data.records[0].get('Year')){
+								me.onDrop(me,term,year,data.records,dropFunction)
+								return 0;
+							}
 						}
 					}
 				},
@@ -89,7 +87,6 @@ Ext.define('GPAS.view.user.Path' ,{
 					itemdblclick: me.onItemDblClick,
 					itemcontextmenu: function(a,b,c,d,e){ me.onRightClick(me,a,b,c,d,e); },
 					containercontextmenu: function(a,b){ me.addClassClick(me,a,b) },
-
 				}
 			});
 			me.lastTerm = term;
@@ -127,6 +124,17 @@ Ext.define('GPAS.view.user.Path' ,{
 								ptype: 'gridviewdragdrop',
 								dragGroup	: me.DDGroup,
 								dropGroup	: me.DDGroup,
+							},
+							listeners: {
+								beforedrop: function (node, data, overModel, dropPosition, dropFunction, eOpts) {
+									console.log(this, node, data, overModel, dropPosition, dropFunction, eOpts);
+									var term = this.panel.term,
+										year = this.panel.year;
+									if(term != data.records[0].get('Term') || year != data.records[0].get('Year')){
+										me.onDrop(me,term,year,data.records,dropFunction)
+										return 0;
+									}
+								}
 							}
 						},
 						listeners: {
@@ -135,12 +143,7 @@ Ext.define('GPAS.view.user.Path' ,{
 							containercontextmenu: function(a,b){ me.addClassClick(me,a,b) },
 						}
 					});
-					//me.setWidth(me.width+me.semesterWidth);
-					//me.down('panel').down('panel').setWidth(me.width+me.semesterWidth);
-					//me.infoBox.updateInfo({units: me.pathUnits, rank : me.pathRank,
-					//	lastTerm: me.lastTerm, lastYear: me.lastYear});
 					me.infoBox.updateInfo();
-					//me.width += me.semesterWidth;
 				}
 			}]
 		}]);
