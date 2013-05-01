@@ -58,7 +58,7 @@
 		<tr>
 			<td style='height: 29px'>Simple Course Name:</td>
 			<td>
-			<input id='modifyCourseName' name='modSimpleName' type='text' disabled='disabled' value='".$row['Course_Name']."' />
+			<input id='modifyCourseName' name='modSimpleName' type='text' readonly='readonly' value='".$row['Course_Name']."' />
 			</td>
 		</tr>
 		<tr>

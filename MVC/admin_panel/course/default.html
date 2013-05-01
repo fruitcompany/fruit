@@ -31,7 +31,6 @@ function fill()
 		if (xmlhttp.readyState==4 && xmlhttp.status==200)
 		{
 			document.getElementById('courseSelect').innerHTML=xmlhttp.responseText;
-			document.getElementById('delCourseSelect').innerHTML=xmlhttp.responseText;
 		}
    	}
 	xmlhttp.open("GET","../database.php?t=2&q="+str,true);
@@ -103,16 +102,15 @@ function majorSelect()
 <div id="container">
 	<!-- Begin Masthead -->
 	<div id="masthead">
-		<img alt="" height="66" src="../images/logo.gif" width="150" />
-		<p>IT Support (555) 555-5555</p>
+		<div style="text-align: right">IT Support (555) 677-1400</div>
+		<img alt="cup logo" height="130" src="../../images/finalGPASLogo.png" width="370" />
 	</div>
 	<!-- End Masthead -->
 	<!-- Begin Navigation -->
 	<div id="navigation">
 		<ul>
-			<li><a href="../default.html">Login</a></li>
-			<li><a href="../student/default.html">Student</a></li>
-			<li><a href="default.html">Course</a></li>
+			<li><a href="../default.html">Logout</a></li>
+			<li><a href="../../index.html">GPAS</a></li>
 		</ul>
 	</div>
 	<!-- End Navigation -->
@@ -127,7 +125,6 @@ function majorSelect()
 			<ul>
 				<li>Add new class</li>
 				<li>Modify existing class</li>
-				<li>Delete class</li>
 			</ul>
 			<h4>Add New Course</h4>
 			<form method="post" action="addClass.php" id="addClass">
@@ -309,7 +306,7 @@ function majorSelect()
 					<tr>
 						<td style="height: 29px">Simple Course Name:</td>
 						<td style="height: 29px">
-						<input id="modifyCourseName" name="modSimpleName" type="text" disabled="disabled" /></td>
+						<input id="modifyCourseName" name="modSimpleName" type="text" readonly="readonly" /></td>
 					</tr>
 					<tr>
 						<td>Course Title:</td>
@@ -345,26 +342,6 @@ function majorSelect()
 						<td>&nbsp;</td>
 						<td>
 						<input type="submit" value="Modify Course" onclick="modify()"/></td>
-					</tr>
-				</table>
-			
-			</form>
-
-			<h4>Delete Course</h4>
-			<form method="post" action="delCourse.php">
-			
-				<table style="width: 100%" bgcolor="#F0F0F0">
-					<tr>
-						<td>Course Name:</td>
-						<td>
-						<select name="delCourseSelect" id="delCourseSelect">
-						<option></option>
-						</select></td>
-					</tr>
-					<tr>
-						<td>&nbsp;</td>
-						<td>
-						<input type="submit" value="Delete Course"/></td>
 					</tr>
 				</table>
 			

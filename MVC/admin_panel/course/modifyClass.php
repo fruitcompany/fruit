@@ -8,7 +8,7 @@
 
     $sql="UPDATE Course_Info
     SET
-    Department ='$_POST[modDept]', Course_Title='$_POST[modCourse]', Description='$_POST[modDescription]', Units='$_POST[modUnit]', Type='$_POST[modType]'
+    Department ='$_POST[modDepartment]', Course_Title='$_POST[modCourse]', Description='$_POST[modDescription]', Units='$_POST[modUnit]', Type='$_POST[modType]'
     WHERE
     Course_Name='$_POST[modSimpleName]'";
 
@@ -18,8 +18,8 @@
     }
 
 	mysqli_query($con,$sql);
-	
+
     mysqli_close($con);
-    
+
     Header("Location: default.html");
 ?>
