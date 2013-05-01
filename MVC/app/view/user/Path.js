@@ -15,6 +15,7 @@ Ext.define('GPAS.view.user.Path' ,{
 	pathUnits: 0,
 
     pathRank : 0,
+	pathRec : null,
 
     border		: 0,
 
@@ -79,6 +80,8 @@ Ext.define('GPAS.view.user.Path' ,{
 							if(term != data.records[0].get('Term') || year != data.records[0].get('Year')){
 								me.onDrop(me,term,year,data.records,dropFunction)
 								return 0;
+							} else {
+								return true;
 							}
 						}
 					}
@@ -107,6 +110,8 @@ Ext.define('GPAS.view.user.Path' ,{
 					} else {
 					    me.lastTerm = 'FALL';
 					}
+					
+					
 					butt.up('panel').up('panel').insert(me.semesters-1,{
 					    xtype: 'semester',
 					    width: me.semesterWidth,
@@ -133,6 +138,8 @@ Ext.define('GPAS.view.user.Path' ,{
 									if(term != data.records[0].get('Term') || year != data.records[0].get('Year')){
 										me.onDrop(me,term,year,data.records,dropFunction)
 										return 0;
+									} else {
+										return true;
 									}
 								}
 							}
@@ -294,8 +301,6 @@ Ext.define('GPAS.view.user.Path' ,{
 					//lastTerm: p.lastTerm, lastYear: p.lastYear});
 					p.infoBox.updateInfo();
 				}
-			},{
-				text: 'Edit'
 			}]
 		}).showAt(e.getXY());
 	},
