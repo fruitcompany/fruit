@@ -18,6 +18,25 @@ Ext.define('GPAS.view.InfoBox' ,{
 		}
 		this.down('panel').update(data);
 		console.log("updating with", data);
+		var button = Ext.getCmp('Save_Button');
+		this.path.store.each(function(sem,a,b){
+			var rt = true;
+			console.log(sem,a,b);
+			sem.classes().each(function(rec,a,b){
+				console.log(rec,a,b);
+				if(!rec.get('Available')){
+					button.disable();
+					button.setTooltip('Please fix any unavailable classes before saving.')
+					rt = false;
+					return false;
+				}
+				else if(button.isDisabled()){
+					button.enable();
+					button.clearTip();
+				}
+			});
+			return rt;
+		})
 	},
 
 	//updateRank: function(data){

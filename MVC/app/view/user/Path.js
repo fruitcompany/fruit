@@ -254,10 +254,11 @@ Ext.define('GPAS.view.user.Path' ,{
 						rec.set('Term',term);
 						rec.set('Class_ID', id);
 						rec.set('id', id);
+						rec.set('Available',true);
 
 
 					} else {
-						alert("Failed to find Class in Availability");
+						//alert("Failed to find Class in Availability");
 						console.log("new class id",id);
 						rec.set('Available',false);
 						rec.set('Year',year);

@@ -25,6 +25,10 @@
     border-color: #BFB8B8;
     border-style: dotted;
 }
+.save {
+	background-image: url(../images/save.png);
+	background-repeat: no-repeat;
+}
 #fruitcup {
 	float: left;
 	width:200px;

@@ -62,7 +62,9 @@ Ext.define('GPAS.view.PathManager' ,{
             },
             {
                 xtype: 'button',
+                id: "Save_Button",
                 text: 'Save Paths',
+                iconCls: 'save',
                 action: "save_path"
             },
             {
