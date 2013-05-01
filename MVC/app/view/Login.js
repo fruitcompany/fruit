@@ -127,9 +127,9 @@ Ext.define('GPAS.view.Login', {
 		validator: function(val){
 		    var valid, me = this;
 		    if(Ext.data.StoreManager.lookup('Users').find('User_Name',val)==-1){
-				return false;
-			} else {
 				return true;
+			} else {
+				return 'This user name has already been used.';
 			}
 		}
 	}, {
@@ -189,9 +189,9 @@ Ext.define('GPAS.view.Login', {
 		validator: function(val){
 		    var valid, me = this;
 		    if(Ext.data.StoreManager.lookup('Users').find('User_Name',val)==-1){
-				return false;
-			} else {
 				return true;
+			} else {
+				return 'This ID has already been used.';
 			}
 		}
 	}, {

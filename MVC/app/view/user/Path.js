@@ -51,7 +51,7 @@ Ext.define('GPAS.view.user.Path' ,{
 				store.each(function(a){
 					me.pathUnits += parseInt(a.get('Units'));
 				});
-				console.log(rec);
+				//console.log(rec);
 
 				//pathUnits = pathUnits + parseInt(rec.get('Units'));
 			//store.on('add',function(a,b){ me.onDrop(me,a,b) } );
@@ -74,14 +74,14 @@ Ext.define('GPAS.view.user.Path' ,{
 					},
 					listeners: {
 						beforedrop: function (node, data, overModel, dropPosition, dropFunction, eOpts) {
-							console.log(this, node, data, overModel, dropPosition, dropFunction, eOpts);
+							//console.log(this, node, data, overModel, dropPosition, dropFunction, eOpts);
+							
 							var term = this.panel.term,
 								year = this.panel.year;
 							if(term != data.records[0].get('Term') || year != data.records[0].get('Year')){
+								dropFunction.wait = true;
 								me.onDrop(me,term,year,data.records,dropFunction)
-								return 0;
-							} else {
-								return true;
+								//return 0;
 							}
 						}
 					}
@@ -132,14 +132,13 @@ Ext.define('GPAS.view.user.Path' ,{
 							},
 							listeners: {
 								beforedrop: function (node, data, overModel, dropPosition, dropFunction, eOpts) {
-									console.log(this, node, data, overModel, dropPosition, dropFunction, eOpts);
+									//console.log(this, node, data, overModel, dropPosition, dropFunction, eOpts);
 									var term = this.panel.term,
 										year = this.panel.year;
 									if(term != data.records[0].get('Term') || year != data.records[0].get('Year')){
+										dropFunction.wait = true;
 										me.onDrop(me,term,year,data.records,dropFunction)
-										return 0;
-									} else {
-										return true;
+										//return 0;
 									}
 								}
 							}
@@ -201,7 +200,7 @@ Ext.define('GPAS.view.user.Path' ,{
 			}
 		}]
 		//me.width = me.semesters*me.semesterWidth+3*me.edgeSpace;
-		console.log("new Path object",this);
+		//console.log("new Path object",this);
 
 		this.callParent(arguments);
 	},
@@ -210,12 +209,12 @@ Ext.define('GPAS.view.user.Path' ,{
 
     loadData: function(data) {
 		Ext.each(data, function(rec) {
-			console.log(rec);
+			//console.log(rec);
 		});
     },
 
     onItemDblClick: function(view,rec,b,c){
-		console.log(view,rec);
+		//console.log(view,rec);
 		Ext.create('Ext.window.Window', {
 			title: rec.get('Course_Name')+" - "+rec.get('Course_Title'),
 			height: 200,
@@ -234,13 +233,13 @@ Ext.define('GPAS.view.user.Path' ,{
     },
 
 	onDrop: function(p,term,year,recs,df){
-		console.log(recs);
+		//console.log(recs);
 		//var ty = store.semester,
 		var me = p;
-		console.log(term,year, p);
+		//console.log(term,year, p);
 
-		console.log(recs);
-		console.log(term,year);
+		//console.log(recs);
+		//console.log(term,year);
 
 		Ext.each(recs,function(rec){
 			Ext.Ajax.request({
@@ -258,7 +257,7 @@ Ext.define('GPAS.view.user.Path' ,{
 
 
 					if(success && id){
-						console.log("new class id",id);
+						//console.log("new class id",id);
 
 						rec.set('Year',year);
 						rec.set('Term',term);
@@ -269,14 +268,14 @@ Ext.define('GPAS.view.user.Path' ,{
 
 					} else {
 						//alert("Failed to find Class in Availability");
-						console.log("new class id",id);
+						//console.log("new class id",id);
 						rec.set('Available',false);
 						rec.set('Year',year);
 						rec.set('Term',term);
 						rec.set('Class_ID', id);
 						rec.set('id', id);
 					}
-					df();
+					df.processDrop();
 					//me.infoBox.updateInfo({units: me.pathUnits, rank : me.pathRank,
 					//lastTerm: me.lastTerm, lastYear: me.lastYear});
 					me.infoBox.updateInfo();
@@ -287,7 +286,7 @@ Ext.define('GPAS.view.user.Path' ,{
 	onRightClick: function(p,table, record, item, index, e, eOpts){
 		var me = this;
 
-		console.log("Right Click",table,record,item,index,e);
+		//console.log("Right Click",table,record,item,index,e);
 		e.stopEvent();
 		Ext.create('Ext.menu.Menu',{
 			items: [{
@@ -306,7 +305,7 @@ Ext.define('GPAS.view.user.Path' ,{
 	},
 
 	addClassClick : function(p,semObj,e){
-		console.log(semObj,semObj.getStore().semester.Year,semObj.getStore().semester.Term);
+		//console.log(semObj,semObj.getStore().semester.Year,semObj.getStore().semester.Term);
 		e.stopEvent();
 		Ext.create('Ext.menu.Menu',{
 			items: [{
@@ -319,7 +318,7 @@ Ext.define('GPAS.view.user.Path' ,{
 						semStore: semObj.getStore(),
 						path: p
 					}).show();
-					console.log(win);
+					//console.log(win);
 				}
 			}]
 		}).showAt(e.getXY());

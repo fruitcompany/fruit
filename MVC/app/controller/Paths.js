@@ -44,6 +44,7 @@ Ext.define('GPAS.controller.Paths', {
 			'login > panel > panel > textfield': {
                 change: function(textfield, newV, oldV){
 					var me = this;
+					me.setCreateButton(textfield);
 
 					//if(textfield.getId()=='createuName'){
 					//	Ext.Ajax.request({
